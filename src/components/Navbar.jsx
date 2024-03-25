@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Login from './Login'
 
 const Navbar = () => {
-  // const [options, setoptions] = useState({Signup:false,Login:false})
   const [Signupop, setSignup] = useState(false)
   const [Loginop, setLogin] = useState(false)
   const [visible, setvisible] = useState(false)
   const [logfun, setlogfun] = useState("")
   const [signfun, setsignfun] = useState("border-2 rounded-full px-7 opacity-100 py-2 border-[#ec8a73] text-[#ec8a73] flex justify-center items-center transition-all duratin-150")
 
+  
   const handleLogin=() => {
     setLogin(true)
     setSignup(false)
