@@ -2,26 +2,18 @@ import React, { useState,useEffect } from 'react'
 import Login from './Login'
 
 const Navbar = () => {
-  const [Signupop, setSignup] = useState(false)
-  const [Loginop, setLogin] = useState(false)
-  const [visible, setvisible] = useState(false)
-  const [logfun, setlogfun] = useState("")
-  const [signfun, setsignfun] = useState("border-2 rounded-full px-7 opacity-100 py-2 border-[#ec8a73] text-[#ec8a73] flex justify-center items-center transition-all duratin-150")
+  const [bool1, setbool1] = useState(false)
+  const [visiblemain1, setvisiblemain1] = useState(false)
+  const [visiblemain2, setvisiblemain2] = useState(false)
 
   
   const handleLogin=() => {
-    setLogin(true)
-    setSignup(false)
-    setvisible(true)
-    setlogfun("translate-y-[150px] translate-x-[-650px] transition-all duratin-150 opacity-0")
-    setsignfun("border-2 rounded-full px-7 py-2 border-[#ec8a73] text-[#ec8a73] flex justify-center items-center opacity-0")
+    setbool1(true)
+    setvisiblemain1(true)
   }
   const handleSignup=() => {
-    setLogin(false)
-    setSignup(true)
-    setvisible(true)
-    setsignfun("border-2 rounded-full px-7 py-2 border-[#ec8a73] text-[#ec8a73] flex justify-center items-center transition-all duratin-150 opacity-0")
-    setlogfun("translate-y-[150px] translate-x-[-650px] transition-all duratin-150 opacity-0")
+    setbool1(true)
+    setvisiblemain2(true)
   }
   
   return (
@@ -38,11 +30,11 @@ const Navbar = () => {
         <li>Contacts</li>
       </ul>
       <div className="buttons text-xl font-sans flex gap-10">
-        <button onClick={handleLogin} className={logfun}>Login</button>
-        <button onClick={handleSignup} className={signfun}>Sign Up</button>
+        <button onClick={handleLogin} className={bool1?"translate-y-[150px] translate-x-[-650px] transition-all duratin-150 opacity-0":""}>Login</button>
+        <button onClick={handleSignup} className={bool1?"border-2 rounded-full px-7 py-2 border-[#ec8a73] text-[#ec8a73] flex justify-center items-center transition-all duratin-150 opacity-0":"border-2 rounded-full px-7 opacity-100 py-2 border-[#ec8a73] text-[#ec8a73] flex justify-center items-center transition-all duration-150"}>Sign Up</button>
       </div>
     </div>
-    <Login sign={Signupop} log={Loginop} visible={visible}/>
+    <Login visible1={visiblemain1} visible2={visiblemain2}/>
     </>
   )
 }
