@@ -29,7 +29,6 @@ const Login = (props) => {
 
 
     const handleChange = (e) => {
-        // console.log(e.target.value)
         if (bool) {
             setlogindetails({ ...logindetails, [e.target.name]: e.target.value })
         } else {
@@ -63,17 +62,17 @@ const Login = (props) => {
 
 
     const handleButton1 = (e) => {
-        toast('🦄 Wow so easy!', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: "Bounce",
-        });
+        // toast('🦄 Wow so easy!', {
+        //     position: "bottom-right",
+        //     autoClose: 5000,
+        //     hideProgressBar: false,
+        //     closeOnClick: true,
+        //     pauseOnHover: true,
+        //     draggable: true,
+        //     progress: undefined,
+        //     theme: "light",
+        //     transition: "Bounce",
+        // });
         setbool(true)
         setregisterdetails({
             username: "",
@@ -121,7 +120,7 @@ const Login = (props) => {
                     <span>Not a member? <span onClick={() => setbool(false)} className='text-[blue] cursor-pointer'>Signup now</span></span>
                 </div>
             </div>
-            <ToastContainer
+            {/* <ToastContainer
                 position="bottom-right"
                 autoClose={5000}
                 hideProgressBar={false}
@@ -134,8 +133,8 @@ const Login = (props) => {
                 theme="dark"
                 transition="Bounce"
             />
-            {/* Same as */}
-            <ToastContainer />
+            Same as */}
+            {/* <ToastContainer /> */}
         </>
     )
 }
