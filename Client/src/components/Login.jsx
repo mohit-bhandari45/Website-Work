@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import { registerapi, loginapi } from '../apis/apis';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = (props) => {
     const [bool, setbool] = useState(false)
@@ -10,6 +12,14 @@ const Login = (props) => {
         email: ""
     })
 
+
+    const toastOptions = {
+        position: "bottom-right",
+        autoClose: 5000,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+    }
 
     const [logindetails, setlogindetails] = useState({
         username: "",
@@ -36,13 +46,36 @@ const Login = (props) => {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (registerdetails.email.length > 0) {
             //register route
-            handleregistervalidation()
+            if (handleregistervalidation()) {
+                let a = await fetch(registerapi, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(registerdetails),
+                })
+                let b = await a.json();
+                console.log(b)
+            }
+
         } else {
             //login route
+            if (handleloginvalidation()) {
+                let a = await fetch(loginapi, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(logindetails),
+                })
+                let b = await a.json();
+                console.log(b)
+            }
         }
 
         setregisterdetails({
@@ -57,22 +90,47 @@ const Login = (props) => {
     }
 
     const handleregistervalidation = () => {
+        if (registerdetails.username.length === 0) {
+            toast.error("Username is required", toastOptions)
+            return false;
+        } else if (registerdetails.username.length < 5) {
+            toast.error("Username must be greater than 5 characters", toastOptions)
+            return false;
+        }
+        if (registerdetails.password.length === 0) {
+            toast.error("Password is required", toastOptions)
+            return false;
+        } else if (registerdetails.password.length < 8) {
+            toast.error("Passowrd must be greater than 8 characters", toastOptions)
+            return false;
+        }
+        if (registerdetails.email.length === 0) {
+            toast.error("Email is required", toastOptions)
+            return false;
+        }
+        return true;
+    }
 
+    const handleloginvalidation = () => {
+        if (logindetails.username.length === 0) {
+            toast.error("Username is required", toastOptions)
+            return false;
+        } else if (logindetails.username.length < 5) {
+            toast.error("Username must be greater than 5 characters", toastOptions)
+            return false;
+        }
+        if (logindetails.password.length === 0) {
+            toast.error("Password is required", toastOptions)
+            return false;
+        } else if (logindetails.password.length < 8) {
+            toast.error("Passowrd must be greater than 8 characters", toastOptions)
+            return false;
+        }
+        return true;
     }
 
 
     const handleButton1 = (e) => {
-        // toast('🦄 Wow so easy!', {
-        //     position: "bottom-right",
-        //     autoClose: 5000,
-        //     hideProgressBar: false,
-        //     closeOnClick: true,
-        //     pauseOnHover: true,
-        //     draggable: true,
-        //     progress: undefined,
-        //     theme: "light",
-        //     transition: "Bounce",
-        // });
         setbool(true)
         setregisterdetails({
             username: "",
@@ -120,8 +178,9 @@ const Login = (props) => {
                     <span>Not a member? <span onClick={() => setbool(false)} className='text-[blue] cursor-pointer'>Signup now</span></span>
                 </div>
             </div>
-            {/* <ToastContainer
-                position="bottom-right"
+
+            <ToastContainer />
+            {/* position="bottom-right"
                 autoClose={5000}
                 hideProgressBar={false}
                 newestOnTop={false}
@@ -130,11 +189,9 @@ const Login = (props) => {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-                theme="dark"
+                theme="light"
                 transition="Bounce"
-            />
-            Same as */}
-            {/* <ToastContainer /> */}
+            /> */}
         </>
     )
 }
