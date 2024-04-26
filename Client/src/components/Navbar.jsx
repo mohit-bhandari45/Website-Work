@@ -1,21 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Login from './Login'
-import { Link } from 'react-router-dom'
 
 const Navbar = () => {
-  const [bool1, setbool1] = useState(false)
-  const [visiblemain1, setvisiblemain1] = useState(false)
-  const [visiblemain2, setvisiblemain2] = useState(false)
-
-
-  const handleLogin = () => {
-    setbool1(true)
-    setvisiblemain1(true)
-  }
-  const handleSignup = () => {
-    setbool1(true)
-    setvisiblemain2(true)
-  }
 
   return (
     <>
@@ -30,11 +15,10 @@ const Navbar = () => {
           <li>Contacts</li>
         </ul>
         <div className="buttons text-xl font-sans flex gap-10">
-          <button onClick={handleLogin} className={bool1 ? "translate-y-[150px] translate-x-[-650px] transition-all duratin-150 opacity-0" : ""}>Login</button>
-          <button onClick={handleSignup} className={bool1 ? "border-2 rounded-full px-7 py-2 border-[#ec8a73] text-[#ec8a73] flex justify-center items-center transition-all duratin-150 opacity-0" : "border-2 rounded-full px-7 opacity-100 py-2 border-[#ec8a73] text-[#ec8a73] flex justify-center items-center transition-all duration-150"}>Sign Up</button>
+          <button className="">Login</button>
+          <button className="border-2 rounded-full px-7 py-2 border-[#ec8a73] text-[#ec8a73] flex justify-center items-center">Sign Up</button>
         </div>
       </div>
-      <Login visible1={visiblemain1} visible2={visiblemain2} />
     </>
   )
 }
