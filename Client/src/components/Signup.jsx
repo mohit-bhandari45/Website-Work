@@ -2,10 +2,8 @@ import React, { useEffect, useState,useContext } from 'react'
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
-import { DetailsContext } from '../context/context';
 
 const Signup = () => {
-    const value = useContext(DetailsContext)
     const navigate = useNavigate()
     const [userlogindet, setuserlogindet] = useState({
         name: "",
@@ -13,11 +11,11 @@ const Signup = () => {
     })
 
     useEffect(() => {
-        console.log(value.details)
-        if (value.details.name.length > 0) {
+        if (userlogindet.name.length > 0) {
             navigate("/about")
+            localStorage.setItem("details",JSON.stringify(userlogindet))
         }
-    }, [value])
+    }, [userlogindet])
 
 
     return (
@@ -52,9 +50,8 @@ const Signup = () => {
                             </div>
                             <div className="text google text-gray-700 w-full flex justify-center items-center">
                                 <GoogleLogin shape="pill" size="large" onSuccess={(credentialResponse) => {
-                                        console.log(credentialResponse);
                                         let res = jwtDecode(credentialResponse.credential);
-                                        value.setdetails({ ...value.details, ["name"]: res.name, ["email"]: res.email })
+                                        setuserlogindet({...userlogindet,["name"]:res.name,["email"]:res.email})
                                     }}
                                     onError={() => {
                                         console.log('Login Failed');

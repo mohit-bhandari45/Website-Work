@@ -1,18 +1,22 @@
 import React from 'react'
-import { useContext,useEffect } from 'react'
-import { DetailsContext } from '../context/context'
+import { useContext, useEffect, useState } from 'react'
 
 const About = () => {
-  const value = useContext(DetailsContext)
+  const [details, setdetails] = useState({
+    name: "",
+    email: ""
+  })
+
   useEffect(() => {
-    console.log(value)
+    setdetails({ ...details, ["name"]: JSON.parse(localStorage.getItem("details")).name, ["email"]: JSON.parse(localStorage.getItem("details")).email })
+    // console.log(details)
   }, [])
-  
+
 
   return (
     <>
-      {/* <div className="name">{value.details.name}</div>
-      <div className="name">{value.details.email}</div> */}
+      <div className="name text-white">{details.name}</div>
+      <div className="name text-white">{details.email}</div>
       <div className='text-white'>mohit</div>
     </>
   )
