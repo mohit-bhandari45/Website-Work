@@ -1,21 +1,81 @@
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const navigate = useNavigate()
-    const [userlogindet, setuserlogindet] = useState({
+    const ref = useRef()
+    const [bool1, setbool1] = useState(false)
+    const [bool2, setbool2] = useState(false)
+    const [counter, setcounter] = useState(0)
+    const [googlesignupdetails, setgooglesignupdetails] = useState({
         name: "",
         email: ""
     })
+    const [inputlogin, setinputlogin] = useState({
+        name: "",
+        email: ""
+    })
+    const [checked, setchecked] = useState(true)
+    const [checkbox, setcheckbox] = useState(false)
 
     useEffect(() => {
-        if (userlogindet.name.length > 0) {
+        if (googlesignupdetails.name.length > 0) {
             navigate("/about")
-            localStorage.setItem("details",JSON.stringify(userlogindet))
+            localStorage.setItem("details", JSON.stringify(googlesignupdetails))
         }
-    }, [userlogindet])
+    }, [googlesignupdetails])
+
+
+    useEffect(() => {
+        if (inputlogin.name.length > 1 && inputlogin.email.includes("@") && inputlogin.email.endsWith(".com") && checkbox) {
+            setchecked(false)
+        } else {
+            setchecked(true)
+        }
+    }, [inputlogin, checkbox])
+
+
+    const handleChange = (e) => {
+        setinputlogin({ ...inputlogin, [e.target.name]: e.target.value })
+        console.log(inputlogin)
+        console.log(counter)
+        setcounter(counter + 1)
+        if (counter >= 1) {
+            if (e.target.name === "name") {
+                if (inputlogin.name.length > 0) {
+                    setbool1(false)
+                } else {
+                    setbool1(true)
+                }
+            }else {
+                setbool2(false)
+            }
+        }
+
+    }
+
+    const handleChange2 = () => {
+        setcheckbox(!checkbox)
+    }
+
+    const handleblur1 = (e) => {
+        if (inputlogin.name.length < 2) {
+            setbool1(true)
+        } else {
+            setbool1(false)
+        }
+    }
+
+    const handleblur2 = (e) => {
+        if (!inputlogin.email.includes("@") || !inputlogin.email.endsWith(".com")) {
+            setbool2(true)
+        } else {
+            setbool2(false)
+        }
+    }
+
 
 
     return (
@@ -28,20 +88,22 @@ const Signup = () => {
                     </div>
                     <div className="section flex flex-col gap-6">
                         <div className="input1 w-[100%]">
-                            <input className='rounded-md border-[1px] h-12 w-[100%] pl-3 placeholder:text-[18px]' type="text" name="" id="" placeholder='Full Name' />
+                            <input onBlur={handleblur1} ref={ref} onChange={handleChange} className='rounded-md border-[1px] h-12 w-[100%] pl-3 placeholder:text-[18px]' type="text" name="name" id="" placeholder='Full Name' value={inputlogin.name} />
+                            {bool1 && <div className="error text-red-500 text-sm">Please enter a valid name</div>}
                         </div>
                         <div className="input1 w-[100%]">
-                            <input className='rounded-md border-[1px] h-12 w-[100%] pl-3 placeholder:text-[18px]' type="text" name="" id="" placeholder='Email' />
+                            <input onBlur={handleblur2} onChange={handleChange} className='rounded-md border-[1px] h-12 w-[100%] pl-3 placeholder:text-[18px]' type="text" name="email" id="" placeholder='Email' value={inputlogin.email} />
+                            {bool2 && <div className="error text-red-500 text-sm">Invalid Email Id</div>}
                         </div>
                         <div className="check flex w-[100%] gap-2 pl-3">
-                            <input type="checkbox" name="" id="" className='w-5 h-5 cursor-pointer' />
+                            <input onChange={handleChange2} checked={checkbox} type="checkbox" name="" id="" className='w-5 h-5 cursor-pointer' />
                             <div className="text text-sm">
                                 I agree to Zomato's Terms of Service, Privacy Policy and Content Policies
                             </div>
                         </div>
                         <div className="section flex flex-col gap-3">
                             <div className="otp w-full">
-                                <button className="text text-center w-full bg-[#18122B] text-white rounded-md py-3 text-[17px]">Create Account</button>
+                                <button disabled={checked} className={checked ? "text text-center w-full bg-gray-300 text-white rounded-md py-3 text-[17px]" : "text text-center w-full bg-[#18122B] text-white rounded-md py-3 text-[17px]"}>Create Account</button>
                             </div>
                             <div className="elements flex w-full justify-center items-center gap-1">
                                 <div className="line text-center w-full border-gray-300 border-[1px] mt-1 opacity-30"></div>
@@ -50,12 +112,12 @@ const Signup = () => {
                             </div>
                             <div className="text google text-gray-700 w-full flex justify-center items-center">
                                 <GoogleLogin shape="pill" size="large" onSuccess={(credentialResponse) => {
-                                        let res = jwtDecode(credentialResponse.credential);
-                                        setuserlogindet({...userlogindet,["name"]:res.name,["email"]:res.email})
-                                    }}
+                                    let res = jwtDecode(credentialResponse.credential);
+                                    setuserlogindet({ ...googlesignupdetails, ["name"]: res.name, ["email"]: res.email })
+                                }}
                                     onError={() => {
                                         console.log('Login Failed');
-                                    }}/>
+                                    }} />
                             </div>
                         </div>
                     </div>
