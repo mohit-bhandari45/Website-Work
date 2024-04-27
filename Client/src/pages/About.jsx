@@ -8,8 +8,7 @@ const About = () => {
   })
 
   useEffect(() => {
-    setdetails({ ...details, ["name"]: JSON.parse(localStorage.getItem("details")).name, ["email"]: JSON.parse(localStorage.getItem("details")).email })
-    // console.log(details)
+    setdetails({ ...details, ["name"]: JSON.parse(localStorage.getItem("userdetails")).name, ["email"]: JSON.parse(localStorage.getItem("userdetails")).email })
   }, [])
 
 
@@ -17,7 +16,6 @@ const About = () => {
     <>
       <div className="name text-white">{details.name}</div>
       <div className="name text-white">{details.email}</div>
-      <div className='text-white'>mohit</div>
     </>
   )
 }
