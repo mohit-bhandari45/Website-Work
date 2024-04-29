@@ -25,7 +25,7 @@ const Body = () => {
                 <img className='w-[180px] h-[200px] absolute left-[-50px]' src="icons/plants-04.png" alt="" />
                 <img className='w-[250px] h-[240px] z-20 absolute right-[-30px] top-[250px]' src="icons/plants-06.png" alt="" />
                 <img className='w-[250px] h-[300px] absolute right-[15px] top-[120px]' src="icons/plants-01.png" alt="" />
-                <img className='relative z-30 top-0 w-[700px] h-[450px]' src="icons/fixed elements.png" alt="" />
+                <img className='relative z-20 top-0 w-[700px] h-[450px]' src="icons/fixed elements.png" alt="" />
 
             </div>
         </div>
