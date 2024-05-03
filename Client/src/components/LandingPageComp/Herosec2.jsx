@@ -14,11 +14,7 @@ const Herosec2 = () => {
     const [counter, setcounter] = useState(0)
     useEffect(() => {
         setInterval(() => {
-            console.log(texts.length)
             setcounter((prevIndex) => (prevIndex + 1) % texts.length)
-            console.log(counter)
-            console.log(texts[counter])
-            // setcounter((counter + 1) % texts.length)
         }, 1000);
     }, [texts])
 
