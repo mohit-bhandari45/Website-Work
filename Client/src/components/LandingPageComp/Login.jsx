@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
-import { registerapi, loginapi } from '../apis/apis';
+import { registerapi, loginapi } from '../../apis/apis';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
