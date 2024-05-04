@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import Signup from './Credentials'
+import Credentials from './Credentials'
 
 const Navbar = () => {
+  const [bool, setbool] = useState(false)
+
+  useEffect(() => {
+    if(bool){
+      
+    }
+  }, [])
+  
 
   return (
     <>
@@ -41,7 +51,7 @@ const Navbar = () => {
           </div>
           <div className="info flex justify-center items-center gap-5">
             <div className="btn">
-              <button className='text-xl font-light flex justify-center items-center border-black border-[3px] text-gray-400 py-1 px-4 rounded-full'>Sign Up</button>
+              <button onClick={()=>setbool(true)} className='text-xl font-light flex justify-center items-center border-black border-[3px] text-gray-400 py-1 px-4 rounded-full'>Sign Up</button>
             </div>
             <div className="cart">
               <svg className='cursor-pointer' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" color="#000000" fill="none">
@@ -55,6 +65,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      {bool?<Credentials setbool={setbool}/>:""}
     </>
   )
 }
