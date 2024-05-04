@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 
 const Herosec2 = () => {
     const [texts, settexts] = useState([
-        "Idealogy",
-        "Feeling",
-        "Vision",
-        "Love",
+        "Canvas",
         "Inspiration",
-        "Expression",
-        "Emotion"
+        "Decoration",
+        "Creation",
+        "Imagination",
+        "Presents",
+        "Celebration",
+        "Journey",
+        "Passion",
+        "Expression"
     ])
 
     const [counter, setcounter] = useState(0)
@@ -20,8 +23,9 @@ const Herosec2 = () => {
 
     return (
         <div className='w-full h-[40vh] flex justify-center items-center'>
-            <div className="text text-8xl font-serif font-semibold">
-                Your Art Is Your <span className='text-[#75A47F]'>{texts[counter]}</span>
+            <div className="text text-8xl font-serif font-semibold flex w-full justify-center items-center gap-10">
+                <div className="texts">Acrilic Is Your</div>
+                <span className='text-[#75A47F] w-[40%]'>{texts[counter]}</span>
             </div>
         </div>
     )

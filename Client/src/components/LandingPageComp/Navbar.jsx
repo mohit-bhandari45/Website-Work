@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
 
@@ -25,10 +26,18 @@ const Navbar = () => {
         <div className="nav flex justify-between items-center">
           <div className="logo"><a href="/"><img className='w-24 h-10' src="/icons/logo full.png" alt="" /></a></div>
           <div className="elements flex gap-32 text-xl font-semibold">
-            <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">Catalog</div>
-            <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">Gallery</div>
-            <div className="about cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">About Us</div>
-            <div className="contacts cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">Contacts</div>
+            <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
+              <NavLink to="catalog">Catalog</NavLink>
+            </div>
+            <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
+              <NavLink>Gallery</NavLink>
+            </div>
+            <div className="about cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
+              <NavLink>About Us</NavLink>
+            </div>
+            <div className="contacts cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
+              <NavLink>Contacts</NavLink>
+            </div>
           </div>
           <div className="info flex justify-center items-center gap-5">
             <div className="btn">

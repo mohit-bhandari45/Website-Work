@@ -5,6 +5,7 @@ import { Route, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import About from './pages/About.jsx'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import LandingPage from './pages/LandingPage.jsx'
+import Catalog from './pages/Catalog.jsx'
 
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     {
         path: "/about",
         element: <About />
+    },
+    {
+        path: "/catalog",
+        element: <Catalog/>
     }
 ])
 
