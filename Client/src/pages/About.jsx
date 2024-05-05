@@ -1,16 +1,17 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom'
 
 const AboutPage = () => {
   return (
     <>
-      <div className='px-6'>
-        <img className='h-[15vh] w-[15vh]' src="/icons/logo.png" alt="" />
+      <div className="image flex justify-center items-center bg-[#eed9ae] py-5">
+        <NavLink to="/"><img className='w-96 h-44' src="/icons/acrilc logo-09.png" alt="" /></NavLink>
       </div>
-      <div className="bg-slate-600 font-[Helvetica] text-black min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <div className="bg-[#eed9ae] font-[Helvetica] text-black min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <h1 className="text-4xl font-bold mb-4 text-white">Discover the Artistry of Acrilc</h1>
-            <p className="text-lg text-white">Welcome to Acrilc, where art meets innovation! We are an e-commerce platform dedicated to showcasing the unparalleled creativity of Indian artists and bringing their unique masterpieces to art enthusiasts worldwide.</p>
+            <h1 className="text-4xl font-bold mb-4">Discover the Artistry of Acrilc</h1>
+            <p className="text-lg ">Welcome to Acrilc, where art meets innovation! We are an e-commerce platform dedicated to showcasing the unparalleled creativity of Indian artists and bringing their unique masterpieces to art enthusiasts worldwide.</p>
           </div>
 
           <div className="grid grid-cols-1 gap-10 bg-white rounded-lg shadow-lg p-8">
@@ -41,7 +42,7 @@ const AboutPage = () => {
         <div className="bg-gradient-to-br min-h-screen py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold text-white mb-4">Who are We?</h1>
+              <h1 className="text-4xl font-bold mb-4">Who are We?</h1>
             </div>
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
