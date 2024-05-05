@@ -37,13 +37,13 @@ const Navbar = () => {
           <div className="logo"><a href="/"><img className='w-24 h-10' src="/icons/logo full.png" alt="" /></a></div>
           <div className="elements flex gap-32 text-xl font-semibold">
             <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
-              <NavLink to="catalog">Catalog</NavLink>
+              <NavLink to="/catalog">Catalog</NavLink>
             </div>
             <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
               <NavLink>Gallery</NavLink>
             </div>
             <div className="about cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
-              <NavLink>About Us</NavLink>
+              <NavLink to="/about">About Us</NavLink>
             </div>
             <div className="contacts cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
               <NavLink>Contacts</NavLink>

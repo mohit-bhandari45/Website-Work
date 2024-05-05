@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
-import Login from './Login';
 
 const Signup = ({ setsignbool, setbool }) => {
     const navigate = useNavigate()
@@ -10,23 +9,26 @@ const Signup = ({ setsignbool, setbool }) => {
     const [bool2, setbool2] = useState(false)
     const [counter, setcounter] = useState(0)
 
-    //user login through google
+    //user signup through google
     const [googlesignupdetails, setgooglesignupdetails] = useState({
         name: "",
         email: ""
     })
+
     useEffect(() => {
         if (googlesignupdetails.name.length > 0) {
-            navigate("/about")
+            // navigate("/about")
             localStorage.setItem("userdetails", JSON.stringify(googlesignupdetails))
         }
     }, [googlesignupdetails])
 
-    //user login using input fields
+
+    //user signup using input fields
     const [inputlogindetails, setinputlogindetails] = useState({
         name: "",
         email: ""
     })
+
     const [checked, setchecked] = useState(true)
     const [checkbox, setcheckbox] = useState(false)
     useEffect(() => {
@@ -84,14 +86,14 @@ const Signup = ({ setsignbool, setbool }) => {
 
     const handleSubmit = (e) => {
         localStorage.setItem("userdetails", JSON.stringify(inputlogindetails))
-        navigate("/about")
+        // navigate("/about")
     }
     return (
         <div>
             <div className="fixed w-[100vw] h-[100vh] top-0 flex justify-center items-center opacity-85 bg-black z-30">
             </div>
-            <div className="fixed w-[100vw] h-[100vh] top-0 flex justify-center items-center z-30">
-                <div className="cont relative h-[85%] w-[30%] bg-white z-50 rounded-md p-6 flex flex-col gap-6">
+            <div className="fixed w-[100vw] h-[100vh] top-0 flex justify-center items-center z-30 font-[Helvetica]">
+                <div className="cont relative h-[80%] w-[30%] bg-white z-50 rounded-md p-6 flex flex-col gap-11">
                     <div className="head flex justify-between items-center w-[100%]">
                         <div className="login text-3xl font-semibold text-gray-500">Sign Up</div>
                         <div className="cross cursor-pointer"><svg onClick={() => { setbool(false) }} xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="24" height="24" viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img" class="sc-rbbb40-0 fJjczH"><title>cross</title><path d="M11.42 10.42l3.54-3.54c0.38-0.4 0.38-1.040 0-1.42s-1.020-0.4-1.42 0l-3.54 3.54-3.54-3.54c-0.4-0.4-1.020-0.4-1.42 0s-0.38 1.020 0 1.42l3.54 3.54-3.54 3.54c-0.38 0.38-0.38 1.020 0 1.42 0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28l3.54-3.56 3.54 3.56c0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28c0.38-0.4 0.38-1.040 0-1.42l-3.54-3.54z"></path></svg></div>
@@ -120,7 +122,7 @@ const Signup = ({ setsignbool, setbool }) => {
                                 <div className="or text-[20px]">or</div>
                                 <div className="line text-center w-full border-gray-300 border-[1px] mt-1 opacity-30"></div>
                             </div>
-                            <div className="text google text-gray-700 w-full flex gap-5 flex-col justify-center items-center">
+                            <div className="text google text-gray-700 w-full flex gap-2 justify-center items-center">
                                 <GoogleLogin shape="pill" size="large" onSuccess={(credentialResponse) => {
                                     let res = jwtDecode(credentialResponse.credential);
                                     setgooglesignupdetails({ ...googlesignupdetails, ["name"]: res.name, ["email"]: res.email })
@@ -128,7 +130,9 @@ const Signup = ({ setsignbool, setbool }) => {
                                     onError={() => {
                                         console.log('Login Failed');
                                     }} />
-                                <div className='text-center border-[1px] w-44 border-black rounded-full py-2 font-semibold'>Are you an artist?</div>
+                                <div className=''>
+                                    <button className='text-center border-[1px] w-44 bg-[#18122B] text-white rounded-full py-2 font-semibold text-sm'>Are you an artist?</button>
+                                </div>
                             </div>
                         </div>
                     </div>

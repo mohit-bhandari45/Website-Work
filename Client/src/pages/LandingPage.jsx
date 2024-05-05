@@ -1,7 +1,7 @@
 import Navbar from '../components/LandingPageComp/Navbar'
 import Body from '../components/LandingPageComp/Body'
 import { useState } from 'react'
-import Search from '../components/LandingPageComp/Search'
+import Search from '../components/UniversalComp/Search'
 import HeroSec from '../components/LandingPageComp/HeroSec'
 import Herosec2 from '../components/LandingPageComp/Herosec2'
 import PotSec from '../components/LandingPageComp/PotSec'

@@ -8,13 +8,18 @@ import 'react-multi-carousel/lib/styles.css';
 const Frames3 = () => {
   const [details, setdetails] = useState([
     {
-      state: "Delhi",
-      image: "/icons/Ellipse 54.png",
+      state: "West Bengal",
+      image: "/icons/Ellipse 54 (3).png",
     },
     {
       state: "Uttarakhand",
       image: "/icons/Ellipse 54 (3).png",
     },
+    {
+      state: "Delhi",
+      image: "/icons/Ellipse 54.png",
+    },
+
     {
       state: "Bihar",
       image: "/icons/Ellipse 54 (2).png",
@@ -24,22 +29,23 @@ const Frames3 = () => {
       image: "/icons/Ellipse 54 (1).png",
     },
     {
-      state: "Punjab",
+      state: "Odissa",
       image: "/icons/Ellipse 54 (1).png",
     },
     {
-      state: "Punjab",
+      state: "Kerala",
       image: "/icons/Ellipse 54 (1).png",
     },
     {
-      state: "Punjab",
+      state: "Karnataka",
       image: "/icons/Ellipse 54 (1).png",
     },
     {
-      state: "Punjab",
+      state: "Chennai",
       image: "/icons/Ellipse 54 (1).png",
     },
   ])
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },

@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage:{
+        "bg-1":"url('/icons/WhatsApp Image 2024-05-05 at 14.14.22_d6498270.jpg')"
+      },
+    },
   },
   plugins: [],
 }
