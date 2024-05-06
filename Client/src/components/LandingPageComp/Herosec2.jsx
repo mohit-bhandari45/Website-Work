@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import TextTransition, { presets } from 'react-text-transition';
 
 const Herosec2 = () => {
     const [texts, settexts] = useState([
@@ -13,19 +14,23 @@ const Herosec2 = () => {
         "Passion",
         "Expression"
     ])
-
-    const [counter, setcounter] = useState(0)
-    useEffect(() => {
-        setInterval(() => {
-            setcounter((prevIndex) => (prevIndex + 1) % texts.length)
-        }, 1000);
-    }, [texts])
+    const [index, setIndex] = React.useState(0);
+    React.useEffect(() => {
+        const intervalId = setInterval(
+            () => setIndex((index) => index + 1),
+            2000,
+        );
+        return () => clearTimeout(intervalId);
+    }, []);
 
     return (
         <div className='w-full h-[40vh] flex justify-center items-center'>
-            <div className="text text-8xl font-serif font-semibold flex w-full justify-center items-center gap-10">
-                <div className="texts">Acrilic Is Your</div>
-                <span className='text-[#75A47F] w-[40%]'>{texts[counter]}</span>
+            <div className="text text-8xl font-serif font-semibold flex w-full justify-center items-center gap-14">
+                <div className="texts flex justify-center items-center gap-5">
+                    <img className='w-96 h-40' src="/icons/acrilc logo-09.png" alt="" />
+                    <div className="text">Is Your</div>
+                </div>
+                <span className='text-[#75A47F] w-[40%]'><TextTransition springConfig={presets.default}>{texts[index % texts.length]}</TextTransition></span>
             </div>
         </div>
     )

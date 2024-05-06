@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import Signup from './Credentials'
 import Credentials from './Credentials'
 
 const Navbar = () => {
@@ -34,7 +33,7 @@ const Navbar = () => {
       <div className="main flex flex-col justify-center gap-8 h-[20vh] px-20 font-[Helvetica]">
         <div className="head text-center font-medium text-sm">Contact Us For International Shipping | Purchase Originals</div>
         <div className="nav flex justify-between items-center">
-          <div className="logo"><a href="/"><img className='w-24 h-10' src="/icons/logo full.png" alt="" /></a></div>
+          <div className="logo"><a href="/"><img className='w-44 h-20' src="/icons/acrilc logo-09.png" alt="" /></a></div>
           <div className="elements flex gap-32 text-xl font-semibold">
             <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
               <NavLink to="/catalog">Catalog</NavLink>
