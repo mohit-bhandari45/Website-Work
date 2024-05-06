@@ -66,11 +66,11 @@ const Frames3 = () => {
   };
 
   return (
-      <Carousel autoPlay={true} showDots={true} keyBoardControl={true} shouldResetAutoplay={true} rewind={true} rewindWithAnimation={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
-        {details.map((detail) => {
-          return <Card2 state={detail.state} image={detail.image} />
-        })}
-      </Carousel>
+    <Carousel autoPlay={true} infinite showDots={true} keyBoardControl={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
+      {details.map((detail) => {
+        return <Card2 state={detail.state} image={detail.image} />
+      })}
+    </Carousel>
   )
 }
 

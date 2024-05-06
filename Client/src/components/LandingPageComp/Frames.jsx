@@ -3,8 +3,7 @@ import React from 'react'
 const Frames = () => {
     return (
         <div className='flex justify-center items-center font-[Helvetica]'>
-            <div className='main h-[100vh] grid grid-cols-3 justify-center items-center gap-20'>
-
+            <div className='main h-[100vh] grid grid-cols-3 justify-center items-center gap-28'>
                 <div className="img1 bg-img-1 h-[75vh] w-[23vw]">
                     <div className="flex justify-center items-end h-[75vh] bg-[#00000082]">
                         <div className='flex text-white px-5 gap-3 justify-center py-5'>

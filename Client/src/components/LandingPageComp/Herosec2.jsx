@@ -24,10 +24,10 @@ const Herosec2 = () => {
     }, []);
 
     return (
-        <div className='w-full h-[40vh] flex justify-center items-center'>
+        <div className='w-full h-[60vh] flex justify-center items-center'>
             <div className="text text-8xl font-serif font-semibold flex w-full justify-center items-center gap-14">
-                <div className="texts flex justify-center items-center gap-5">
-                    <img className='w-72 h-40 pb-5' src="/icons/acrilc logo-09.png" alt="" />
+                <div className="texts flex justify-center items-center gap-7">
+                    <img className='w-[3/4] h-48' src="/icons/acrilc logo-09.png" alt="" />
                     <div className="text">is your</div>
                 </div>
                 <span className='text-[#75A47F] w-[40%]'><TextTransition springConfig={presets.default}>{texts[index % texts.length]}</TextTransition></span>
