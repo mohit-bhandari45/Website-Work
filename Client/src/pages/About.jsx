@@ -4,14 +4,15 @@ import { NavLink } from 'react-router-dom'
 const AboutPage = () => {
   return (
     <>
-      <div className="image flex justify-center items-center bg-[#eed9ae] py-5">
-        <NavLink to="/"><img className='w-96 h-44' src="/icons/acrilc logo-09.png" alt="" /></NavLink>
+      <div className="h-full w-full absolute">
+        <img className='h-[300vh] w-full' src="/icons/WhatsApp Image 2024-05-05 at 14.14.22_d6498270.jpg" alt="" />
       </div>
-      <div className="bg-[#eed9ae] font-[Helvetica] text-black min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="bg-[#eed9ae] bg-opacity-90 font-[Helvetica] text-black min-h-screen py-12 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className='flex justify-center items-center mb-16'><NavLink to="/"><img className='w-96 h-44' src="/icons/acrilc logo-09.png" alt="" /></NavLink></div>
+        <div className="w-[90vw] mx-auto">
           <div className="mb-12">
-            <h1 className="text-4xl font-bold mb-4">Discover the Artistry of Acrilc</h1>
-            <p className="text-lg ">Welcome to Acrilc, where art meets innovation! We are an e-commerce platform dedicated to showcasing the unparalleled creativity of Indian artists and bringing their unique masterpieces to art enthusiasts worldwide.</p>
+            <h1 className="text-5xl font-bold mb-4 text-center">Discover the Artistry of Acrilc</h1>
+            <p className="text-lg text-center px-36">Welcome to Acrilc, where art meets innovation! We are an e-commerce platform dedicated to showcasing the unparalleled creativity of Indian artists and bringing their unique masterpieces to art enthusiasts worldwide.</p>
           </div>
 
           <div className="grid grid-cols-1 gap-10 bg-white rounded-lg shadow-lg p-8">

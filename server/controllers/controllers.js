@@ -12,6 +12,7 @@ const usersRegister =async (req, res) => {
             pass: "mbox dxgw rktw hyen", // Password (for gmail, your app password)
         },
     });
+    
     const mailOptions = {
         from: {
             name: "Acrilic",
