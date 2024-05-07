@@ -12,8 +12,8 @@ import Mid2 from '../components/LandingPageComp/Mid2'
 import Mid3 from '../components/LandingPageComp/Mid3'
 import Frames4 from '../components/LandingPageComp/Frames4'
 import Frames5 from '../components/LandingPageComp/Frames5'
-import Frames6 from '../components/LandingPageComp/Frames6'
 import Footer from '../components/LandingPageComp/Footer'
+import FramesLast from '../components/LandingPageComp/FramesLast'
 
 function LandingPage() {
   const [, set] = useState()
@@ -32,7 +32,7 @@ function LandingPage() {
         <Mid3/>
         <Frames4/>
         <Frames5/>
-        <Frames6/>
+        <FramesLast/>
         <Footer/>
     </>
   )
