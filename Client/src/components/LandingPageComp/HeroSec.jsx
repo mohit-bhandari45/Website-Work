@@ -3,31 +3,18 @@ import { Slide,Fade,Zoom } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 
 const HeroSec = () => {
-  const spanStyle = {
-    padding: '20px',
-    background: '#efefef',
-    color: '#000000'
-  }
-
-  const divStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundSize: 'cover',
-    height: '400px'
-  }
   const [images, setimages] = useState([
     {
-      "image": "/icons/Component 1.png"
+      "image": "src/assets/Component 1.png"
     },
     {
-      "image": "/icons/close-up-oil-paints-brushes-palette 1.png"
+      "image": "src/assets/close-up-oil-paints-brushes-palette 1.png"
     },
     {
-      "image": "/icons/graffiti-508272 1.png"
+      "image": "src/assets/graffiti-508272 1.png"
     },
     {
-      "image": "/icons/painting-3995999 1.png"
+      "image": "src/assets/painting-3995999 1.png"
     }
   ])
 

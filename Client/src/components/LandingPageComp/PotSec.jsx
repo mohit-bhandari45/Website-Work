@@ -8,7 +8,7 @@ const PotSec = () => {
         <div className='font-extralight'>PAINTED</div>
       </div>
       <div className="pot h-full">
-        <img className='h-[100vh] w-[40vw]' src="/icons/Frame 15.png" alt="" />
+        <img className='h-[100vh] w-[40vw]' src="src/assets/Frame 15.png" alt="" />
       </div>
       <div className="text2 h-3/4 items-end justify-end text-7xl pt-96 font-light">TERACOTTA</div>
     </div>

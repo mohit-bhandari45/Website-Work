@@ -9,40 +9,40 @@ const Frames3 = () => {
   const [details, setdetails] = useState([
     {
       state: "West Bengal",
-      image: "/icons/Ellipse 54 (3).png",
+      image: "src/assets/Ellipse 54 (3).png",
     },
     {
       state: "Uttarakhand",
-      image: "/icons/Ellipse 54 (3).png",
+      image: "src/assets/Ellipse 54 (3).png",
     },
     {
       state: "Delhi",
-      image: "/icons/Ellipse 54.png",
+      image: "src/assets/Ellipse 54.png",
     },
 
     {
       state: "Bihar",
-      image: "/icons/Ellipse 54 (2).png",
+      image: "src/assets/Ellipse 54 (2).png",
     },
     {
       state: "Punjab",
-      image: "/icons/Ellipse 54 (1).png",
+      image: "src/assets/Ellipse 54 (1).png",
     },
     {
       state: "Odissa",
-      image: "/icons/Ellipse 54 (1).png",
+      image: "src/assets/Ellipse 54 (1).png",
     },
     {
       state: "Kerala",
-      image: "/icons/Ellipse 54 (1).png",
+      image: "src/assets/Ellipse 54 (1).png",
     },
     {
       state: "Karnataka",
-      image: "/icons/Ellipse 54 (1).png",
+      image: "src/assets/Ellipse 54 (1).png",
     },
     {
       state: "Chennai",
-      image: "/icons/Ellipse 54 (1).png",
+      image: "src/assets/Ellipse 54 (1).png",
     },
   ])
 

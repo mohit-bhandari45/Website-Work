@@ -1,5 +1,4 @@
 import Navbar from '../components/LandingPageComp/Navbar'
-import Body from '../components/LandingPageComp/Body'
 import { useState } from 'react'
 import Search from '../components/UniversalComp/Search'
 import HeroSec from '../components/LandingPageComp/HeroSec'
@@ -35,9 +34,6 @@ function LandingPage() {
         <Frames5/>
         <Frames6/>
         <Footer/>
-        {/* <Body/> */}
-        {/* <Login/> */}
-        {/* <Signup /> */}
     </>
   )
 }

@@ -8,7 +8,7 @@ const Frames = () => {
                     <div className="flex justify-center items-end h-[75vh] bg-[#00000082]">
                         <div className='flex text-white px-5 gap-3 justify-center py-5'>
                             <div className="image">
-                                <img className='h-14 w-36' src="/icons/Ellipse 40.png" alt="" />
+                                <img className='h-14 w-36' src="src/assets/Ellipse 40.png" alt="" />
                             </div>
                             <div className="cont pt-1">
                                 <div className="1 font-semibold">Ayushi</div>
@@ -24,7 +24,7 @@ const Frames = () => {
                     <div className="flex justify-center items-end h-[75vh] bg-[#00000082]">
                         <div className='flex text-white px-5 gap-3 justify-center py-5'>
                             <div className="image">
-                                <img className='h-14 w-36' src="/icons/Ellipse 39.png" alt="" />
+                                <img className='h-14 w-36' src="src/assets/Ellipse 39.png" alt="" />
                             </div>
                             <div className="cont pt-1">
                                 <div className="1 font-semibold">Jack</div>
@@ -39,7 +39,7 @@ const Frames = () => {
                     <div className="flex justify-center items-end h-[75vh] bg-[#00000082]">
                         <div className='flex text-white px-5 gap-3 justify-center py-5'>
                             <div className="image">
-                                <img className='h-14 w-36' src="/icons/Ellipse 51.png" alt="" />
+                                <img className='h-14 w-36' src="src/assets/Ellipse 51.png" alt="" />
                             </div>
                             <div className="cont pt-1">
                                 <div className="1 font-semibold">Tony</div>

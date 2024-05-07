@@ -6,6 +6,10 @@ import About from './pages/About.jsx'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import LandingPage from './pages/LandingPage.jsx'
 import Catalog from './pages/Catalog.jsx'
+import Contacts from './pages/Contacts.jsx'
+import Gallery from './pages/Gallery.jsx'
+import ShowMore from './pages/ShowMore.jsx'
+import ShoppingCart from './pages/ShoppingCart.jsx'
 
 
 const router = createBrowserRouter([
@@ -20,6 +24,22 @@ const router = createBrowserRouter([
     {
         path: "/catalog",
         element: <Catalog/>
+    },
+    {
+        path: "/contact",
+        element: <Contacts/>
+    },
+    {
+        path: "/gallery",
+        element: <Gallery/>
+    },
+    {
+        path: "/showmore",
+        element: <ShowMore/>
+    },
+    {
+        path: "/shoppingcart",
+        element: <ShoppingCart/>
     },
 ])
 

@@ -18,7 +18,7 @@ const Search = () => {
                             </svg>
                         </div>
                         <div className="btn">
-                            <button className='font-bold text-white bg-[#2E93A9] px-4 py-2 rounded-2xl cursor-pointer'>SEARCH</button>
+                            <button className='font-bold text-white bg-[#2E93A9] px-4 py-2 rounded-xl cursor-pointer'>SEARCH</button>
                         </div>
                     </div>
                 </div>
