@@ -66,7 +66,7 @@ const Frames3 = () => {
   };
 
   return (
-    <Carousel autoPlay={true} infinite showDots={true} keyBoardControl={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
+    <Carousel autoPlay={true} centerMode={true} infinite showDots={true} arrows={false} keyBoardControl={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
       {details.map((detail) => {
         return <Card2 state={detail.state} image={detail.image} />
       })}

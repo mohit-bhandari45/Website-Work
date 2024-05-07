@@ -6,7 +6,7 @@ const AboutPage = () => {
   return (
     <>
       <div className="h-full w-full absolute">
-        <img className='h-[300vh] w-full' src="/icons/WhatsApp Image 2024-05-05 at 14.14.22_d6498270.jpg" alt="" />
+        <img className='h-[300vh] w-full' src="src/assets/WhatsApp Image 2024-05-05 at 14.14.22_d6498270.jpg" alt="" />
       </div>
       <div className="bg-[#eed9ae] bg-opacity-90 font-[Helvetica] text-black min-h-screen py-12 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className='flex justify-center items-center mb-8'><NavLink to="/"><img className='w-96 h-44' src="src/assets/acrilc logo-09.png" alt="" /></NavLink></div>
