@@ -9,11 +9,11 @@ const AboutPage = () => {
         <img className='h-[300vh] w-full' src="src/assets/WhatsApp Image 2024-05-05 at 14.14.22_d6498270.jpg" alt="" />
       </div>
       <div className="bg-[#eed9ae] bg-opacity-90 font-[Helvetica] text-black min-h-screen py-12 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className='flex justify-center items-center mb-8'><NavLink to="/"><img className='w-96 h-44' src="src/assets/acrilc logo-09.png" alt="" /></NavLink></div>
+        <div className='flex justify-center items-center mb-1'><NavLink to="/"><img className='w-80 h-36' src="src/assets/acrilc logo-09.png" alt="" /></NavLink></div>
         <div className="w-[90vw] mx-auto">
           <div className="mb-12 w-full">
             <div className="flex justify-center items-center w-full">
-              <div className="w-[100%] p-8 shadow-lg rounded-lg text-lg font-medium">
+              <div className="w-[100%] px-8 py-0 shadow-lg rounded-lg text-lg font-medium">
                 <h1 className="text-5xl font-bold mb-4 text-center">Discover the Artistry of Acrilc</h1>
                 <h1 className="text-2xl font-bold mb-2 text-center">
                   Welcome to Acrilc

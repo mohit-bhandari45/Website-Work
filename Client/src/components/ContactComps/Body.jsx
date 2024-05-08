@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 
 const Body = () => {
     return (
-        <div className='body flex mx-auto w-[95vw] h-[75vh] gap-64 font-[Helvetica] relative'>
-            <div className="content w-[30vw] pl-16 py-10 flex flex-col gap-1">
+        <div className='body flex w-[100vw] h-[75vh] gap-64 font-[Helvetica] relative justify-center px-10'>
+            <div className="content w-[35%] pl-16 py-10 flex flex-col gap-1">
                 <img className='w-[360px] h-[130px] pl-6' src="src/assets/logo full.png" alt="" />
                 <div className="para font-medium py-4 text-[20px] w-[500px] flex flex-col gap-0">
                     <span className='font-medium'>Your personalized e-commerce platform for artists! Explore a curated collection of art accessories and products, designed to inspire and </span>
@@ -14,16 +14,16 @@ const Body = () => {
                     <button className='rounded-full px-9 py-3 bg-[#ec8a73] text-white flex justify-center items-center'>Email Us</button>
                     <button className='underline font-medium'><NavLink to="/showmore">Show More</NavLink></button>
                 </div>
-                <div className="whatsapp w-full">
+                <div className="whatsapp w-[110%]">
                     <button className='rounded-full w-[95%] px-7 mt-3 py-3 bg-[#66CF78] text-white flex justify-start items-center gap-5'>
                         <div className="icon">
-                            <img className='w-[35px] h-[35px]' src="src/assets/whatsapp-logo-variant 1.png" alt="" />
+                            <img className='w-[30px] h-[30px]' src="src/assets/whatsapp-logo-variant 1.png" alt="" />
                         </div>
                         <div className="text font-bold text-xl">Connect us through whatsapp</div>
                     </button>
                 </div>
             </div>
-            <div className="image relative pt-10">
+            <div className="image relative pt-10 md:w-[1/2] xl:w-[3/4]">
                 <div className="clouds relative">
                     <img className='absolute w-[180px] h-[100px] top-[-70px] left-[-50px]' src="src/assets/clouds-01.png" alt="" />
                     <img className='absolute w-[180px] h-[100px] top-[-150px] left-[180px]' src="src/assets/clouds-01.png" alt="" />

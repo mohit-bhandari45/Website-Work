@@ -4,7 +4,7 @@ import Card from './Subcomps/Card'
 const Frames5 = () => {
     return (
         <>
-            <div className="main1 h-[150vh] flex flex-col w-full">
+            <div className="main1 h-[180vh] flex flex-col w-full">
                 <div className='main h-1/2 w-full flex justify-center items-center gap-10 font-[Helvetica]'>
                     <Card image="src/assets/Rectangle 15.png" price="1000" />
                     <Card image="src/assets/Rectangle 16.png" price="5000" />
