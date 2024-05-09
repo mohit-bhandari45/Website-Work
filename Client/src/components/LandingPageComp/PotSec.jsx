@@ -2,7 +2,7 @@ import React from 'react'
 
 const PotSec = () => {
   return (
-    <div className='h-[100vh] w-full flex bg-black text-white justify-center items-center px-14 gap-32'>
+    <div className='min-h-[100vh] w-full flex bg-black text-white justify-center items-center px-14 gap-32'>
       <div className="text1 h-3/4 text-7xl pt-10 flex flex-col gap-4">
         <div className='font-medium'>HAND</div>
         <div className='font-extralight'>PAINTED</div>

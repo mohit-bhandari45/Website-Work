@@ -24,13 +24,13 @@ const Herosec2 = () => {
     }, []);
 
     return (
-        <div className='w-full h-[100vh] flex justify-center items-center'>
-            <div className="text text-8xl font-serif font-semibold flex xl:flex-row md:flex-col w-full justify-center items-center gap-14">
-                <div className="texts flex justify-center items-center gap-7">
-                    <img className='w-[3/4] h-48' src="src/assets/acrilc logo-09.png" alt="" />
+        <div className='w-full min-h-[70vh] md:min-h-[80vh]: xl:min-h-[100vh] flex justify-center items-center'>
+            <div className="text text-5xl md:text-8xl font-serif font-semibold flex flex-col xl:flex-row md:flex-col w-full justify-center items-center gap-8">
+                <div className="texts flex flex-col md:flex-row justify-center items-center gap-4">
+                    <img className='w-[100%] md:w-1/2 h-28 md:h-48' src="src/assets/acrilc logo-09.png" alt="" />
                     <div className="text">is your</div>
                 </div>
-                <div className='text-[#75A47F] w-[40%] text-8xl flex flex-row md:justify-center md:items-center xl:justify-start'><TextTransition springConfig={presets.default}>{texts[index % texts.length]}</TextTransition></div>
+                <div className='text-[#75A47F] w-[30%] md:w-[40%] text-[45px] md:text-9xl xl:text-8xl flex flex-row justify-center items-center xl:justify-start'><TextTransition springConfig={presets.default}>{texts[index % texts.length]}</TextTransition></div>
             </div>
         </div>
     )

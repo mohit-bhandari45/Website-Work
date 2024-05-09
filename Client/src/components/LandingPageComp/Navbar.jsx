@@ -14,8 +14,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="main flex flex-col justify-center gap-8 h-[18vh] px-20 font-[Helvetica]">
-        {/* <div className="head text-center font-semibold text-sm">Contact Us For International Shipping | Purchase Originals</div> */}
+      <div className="main flex flex-col justify-center gap-8 min-h-[18vh] px-20 font-[Helvetica]">
         <div className="nav flex justify-between items-center">
           <div className="logo flex justify-center items-center gap-2">
             <div className="hamburger xl:hidden block">

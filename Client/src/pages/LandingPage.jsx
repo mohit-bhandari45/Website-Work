@@ -19,16 +19,16 @@ function LandingPage() {
   const [, set] = useState()
   return (
     <>
-        <Navbar/>
-        <Search/>
-        <HeroSec/>
+        <Navbar />
+        <Search />
+        <HeroSec />
         <Herosec2/>
         <PotSec/>
-        <Frames/>
+        {/* <Frames/> */}
         <Mid/>
         <Frames2/>
         <Mid2/>
-        <Frames3/>
+        {/* <Frames3/> */}
         <Mid3/>
         <Frames4/>
         <Frames5/>

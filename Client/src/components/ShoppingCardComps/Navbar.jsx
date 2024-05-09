@@ -9,8 +9,8 @@ const Navbar = () => {
             </div>
             <div className="elements w-full flex justify-between items-center px-20">
                 <div className="left"><img src="src/assets/go back.png" alt="" /></div>
-                <div className="text text-6xl font-bold">Shopping Cart</div>
-                <div className="right"><img className='w-[3vw] h-[8vh]' src="src/assets/cart.png" alt="" /></div>
+                <div className="text text-5xl font-bold">Shopping Cart</div>
+                <div className="right"><img className='w-[2.9vw] h-[7vh]' src="src/assets/cart.png" alt="" /></div>
             </div>
         </div>
     )

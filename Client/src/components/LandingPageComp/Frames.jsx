@@ -57,7 +57,7 @@ const Frames = () => {
     };
 
     return (
-        <Carousel autoPlay={false} slidesToSlide={1} keyBoardControl={true} draggable={true} centerMode={true} infinite showDots={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
+            <Carousel autoPlay={false} slidesToSlide={1} keyBoardControl={true} draggable={true} centerMode={true} infinite showDots={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
             {storydetails.map((storydetail) => {
                 return <Story mainimage={storydetail.mainimage} image={storydetail.image} name={storydetail.name} para={storydetail.para} />
             })}
