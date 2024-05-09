@@ -1,10 +1,13 @@
 import React from 'react'
+import Navbar from '../components/ContactComps/Navbar'
+import Body from '../components/ContactComps/Body'
 
 const SeeMore = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <Navbar />
+      <Body />
+    </>
   )
 }
 

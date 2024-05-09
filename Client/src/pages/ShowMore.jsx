@@ -1,10 +1,13 @@
 import React from 'react'
+import Navbar from '../components/ContactComps/Navbar'
+import Body from "../components/ShowMoreComps/Body"
 
 const ShowMore = () => {
   return (
-    <div>
-      dwargq2g
-    </div>
+    <>
+      <Navbar title="Show More"/>
+      <Body/>
+    </>
   )
 }
 

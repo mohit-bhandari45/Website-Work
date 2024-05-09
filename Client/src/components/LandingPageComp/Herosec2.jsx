@@ -24,7 +24,7 @@ const Herosec2 = () => {
     }, []);
 
     return (
-        <div className='w-full min-h-[70vh] md:min-h-[80vh]: xl:min-h-[100vh] flex justify-center items-center'>
+        <div className='w-full min-h-[70vh] md:min-h-[80vh]: xl:min-h-[100vh] flex justify-center items-center py-10'>
             <div className="text text-5xl md:text-8xl font-serif font-semibold flex flex-col xl:flex-row md:flex-col w-full justify-center items-center gap-8">
                 <div className="texts flex flex-col md:flex-row justify-center items-center gap-4">
                     <img className='w-[100%] md:w-1/2 h-28 md:h-48' src="src/assets/acrilc logo-09.png" alt="" />

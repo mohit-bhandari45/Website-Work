@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Navbar = () => {
+const Navbar = ({title}) => {
     return (
         <div className='navbar flex justify-between items-center px-28 h-[25vh] w-full font-[Helvetica]'>
             <div className="contact flex justify-center items-center text-4xl font-bold">
-                Contact Us
+                {title}
             </div>
             <div className="buttons text-xl md:flex gap-10 hidden">
                 <button className="font-medium">Login</button>

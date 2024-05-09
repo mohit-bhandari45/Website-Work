@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="main flex flex-col justify-center gap-8 min-h-[18vh] px-20 font-[Helvetica]">
+      <div className="main flex flex-col justify-center gap-8 min-h-[18vh] px-4 md:px-20 font-[Helvetica]">
         <div className="nav flex justify-between items-center">
           <div className="logo flex justify-center items-center gap-2">
             <div className="hamburger xl:hidden block">
@@ -24,7 +24,7 @@ const Navbar = () => {
                 <path d="M4 19L20 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
-            <a href="/"><img className='w-44 h-20' src="src/assets/acrilc logo-09.png" alt="" /></a>
+            <a href="/"><img className='md:w-44 md:h-20 w-32 h-16' src="src/assets/acrilc logo-09.png" alt="" /></a>
           </div>
 
           <div className="elements xl:flex gap-32 text-xl font-semibold hidden">
@@ -44,7 +44,7 @@ const Navbar = () => {
 
           <div className="info flex justify-center items-center gap-5">
             <div className="btn">
-              <button onClick={() => setbool(true)} className='text-xl font-light flex justify-center items-center border-black border-[3px] text-black py-1 px-4 rounded-full'>Sign Up</button>
+              <button onClick={() => setbool(true)} className='text-lg md:text-xl font-light flex justify-center items-center border-black border-[3px] text-black py-0 md:py-1 px-2 md:px-4 rounded-full'>Sign Up</button>
             </div>
             <div className="cart">
               <NavLink to="shoppingcart">

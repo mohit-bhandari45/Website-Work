@@ -5,7 +5,7 @@ import Body from '../components/ContactComps/Body'
 const Contacts = () => {
   return (
     <>
-      <Navbar />
+      <Navbar title="Contact Us"/>
       <Body />
     </>
   )

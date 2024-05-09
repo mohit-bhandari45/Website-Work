@@ -2,7 +2,7 @@ import React from 'react'
 
 const FramesLast = () => {
     return (
-        <div className='h-[120vh] py-16 px-6 my-20 flex gap-2 w-full justify-center items-center'>
+        <div className='h-[50vh] md:h-[40vh] xl:h-[60vh] 2xl:h-[120vh] py-20 px-6 my-20 flex gap-2 w-[100%] md:w-[98%] xl:w-full justify-center items-center mx-auto'>
             <div className="main h-[99%] w-[45vw]">
                 <img className='object-cover w-full h-full' src="/src/assets/Rectangle 30.png" alt="" />
             </div>
