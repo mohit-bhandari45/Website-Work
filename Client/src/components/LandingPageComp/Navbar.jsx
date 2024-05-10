@@ -4,6 +4,7 @@ import Credentials from './Credentials'
 
 const Navbar = () => {
   const [bool, setbool] = useState(false)
+  
 
   useEffect(() => {
     if (bool) {

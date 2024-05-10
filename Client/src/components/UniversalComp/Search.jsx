@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Search = () => {
+
     return (
         <>
             <div className="main w-full min-h-[20vh] flex justify-center items-center font-[Helvetica]">

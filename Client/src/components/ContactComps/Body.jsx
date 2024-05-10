@@ -2,6 +2,12 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const Body = () => {
+
+    const handleClick=() => {
+      window.open("https://mail.google.com/mail/u/0/#inbox?compose=jrjtXMncSjWrhgQLSqkkKrvjtTflHZQXPBggfTnpxBBsPSgQjZxJBBDDlvlNztzTNHxsmpTq")
+    }
+    
+
     return (
         <div className='body flex w-[100vw] h-[75vh] gap-64 font-[Helvetica] relative justify-center px-10'>
             <div className="content w-[35%] pl-16 py-10 flex flex-col gap-1">
@@ -11,7 +17,7 @@ const Body = () => {
                     <span className='font-medium'>empower your creativity.</span>
                 </div>
                 <div className="buttons flex pl-5 text-xl gap-10">
-                    <button className='rounded-full px-9 py-3 bg-[#ec8a73] text-white flex justify-center items-center'>Email Us</button>
+                    <button onClick={handleClick} className='rounded-full px-9 py-3 bg-[#ec8a73] text-white flex justify-center items-center'>Email Us</button>
                     <button className='underline font-medium'><NavLink to="/showmore">Show More</NavLink></button>
                 </div>
                 <div className="whatsapp w-[110%]">

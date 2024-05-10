@@ -6,7 +6,8 @@ const Body = () => {
       <div className="image flex w-full justify-center items-center">
         <img className='w-52 h-24' src="src/assets/acrilc logo-09.png" alt="" />
       </div>
-      <div className="main w-full flex justify-start items-center pb-24">
+
+      <div className="main w-full flex justify-between items-center pb-24 px-20 relative">
         <div className="left text-4xl flex flex-col gap-5 px-20 transition-all duration-150 ease-in-out">
 
           <div className="1 h-10 overflow-hidden hover:h-56 cursor-pointer transition-all duration-1000 ease-in-out">
@@ -51,10 +52,13 @@ const Body = () => {
               <div>- Our customer support team is available in all major Metro Cities to assist you with any questions or concerns</div>
             </div>
           </div>
+        </div>
 
-
+        <div className="image absolute right-0">
+          <img className='w-[40vw] h-[40vh]' src="src/assets/Refund.png" alt="" />
         </div>
       </div>
+
       <div className="email w-full flex justify-center items-center">
         <button className='rounded-full px-8 py-2 bg-[#ec8a73] text-white flex justify-center items-center text-xl font-semibold'>Email Us</button>
       </div>

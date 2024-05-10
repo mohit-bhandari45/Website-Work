@@ -2,15 +2,46 @@ import React from 'react'
 
 const PotSec = () => {
   return (
-    <div className='min-h-[110vh] xl:min-h-[100vh] w-full flex flex-col py-10 xl:py-0 xl:flex-row bg-black text-white justify-center items-center px-14 gap-0 xl:gap-32'>
-      <div className="text1 h-3/4 xl:text-7xl md:text-6xl text-5xl pt-10 flex xl:flex-col gap-4">
-        <div className='font-medium'>HAND</div>
-        <div className='font-extralight'>PAINTED</div>
+
+    <div className='h-[110vh] relative font-[Helvetica] w-full bg-black text-white '>
+      <div className="head h-[20vh] border-b-2 border-dashed box-border"></div>
+      <div className="absolute w-1/2 bg-white rounded-full right-44 top-0 h-full blur-[600px] opacity-40"></div>
+
+      <div className="main h-[90vh] flex justify-between items-center px-32 relative w-full">
+        <div className="image absolute right-80 top-[-120px] h-full w-[37%] z-10">
+          <img className='w-[100%] h-full opacity-20 ' src="src/assets/png-clipart-noise-cancelling-headphones-jbl-everest-elite-700-active-noise-control-headphones-electronics-bluetooth 1.png" alt="" />
+        </div>
+        <div className="left flex flex-col gap-10 w-1/2 relative z-20">
+          <div className='flex flex-col gap-4'>
+            <h2 className='text-xl font-semibold'>Tin Tea Pot</h2>
+            <h1 className='text-6xl font-bold'>Pattachitra Art</h1>
+          </div>
+          <div className="para w-[300px]">A Series of Bengal Pattachitra Art to
+            empower artists, makers, and culture
+            to empower local art form.
+          </div>
+          <div className="elements flex justify-start items-center gap-5 w-full">
+            <div className="stars flex justify-center items-center gap-2">
+              <img className='h-6 w-6' src="src/assets/Star 1.png" alt="" />
+              <img className='h-6 w-6' src="src/assets/Star 1.png" alt="" />
+              <img className='h-6 w-6' src="src/assets/Star 1.png" alt="" />
+              <img className='h-6 w-6' src="src/assets/Star 1.png" alt="" />
+              <img className='h-6 w-6' src="src/assets/Star 5.png" alt="" />
+            </div>
+            <div className="rate">100+ Reviews</div>
+          </div>
+          <div className="buttons flex justify-between items-center w-[67%]">
+            <button className='border-white border-2 rounded-2xl font-semibold py-2 px-5'>Buy Now</button>
+            <button className='bg-[#EE440F] px-16 font-semibold py-3 rounded-full'>Add to cart</button>
+          </div>
+
+        </div>
+
+        <div className="right image w-1/2 flex justify-end relative">
+          <img className='w-[100%] h-full relative z-20' src="src\assets\1 1.png" alt="" />
+        </div>
+
       </div>
-      <div className="pot h-full">
-        <img className='xl:h-[100vh] xl:w-[40vw] md:h-[80vh] md:w-[40vw]' src="src/assets/Frame 15.png" alt="" />
-      </div>
-      <div className="text2 h-3/4 items-end justify-end pt-0 xl:pt-96 font-light xl:text-7xl md:text-6xl text-6xl">TERACOTTA</div>
     </div>
   )
 }
