@@ -16,7 +16,7 @@ const PotSec = () => {
             <h2 className='text-xl font-semibold'>Tin Tea Pot</h2>
             <h1 className='text-6xl font-bold'>Pattachitra Art</h1>
           </div>
-          <div className="para w-[300px]">A Series of Bengal Pattachitra Art to
+          <div className="para w-[300px] text-[#959292]">A Series of Bengal Pattachitra Art to
             empower artists, makers, and culture
             to empower local art form.
           </div>

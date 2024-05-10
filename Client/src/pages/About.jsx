@@ -13,13 +13,10 @@ const AboutPage = () => {
         <div className="w-[90vw] mx-auto">
           <div className="mb-12 w-full">
             <div className="flex justify-center items-center w-full">
-              <div className="w-[100%] px-8 py-0 shadow-lg rounded-lg text-lg font-medium">
+              <div className="w-[95%] px-8 py-4 shadow-lg rounded-lg text-lg font-medium">
                 <h1 className="text-5xl font-bold mb-4 text-center">Discover the Artistry of Acrilc</h1>
-                <h1 className="text-2xl font-bold mb-2 text-center">
-                  Welcome to Acrilc
-                </h1>
                 <p className="text-gray-700 text-center">
-                  Where art meets innovation and creativity finds its canvas in every aspect of our existence. Founded with a vision to revolutionize the art industry, Acrilc is not just an e-commerce platform; it's a vibrant community that celebrates the spirit of artistic expression.
+                Welcome to Acrilc, Where art meets innovation and creativity finds its canvas in every aspect of our existence. Founded with a vision to revolutionize the art industry, Acrilc is not just an e-commerce platform; it's a vibrant community that celebrates the spirit of artistic expression.
                 </p>
                 <p className="text-gray-700 text-center">
                   At Acrilc, we believe that art is more than just colors on a canvas; it's a reflection of emotions, stories, and perspectives that shape our world. Our mission is to empower artists, both seasoned professionals and emerging talents, by providing them with a platform to showcase their creativity, connect with a global audience, and transform their passion into a sustainable livelihood.
