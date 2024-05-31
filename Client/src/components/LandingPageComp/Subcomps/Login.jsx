@@ -28,9 +28,9 @@ const Login = (props) => {
 
     return (
         <>
-            <div className="fixed w-[100vw] h-[100vh] top-0 flex justify-center items-center opacity-85 bg-black">
+            <div className="fixed w-[100vw] h-[100vh] top-0 flex justify-center items-center opacity-85 bg-black z-40">
             </div>
-            <div className="fixed w-[100vw] h-[100vh] top-0 flex justify-center items-center text-black">
+            <div className="fixed w-[100vw] h-[100vh] top-0 flex justify-center items-center text-black z-50">
                 <div className="cont relative h-[70%] w-[30%] bg-white z-50 rounded-md p-6 flex flex-col gap-9">
                     <div className="head flex justify-between items-center w-[100%]">
                         <div className="login text-3xl font-semibold text-gray-500">Login</div>

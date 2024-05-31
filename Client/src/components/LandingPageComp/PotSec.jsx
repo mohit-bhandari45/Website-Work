@@ -4,7 +4,7 @@ const PotSec = () => {
   return (
 
     <div className='h-[110vh] relative font-[Helvetica] w-full bg-black text-white '>
-      <div className="head h-[20vh] border-b-2 border-dashed box-border"></div>
+      <div className="head h-[20vh]"></div>
       <div className="absolute w-1/2 bg-white rounded-full right-44 top-0 h-full blur-[600px] opacity-40"></div>
 
       <div className="main h-[90vh] flex justify-between items-center px-32 relative w-full">
@@ -16,7 +16,7 @@ const PotSec = () => {
             <h2 className='text-xl font-semibold'>Tin Tea Pot</h2>
             <h1 className='text-6xl font-bold'>Pattachitra Art</h1>
           </div>
-          <div className="para w-[300px] text-[#959292]">A Series of Bengal Pattachitra Art to
+          <div className="para w-[43%] text-[#959292]">A Series of Bengal Pattachitra Art to
             empower artists, makers, and culture
             to empower local art form.
           </div>

@@ -15,20 +15,21 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="main flex flex-col justify-center gap-8 min-h-[18vh] px-4 md:px-20 font-[Helvetica]">
-        <div className="nav flex justify-between items-center">
+      <div className="main flex justify-center gap-8 h-[18vh] w-full font-[Helvetica]">
+
+        <div className="nav flex justify-between items-center w-[95%]">
           <div className="logo flex justify-center items-center gap-2">
-            <div className="hamburger xl:hidden block">
+            {/* <div className="hamburger xl:hidden block">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
                 <path d="M4 5L20 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M4 12L20 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M4 19L20 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-            </div>
-            <a href="/"><img className='md:w-44 md:h-20 w-32 h-16' src="src/assets/acrilc logo-09.png" alt="" /></a>
+            </div> */}
+            <a href="/"><img className='w-44 h-20' src="src/assets/acrilc logo-09.png" alt="" /></a>
           </div>
 
-          <div className="elements xl:flex gap-32 text-xl font-semibold hidden">
+          <div className="elements flex gap-32 text-xl font-semibold">
             <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
               <NavLink to="/catalog">Catalog</NavLink>
             </div>
@@ -60,6 +61,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+
       </div>
       {bool ? <Credentials setbool={setbool} /> : ""}
     </>

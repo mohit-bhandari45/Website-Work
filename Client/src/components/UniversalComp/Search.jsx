@@ -4,7 +4,7 @@ const Search = () => {
 
     return (
         <>
-            <div className="main w-full min-h-[20vh] flex justify-center items-center font-[Helvetica]">
+            <div className="main w-full h-[20vh] flex justify-center items-center font-[Helvetica]">
                 <div className='inputs w-[80%] border-[2px] border-gray-600 h-[40%] flex justify-between items-center rounded-2xl px-2'>
                     <div className="inputs w-full h-full pl-4">
                         <input className='focus:outline-none text-xl w-[98%] bg-transparent placeholder:text-xl h-full flex justify-center items-center' type="text" placeholder='Kalighat Pot Art' />

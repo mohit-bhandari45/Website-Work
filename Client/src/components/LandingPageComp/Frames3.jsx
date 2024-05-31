@@ -8,41 +8,37 @@ import 'react-multi-carousel/lib/styles.css';
 const Frames3 = () => {
   const [details, setdetails] = useState([
     {
-      state: "West Bengal",
-      image: "src/assets/Ellipse 54 (3).png",
-    },
-    {
-      state: "Uttarakhand",
-      image: "src/assets/Ellipse 54 (3).png",
-    },
-    {
       state: "Delhi",
-      image: "src/assets/Ellipse 54.png",
-    },
-
-    {
-      state: "Bihar",
-      image: "src/assets/Ellipse 54 (2).png",
+      image: "src/assets/Ellipse 54 (4).png",
     },
     {
       state: "Punjab",
-      image: "src/assets/Ellipse 54 (1).png",
+      image: "src/assets/Ellipse 54 (5).png",
     },
     {
-      state: "Odissa",
-      image: "src/assets/Ellipse 54 (1).png",
+      state: "Delhi",
+      image: "src/assets/Ellipse 54 (6).png",
+    },
+
+    {
+      state: "Odisha",
+      image: "src/assets/Ellipse 54 (7).png",
     },
     {
-      state: "Kerala",
-      image: "src/assets/Ellipse 54 (1).png",
+      state: "Maharastra",
+      image: "src/assets/Ellipse 54 (8).png",
     },
     {
-      state: "Karnataka",
-      image: "src/assets/Ellipse 54 (1).png",
+      state: "West Bengal",
+      image: "src/assets/Ellipse 54 (9).png",
     },
     {
-      state: "Chennai",
-      image: "src/assets/Ellipse 54 (1).png",
+      state: "Jaipur",
+      image: "src/assets/Ellipse 54 (10).png",
+    },
+    {
+      state: "South India",
+      image: "src/assets/Ellipse 54 (11).png",
     },
   ])
 

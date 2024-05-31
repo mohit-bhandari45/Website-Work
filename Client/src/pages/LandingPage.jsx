@@ -13,6 +13,7 @@ import Frames5 from '../components/LandingPageComp/Frames5'
 import Footer from '../components/LandingPageComp/Footer'
 import FramesLast from '../components/LandingPageComp/FramesLast'
 import Frames6 from '../components/LandingPageComp/Frames6'
+import FlashSales from '../components/LandingPageComp/FlashSales'
 
 function LandingPage() {
   const [, set] = useState()
@@ -23,11 +24,12 @@ function LandingPage() {
         <HeroSec />
         <Herosec2/>
         <PotSec/>
-        {/* <Frames/> */}
+        <Frames/>
+        <FlashSales/>
         <Mid title="COMING SOON !"/>
         <Frames2/>
         <Mid title="State Arts"/>
-        {/* <Frames3/> */}
+        <Frames3/>
         <Mid title="BESTSELLER"/>
         <Frames4/>
         <Frames5/>

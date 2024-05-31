@@ -14,8 +14,8 @@ const Story = ({mainimage,image,name,para}) => {
     }
 
     return (
-        <div className="img1 md:h-[53vh] xl:min-h-[94vh] w-[23vw] relative py-20 top-0 hover:scale-105 transition-all duration-100 ease-in-out cursor-pointer">
-            <img className='absolute top-20 md:h-[45vh] xl:min-h-[75vh] w-full' src={changeimage.length>1?changeimage:mainimage} alt="" />
+        <div className="img1 h-[94vh] w-[23vw] relative py-20 top-0 hover:scale-105 transition-all duration-100 ease-in-out cursor-pointer">
+            <img className='absolute top-20 h-[75vh] w-full' src={changeimage.length>1?changeimage:mainimage} alt="" />
             {/* <input onChange={handleChange} className='absolute z-20' type="file"/> */}
             <div className="flex justify-center items-end h-[75vh] bg-[#00000082] relative z-10">
                 <div className='flex text-white px-5 gap-3 justify-center py-5'>

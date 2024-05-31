@@ -3,7 +3,7 @@ import React from 'react'
 const Card2 = ({state,image}) => {
   return (
     <div className='flex flex-col gap-4 justify-center items-center font-[Helvetica] h-[60vh]'>
-      <div className="image hover:scale-110 transition-all duration-100 ease-in-out cursor-pointer">
+      <div className="image hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer">
         <img src={image} alt="" />
       </div>
       <div className='flex flex-col gap-3 justify-center items-center'>
