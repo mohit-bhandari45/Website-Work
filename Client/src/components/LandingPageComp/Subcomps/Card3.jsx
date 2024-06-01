@@ -4,7 +4,7 @@ const Card3 = ({img,discount,title,mainprice,prevprice,stars,amount}) => {
     const [visible, setvisible] = useState(false)
 
     return (
-        <div className='h-full w-[20vw] rounded-lg relative flex flex-col justify-center items-center font-[Helvetica]'>
+        <div className='h-full w-[21vw] rounded-lg relative flex flex-col justify-center items-center font-[Helvetica]'>
             <div onMouseOver={()=>{setvisible(true)}} onMouseLeave={()=>{setvisible(false)}} className="card h-[50vh] w-full bg-[#F5F5F5] relative flex justify-center items-center cursor-pointer hover:scale-95 transition-all ease-in-out duration-500">
                 <div className="image absolute"><img src={img} alt="" /></div>
                 <div className="icons w-full flex justify-between items-start h-full p-3">
