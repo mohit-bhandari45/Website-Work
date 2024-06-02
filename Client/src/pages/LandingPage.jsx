@@ -14,6 +14,7 @@ import FramesLast from '../components/LandingPageComp/FramesLast'
 import FlashSales from '../components/LandingPageComp/FlashSales'
 import BrowseCategory from '../components/LandingPageComp/BrowseCategory'
 import Frames5 from '../components/LandingPageComp/Frames5'
+import SubFooter from '../components/LandingPageComp/SubFooter'
 
 function LandingPage() {
   const [, set] = useState()
@@ -35,6 +36,7 @@ function LandingPage() {
       <Frames4 />
       <Frames5/>
       <FramesLast />
+      <SubFooter/>
       <Footer />
     </>
   )
