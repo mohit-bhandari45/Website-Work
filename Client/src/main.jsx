@@ -9,10 +9,14 @@ import Catalog from './pages/Catalog.jsx'
 import Contacts from './pages/Contacts.jsx'
 import Gallery from './pages/Gallery.jsx'
 import ShowMore from './pages/ShowMore.jsx'
-import ShoppingCart from './pages/ShoppingCart.jsx'
+import ShoppingCart from './pages/user/ShoppingCart.jsx'
+import ArtistSignup from './pages/artist/ArtistSignup.jsx'
+import UserProfile from './pages/user/UserProfile.jsx'
+import ArtistProfile from './pages/artist/ArtistProfile.jsx'
 
 
 const router = createBrowserRouter([
+    //in this landing page, the user authentication will also happen
     {
         path: "/",
         element: <LandingPage />
@@ -37,9 +41,25 @@ const router = createBrowserRouter([
         path: "/showmore",
         element: <ShowMore/>
     },
+
+    //artist routes
+    {
+        path: "/artistsignup",
+        element: <ArtistSignup />
+    },
+    {
+        path: "/artistprofile",
+        element: <ArtistProfile />
+    },
+
+    //userroutes
     {
         path: "/shoppingcart",
         element: <ShoppingCart/>
+    },
+    {
+        path: "/userprofile",
+        element: <UserProfile/>
     },
 ])
 

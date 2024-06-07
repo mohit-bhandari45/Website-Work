@@ -1,15 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Body = () => {
   return (
-    <div className='h-[75vh] font-[Helvetica]'>
+    <div className='font-[Helvetica] relative pb-5'>
       <div className="image flex w-full justify-center items-center">
-        <img className='w-52 h-24' src="src/assets/acrilc logo-09.png" alt="" />
+        <Link to="/"><img className='w-52 h-24' src="src/assets/acrilc logo-09.png" alt="" /></Link>
       </div>
 
-      <div className="main w-full flex justify-between items-center pb-24 px-20 relative">
-        <div className="left text-4xl flex flex-col gap-5 px-20 transition-all duration-150 ease-in-out">
-
+      <div className="main w-full flex justify-between items-start pb-24 px-20 relative">
+        <div className="left text-4xl flex flex-col pt-52 gap-5 px-20 transition-all duration-150 ease-in-out relative top-0">
           <div className="1 h-10 overflow-hidden hover:h-56 cursor-pointer transition-all duration-1000 ease-in-out">
             <div className='hover:underline hover:underline-offset-8'>Refund Policy</div>
             <div className='h-96 py-3 text-lg w-96 px-2'>
@@ -18,7 +18,7 @@ const Body = () => {
             </div>
           </div>
 
-          <div className="1 h-10 overflow-hidden hover:h-72 cursor-pointer transition-all duration-1000 ease-in-out">
+          <div className="1 h-10 overflow-hidden hover:h-72 relative top-0 cursor-pointer transition-all duration-1000 ease-in-out">
             <div className='hover:underline hover:underline-offset-8'>Shipping Policy</div>
             <div className='h-96 py-3 text-lg w-96 px-2'>
               <div>- We provide standard and expedited shipping options.</div>
@@ -27,7 +27,7 @@ const Body = () => {
             </div>
           </div>
 
-          <div className="1 h-10 overflow-hidden hover:h-60 cursor-pointer transition-all duration-1000 ease-in-out">
+          <div className="1 h-10 overflow-hidden hover:h-64 cursor-pointer transition-all duration-1000 ease-in-out">
             <div className='hover:underline hover:underline-offset-8'>Privacy Policy</div>
             <div className='h-96 py-3 text-lg w-96 px-2'>
               <div>- We prioritize the protection of your personal information and adhere to strict privacy practices.</div>
@@ -54,8 +54,8 @@ const Body = () => {
           </div>
         </div>
 
-        <div className="image absolute right-0">
-          <img className='w-[40vw] h-[40vh]' src="src/assets/Refund.png" alt="" />
+        <div className="image right-0">
+          <img className='w-[40vw] h-[80vh]' src="src/assets/Refund.png" alt="" />
         </div>
       </div>
 

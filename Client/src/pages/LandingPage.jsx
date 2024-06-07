@@ -9,7 +9,7 @@ import Mid from '../components/LandingPageComp/Mid'
 import Frames2 from '../components/LandingPageComp/Frames2'
 import Frames3 from '../components/LandingPageComp/Frames3'
 import Frames4 from '../components/LandingPageComp/Frames4'
-import Footer from '../components/LandingPageComp/Footer'
+import Footer from '../components/UniversalComp/Footer'
 import FramesLast from '../components/LandingPageComp/FramesLast'
 import FlashSales from '../components/LandingPageComp/FlashSales'
 import BrowseCategory from '../components/LandingPageComp/BrowseCategory'
@@ -17,7 +17,6 @@ import Frames5 from '../components/LandingPageComp/Frames5'
 import SubFooter from '../components/LandingPageComp/SubFooter'
 
 function LandingPage() {
-  const [, set] = useState()
   return (
     <>
       <Navbar />
