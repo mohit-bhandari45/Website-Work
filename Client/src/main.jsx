@@ -13,6 +13,7 @@ import ShoppingCart from './pages/user/ShoppingCart.jsx'
 import ArtistSignup from './pages/artist/ArtistSignup.jsx'
 import UserProfile from './pages/user/UserProfile.jsx'
 import ArtistProfile from './pages/artist/ArtistProfile.jsx'
+import WishList from './pages/user/WishList.jsx'
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
     {
         path: "/userprofile",
         element: <UserProfile/>
+    },
+    {
+        path: "/wishlist",
+        element: <WishList/>
     },
 ])
 
