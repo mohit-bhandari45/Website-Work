@@ -1,7 +1,7 @@
 import React from 'react'
-import Navbar from '../../components/ShoppingCardComps/Navbar'
-import Card from '../../components/ShoppingCardComps/Card'
-import Footer from '../../components/ShoppingCardComps/Footer'
+import Navbar from '../../components/UserPageComps/ShoppingCartComps/Navbar'
+import Card from '../../components/UserPageComps/ShoppingCartComps/Card'
+import Footer from '../../components/UserPageComps/ShoppingCartComps/Footer'
 
 const ShoppingCart = () => {
     return (

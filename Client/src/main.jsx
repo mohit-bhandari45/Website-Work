@@ -14,6 +14,8 @@ import ArtistSignup from './pages/artist/ArtistSignup.jsx'
 import UserProfile from './pages/user/UserProfile.jsx'
 import ArtistProfile from './pages/artist/ArtistProfile.jsx'
 import WishList from './pages/user/WishList.jsx'
+import Checkout from './pages/user/Checkout.jsx'
+import ProductDetails from './pages/user/ProductDetails.jsx'
 
 
 const router = createBrowserRouter([
@@ -65,6 +67,14 @@ const router = createBrowserRouter([
     {
         path: "/wishlist",
         element: <WishList/>
+    },
+    {
+        path: "/checkout",
+        element: <Checkout/>
+    },
+    {
+        path: "/productdetails",
+        element: <ProductDetails/>
     },
 ])
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Search from '../../components/UniversalComp/Search'
-import Section from '../../components/ArtistProfileComps/Section'
+import Section from '../../components/ArtistPageComps/ArtistProfileComps/Section'
 import Mid from '../../components/LandingPageComp/Mid'
-import Card from '../../components/ArtistProfileComps/SectionComps/Card'
+import Card from '../../components/ArtistPageComps/ArtistProfileComps/SectionComps/Card'
 import Footer from '../../components/UniversalComp/Footer'
 
 const ArtistProfile = () => {
