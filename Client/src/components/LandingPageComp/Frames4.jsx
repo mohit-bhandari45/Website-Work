@@ -2,7 +2,7 @@ import React from 'react'
 
 const Frames4 = () => {
     return (
-        <div className='h-[120vh] w-full font-[Helvetica] flex flex-col justify-center items-center'>
+        <div className='h-[130vh] w-full font-[Helvetica] flex flex-col justify-center items-center'>
             <div className="head h-[30vh] w-[90%]">
                 <div className="head2 h-[10vh] flex justify-start items-center gap-4 w-full">
                     <div className="bar w-[1.5%] h-[70%] rounded-sm bg-[#DB4444]"></div>

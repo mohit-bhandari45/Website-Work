@@ -16,6 +16,7 @@ import ArtistProfile from './pages/artist/ArtistProfile.jsx'
 import WishList from './pages/user/WishList.jsx'
 import Checkout from './pages/user/Checkout.jsx'
 import ProductDetails from './pages/user/ProductDetails.jsx'
+import Page404 from './pages/Page404.jsx'
 
 
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
     {
         path: "/showmore",
         element: <ShowMore/>
+    },
+    {
+        path: "/404",
+        element: <Page404/>
     },
 
     //artist routes

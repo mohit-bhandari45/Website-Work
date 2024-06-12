@@ -82,7 +82,7 @@ const Frames5 = () => {
 
     const [right, setright] = useState(0)
     return (
-        <div className='h-[180vh] py-16 w-full font-[Helvetica] flex flex-col justify-center items-center'>
+        <div className='h-[190vh] py-16 w-full font-[Helvetica] flex flex-col justify-center items-center'>
             <div className="head h-[30vh] w-[90%]">
                 <div className="head2 h-[10vh] flex justify-start items-center gap-4 w-full">
                     <div className="bar w-[1.5%] h-[70%] rounded-sm bg-[#ED8A73]"></div>
@@ -116,4 +116,3 @@ const Frames5 = () => {
 }
 
 export default Frames5
-

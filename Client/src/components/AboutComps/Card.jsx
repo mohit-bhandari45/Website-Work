@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Card = ({name,para}) => {
+const Card = ({icon,views,title}) => {
+    const [bool, setbool] = useState(false)
+
     return (
-        <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-black mb-4 text-center">{name}</h2>
-            <p className='text-balance text-center'>{para}</p>
+        <div onClick={()=>{setbool(!bool)}} className={`${bool?"bg-[#ED8A73] text-white":"text-black bg-white"} cursor-pointer transition-all duration-300 ease-in-out w-[15%] flex-col border-2 border-gray-300 rounded-sm gap-3 h-[55%] flex justify-center items-center`}>
+            <div className="logo p-2 bg-gray-300 rounded-full">
+                <div className="circle p-2 bg-black rounded-full">
+                    <img className='w-8 h-8' src={icon} alt="" />
+                </div>
+            </div>
+            <div className="amount text-2xl font-bold font-[Helvetica]">
+                {views}
+            </div>
+            <div className="para font-[Helvetica] font-semibold">
+                {title}
+            </div>
         </div>
     )
 }

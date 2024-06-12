@@ -27,11 +27,11 @@ function LandingPage() {
       <Frames />
       <BrowseCategory/>
       <FlashSales />
-      <Mid title="COMING SOON !" />
+      <Mid title="COMING SOON !" h="10vh"/>
       <Frames2 />
-      <Mid title="State Arts" />
+      <Mid title="State Arts" h="20vh"/>
       <Frames3 />
-      <Mid title="BESTSELLER" />
+      <Mid title="BESTSELLER" h="25vh"/>
       <Frames4 />
       <Frames5/>
       <FramesLast />

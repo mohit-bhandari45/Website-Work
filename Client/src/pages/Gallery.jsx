@@ -6,7 +6,13 @@ import { useState } from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Mid from '../components/GalleryComps/Mid'
-import ThreeDCarousel from '../components/GalleryComps/ThreeDCarousel'
+import HeroSec from '../components/GalleryComps/HeroSec'
+import MinorSec from '../components/GalleryComps/MinorSec'
+import SubFooter from '../components/LandingPageComp/SubFooter'
+import Footer from '../components/UniversalComp/Footer'
+import Mid2 from '../components/GalleryComps/Mid2'
+import Card from '../components/GalleryComps/Card'
+import Frames5 from '../components/LandingPageComp/Frames5'
 
 const Gallery = () => {
   const [details, setdetails] = useState([
@@ -73,14 +79,39 @@ const Gallery = () => {
       <div className='h-[10vh] flex justify-center items-center font-[Helvetica]'>
         <div className='text-6xl font-bold'>Gallery</div>
       </div>
-      <Search/>
-      <Carousel autoPlay={true} arrows={false} infinite showDots={true} keyBoardControl={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
-      {details.map((detail) => {
-        return <Card2 state={detail.state} image={detail.image} />
-      })}
-    </Carousel>
-    <Mid/>
-    <ThreeDCarousel/>
+      <Search />
+      <Carousel autoPlay={true} arrows={false} infinite showDots={false} keyBoardControl={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
+        {details.map((detail) => {
+          return <Card2 state={detail.state} image={detail.image} />
+        })}
+      </Carousel>
+      <Mid />
+      <HeroSec />
+      <MinorSec />
+      <div className="hero3 h-[120vh] w-full flex flex-col py-16">
+        <Mid2 />
+        <div className="cards w-full h-[100vh] flex justify-center items-center">
+          <div className="inner w-[90%] h-full flex flex-col justify-center items-center gap-3">
+            <div className="one flex">
+              <Card/>
+              <Card/>
+              <Card/>
+              <Card/>
+              <Card/>
+            </div>
+            <div className="two flex">
+              <Card/>
+              <Card/>
+              <Card/>
+              <Card/>
+              <Card/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Frames5/>
+      <SubFooter />
+      <Footer />
     </>
   )
 }
