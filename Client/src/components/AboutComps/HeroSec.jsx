@@ -9,11 +9,9 @@ const HeroSec = () => {
                 <div className="cont w-[90%] h-full">
                     <div className="nav2 main1 h-[25vh] flex justify-between items-center">
                         <div className="path">
-                            <span className='font-[Helvetica] text-gray-400'>Account</span>
+                            <span className='font-[Helvetica] text-gray-400'>Home</span>
                             <span className='px-2 text-gray-400'> / </span>
-                            <span className='font-[Helvetica] text-gray-400'>Gaming</span>
-                            <span className='px-2 text-gray-400'> / </span>
-                            <span className='font-semibold font-[Helvetica]'>Handcrafted Bird Brass Lamp with 5 diyas</span>
+                            <span className='font-semibold font-[Helvetica]'>About</span>
                         </div>
                     </div>
                     <div className="hero h-[90vh] w-full flex justify-center items-center">
@@ -21,10 +19,10 @@ const HeroSec = () => {
                             <h1 className='text-6xl font-bold font-[Helvetica]'>Our Story</h1>
                             <div className="para flex flex-col text-lg justify-center items-start gap-5 font-medium font-[Helvetica] w-[85%] text-balance">
                                 <div className="one">
-                                    Welcome to Acrilc, where art meets innovation and creativity finds its canvas in every aspect of our existence. Founded with a vision to revolutionize the art industry, Acrilc is not just an e-commerce platform; it's a vibrant community that celebrates the spirit of artistic expression.
+                                    Welcome to Acrilc, where art meets innovation and creativity finds its canvas in every aspect of our existence. Founded with a vision to revolutionize the art industry, Acrilc is not just an e-commerce platform, it's a vibrant community that celebrates the spirit of artistic expression.
                                 </div>
                                 <div className="two">
-                                    At Acrilc, we believe that art is more than just colors on a canvas; it's a reflection of emotions, stories, and perspectives that shape our world. Our mission is to empower artists, both seasoned professionals and emerging talents, by providing them with a platform to showcase their creativity, connect with a global audience, and transform their passion into a sustainable
+                                    At Acrilc, we believe that art is more than just colors on a canvas, it's a reflection of emotions, stories, and perspectives that shape our world. Our mission is to empower artists, both seasoned professionals and emerging talents, by providing them with a platform to showcase their creativity, connect with a global audience, and transform their passion into a sustainable
                                     <div>livelihood.</div>
                                 </div>
                             </div>
