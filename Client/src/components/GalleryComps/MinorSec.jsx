@@ -35,7 +35,7 @@ const MinorSec = () => {
                 </div>
             </div>
             <div className={`${bool1 || bool2 ?"h-[50vh]":"h-0"} boolean flex w-full transition-all duration-700 ease-in-out justify-center items-center`}>
-                <div className="content w-[72%] h-full flex justify-center items-center gap-5 font-semibold">
+                <div className="content w-[76%] h-full flex justify-center items-center gap-5 font-semibold">
                     <div className={`${bool1 ? "h-[40vh] opacity-100" : "h-0 opacity-0 overflow-hidden"} transition-all duration-700 ease-in-out w-[100%] left`}>
                         Meticulously hand-moulded by skilled artisans, this Indian God Sculpture Figurine captures the essence of traditional craftsmanship and spiritual reverence.
                         Crafted with precision and attention to detail, each Laxmi Murti reflects the artistry and devotion of our artisans, making it a cherished addition to your home décor. The intricate detailing on the figurine, from the delicate features of Goddess Laxmi to the ornate motifs adorning her attire, showcases the craftsmanship steeped in centuries-old traditions.
