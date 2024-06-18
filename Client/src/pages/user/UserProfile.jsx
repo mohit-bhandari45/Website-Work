@@ -4,7 +4,7 @@ import Navbar from '../../components/UserPageComps/UniversalComps/Navbar'
 
 //firebase
 import { app } from '../../firebase'
-import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { getAuth, onAuthStateChanged, updateEmail, verifyBeforeUpdateEmail } from "firebase/auth"
 import { getFirestore, collection, where, query, getDocs } from "firebase/firestore"
 
 const auth = getAuth(app)
@@ -15,7 +15,16 @@ const UserProfile = () => {
     firstname: "",
     lastname: "",
     email: "",
+    address: "",
+    newpassword: "",
+    confirmnewpassword: ""
   })
+
+  useEffect(() => {
+    console.log(userInfo)
+    console.log(auth.currentUser)
+  }, [userInfo])
+
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -37,6 +46,23 @@ const UserProfile = () => {
     });
   }, [])
 
+  const handleChange = (e) => {
+    setuserInfo({ ...userInfo, [e.target.name]: e.target.value })
+  }
+
+  const handleUpdate = () => {
+    onAuthStateChanged(auth, async (user) => {
+      if(user){
+        verifyBeforeUpdateEmail(userInfo.email).then(() => {
+          // Email sent.
+          console.log('Verification email sent to new email address. Please verify the new email address.');
+        }).catch((error) => {
+          // Handle errors
+          console.error('Error sending verification email:', error.message);
+        });
+      }
+    });
+  }
 
   return (
     <>
@@ -45,7 +71,7 @@ const UserProfile = () => {
         <div className="main w-[85vw] h-full">
           <div className="nav2 h-[25vh] flex justify-between items-center">
             <div className="path"><span className='font-[Helvetica] text-gray-400'>Home</span><span className='px-2 text-gray-400'> / </span><span className='font-semibold font-[Helvetica]'>My Account</span></div>
-            <div className="welcome"><span className='font-semibold font-[Helvetica]'>Welcome!</span> <span className='font-bold font-[Helvetica] text-[#ED8A73]'>Sambit</span></div>
+            <div className="welcome"><span className='font-semibold font-[Helvetica]'>Welcome!</span> <span className='font-bold font-[Helvetica] text-[#ED8A73]'>{userInfo.firstname}</span></div>
           </div>
           <div className="content w-[85vw] h-[95vh] flex justify-start items-start">
             <div className="left w-[25%] h-full flex flex-col justify-start items-start gap-8">
@@ -75,13 +101,13 @@ const UserProfile = () => {
                   <div className="name w-1/2 flex flex-col justify-center gap-2">
                     <div className="head1 font-medium">First Name</div>
                     <div className="box h-12 rounded-sm">
-                      <input className='w-full h-full px-3 bg-[#F5F5F5]' type="text" value={userInfo.firstname} />
+                      <input onChange={handleChange} className='w-full h-full px-3 bg-[#F5F5F5]' name="firstname" type="text" value={userInfo.firstname} />
                     </div>
                   </div>
                   <div className="name w-1/2 flex flex-col justify-center gap-2">
                     <div className="head2 font-medium">Last Name</div>
                     <div className="box h-12 rounded-sm">
-                      <input className='w-full h-full px-3 bg-[#F5F5F5]' type="text" value={userInfo.lastname} />
+                      <input onChange={handleChange} className='w-full h-full px-3 bg-[#F5F5F5]' name="lastname" type="text" value={userInfo.lastname} />
                     </div>
                   </div>
                 </div>
@@ -89,28 +115,25 @@ const UserProfile = () => {
                   <div className="name w-1/2 flex flex-col justify-center gap-2">
                     <div className="head1 font-medium">Email</div>
                     <div className="box h-12 w-full rounded-sm">
-                      <input className='w-full h-full px-3 bg-[#F5F5F5]' type="email" value={userInfo.email} />
+                      <input onChange={handleChange} className='w-full h-full px-3 bg-[#F5F5F5]' type="email" name="email" value={userInfo.email} />
                     </div>
                   </div>
                   <div className="name w-1/2 flex flex-col justify-center gap-2">
                     <div className="head2 font-medium">Address</div>
                     <div className="box h-12 rounded-sm">
-                      <input className='w-full h-full px-3 bg-[#F5F5F5]' type="text" />
+                      <input onChange={handleChange} name='address' className='w-full h-full px-3 bg-[#F5F5F5]' type="text" />
                     </div>
                   </div>
                 </div>
                 <div className="first w-full flex justify-center items-center gap-8 py-3">
-                  <div className="name w-full flex flex-col justify-center gap-2">
+                  <div className="name w-full flex flex-col justify-center gap-4">
                     <div className="head1 font-medium">Password Changes</div>
                     <div className="boxes flex flex-col justify-center gap-4">
                       <div className="box h-12 rounded-sm">
-                        <input className='w-full h-full px-3 bg-[#F5F5F5]' type="text" />
+                        <input onChange={handleChange} name='newpassword' className='w-full h-full px-3 bg-[#F5F5F5]' placeholder='New Password' type="text" />
                       </div>
                       <div className="box h-12 rounded-sm">
-                        <input className='w-full h-full px-3 bg-[#F5F5F5]' type="text" />
-                      </div>
-                      <div className="box h-12 rounded-sm">
-                        <input className='w-full h-full px-3 bg-[#F5F5F5]' type="text" />
+                        <input onChange={handleChange} name='confirmnewpassword' className='w-full h-full px-3 bg-[#F5F5F5]' placeholder='Confirm New Password' type="text" />
                       </div>
                     </div>
                   </div>
@@ -118,7 +141,7 @@ const UserProfile = () => {
               </div>
               <div className="buttons w-full h-[20%] py-4 flex justify-end items-center">
                 <div className="cancel px-8">Cancel</div>
-                <div className="save"><button className='py-3 px-8 text-white bg-[#ED8A73] rounded-sm'>Save Changes</button></div>
+                <div className="save"><button onClick={handleUpdate} className='py-3 px-8 text-white bg-[#ED8A73] rounded-sm font-bold font-[Helvetica]'>Save Changes</button></div>
               </div>
             </div>
           </div>

@@ -18,6 +18,8 @@ import Checkout from './pages/user/Checkout.jsx'
 import ProductDetails from './pages/user/ProductDetails.jsx'
 import Page404 from './pages/Page404.jsx'
 
+/* Context API */
+import { BooleanProvider } from './context/context.jsx'
 
 const router = createBrowserRouter([
     //in this landing page, the user authentication will also happen
@@ -85,6 +87,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <GoogleOAuthProvider clientId="1013003077692-bp8uca4g508sh0ejjmr2uichvo62t6nh.apps.googleusercontent.com">
+        <BooleanProvider>
         <RouterProvider router={router}></RouterProvider>
+        </BooleanProvider>
     </GoogleOAuthProvider>
 )

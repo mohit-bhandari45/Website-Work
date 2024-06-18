@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+/* Context API */
+import { useBooleanContext } from '../../../context/context';
 
 /* Firebase */
 import { app } from '../../../firebase';
@@ -22,6 +24,8 @@ const Signup = ({ setsignbool, setbool }) => {
     const [bool3, setbool3] = useState(false)
     const [counter, setcounter] = useState(0)
     const [height, setHeight] = useState(85)
+    // const { setBoolPopPhone,setToastBool } = useBooleanContext()
+    const { setBoolPopPhone } = useBooleanContext()
 
     const toastOptions = {
         position: "bottom-right",
@@ -31,7 +35,6 @@ const Signup = ({ setsignbool, setbool }) => {
         theme: "dark",
         closeOnClick: true,
     }
-
 
     const googleProviderFn = () => {
         signInWithPopup(auth, googleProvider).then(async (user) => {
@@ -45,8 +48,13 @@ const Signup = ({ setsignbool, setbool }) => {
                     addDoc(collection(firestore, "users"), {
                         name: user.user.displayName,
                         email: user.user.email
-                    }).then((result) => { console.log(result) })
-                    navigate("/userprofile")
+                    }).then((result) => {
+                        // setToastBool(true)
+                        setbool(false)
+                        setTimeout(() => {
+                            setBoolPopPhone(true)
+                        }, 2000);
+                    })
                 }
             }
         })
@@ -142,9 +150,14 @@ const Signup = ({ setsignbool, setbool }) => {
                 email: inputdetails.email,
                 password: inputdetails.password
             })
-            navigate("/userprofile")
+            // setToastBool(true)
+            setbool(false)
+            setTimeout(() => {
+                setBoolPopPhone(true)
+            }, 2000);
         }).catch((err) => {
             toast.error("User already exist", toast)
+            console.log("riwgpi3rh3tqtw")
             console.log(err)
         })
     }
@@ -158,7 +171,9 @@ const Signup = ({ setsignbool, setbool }) => {
                 <div className={`${bool1 || bool2 || bool3 ? handleheightChange : height + "%"} cont relative w-[30%] bg-white z-50 rounded-md px-6 py-4 flex flex-col gap-11`}>
                     <div className="head flex justify-between items-center w-[100%]">
                         <div className="login text-3xl font-semibold text-gray-500">Sign Up</div>
-                        <div className="cross cursor-pointer"><svg onClick={() => { setbool(false) }} xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="24" height="24" viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img" class="sc-rbbb40-0 fJjczH"><title>cross</title><path d="M11.42 10.42l3.54-3.54c0.38-0.4 0.38-1.040 0-1.42s-1.020-0.4-1.42 0l-3.54 3.54-3.54-3.54c-0.4-0.4-1.020-0.4-1.42 0s-0.38 1.020 0 1.42l3.54 3.54-3.54 3.54c-0.38 0.38-0.38 1.020 0 1.42 0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28l3.54-3.56 3.54 3.56c0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28c0.38-0.4 0.38-1.040 0-1.42l-3.54-3.54z"></path></svg></div>
+                        <div className="cross cursor-pointer">
+                            <svg onClick={() => { setbool(false) }} xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="24" height="24" viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img" class="sc-rbbb40-0 fJjczH"><title>cross</title><path d="M11.42 10.42l3.54-3.54c0.38-0.4 0.38-1.040 0-1.42s-1.020-0.4-1.42 0l-3.54 3.54-3.54-3.54c-0.4-0.4-1.020-0.4-1.42 0s-0.38 1.020 0 1.42l3.54 3.54-3.54 3.54c-0.38 0.38-0.38 1.020 0 1.42 0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28l3.54-3.56 3.54 3.56c0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28c0.38-0.4 0.38-1.040 0-1.42l-3.54-3.54z"></path></svg>
+                        </div>
                     </div>
                     <div className="section flex flex-col gap-4">
                         <div className="input1 w-[100%]">

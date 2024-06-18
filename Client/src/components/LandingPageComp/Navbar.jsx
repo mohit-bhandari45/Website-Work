@@ -2,15 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import Credentials from './Credentials'
 
-const Navbar = () => {
-  const [bool, setbool] = useState(false)
-
-  useEffect(() => {
-    if (bool) {
-
-    }
-  }, [])
-
+const Navbar = ({bool,setbool}) => {
 
   return (
     <>
