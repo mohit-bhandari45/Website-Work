@@ -24,8 +24,7 @@ const Signup = ({ setsignbool, setbool }) => {
     const [bool3, setbool3] = useState(false)
     const [counter, setcounter] = useState(0)
     const [height, setHeight] = useState(85)
-    // const { setBoolPopPhone,setToastBool } = useBooleanContext()
-    const { setBoolPopPhone } = useBooleanContext()
+    const { setBoolPopPhone,setToastBool } = useBooleanContext()
 
     const toastOptions = {
         position: "bottom-right",
@@ -45,16 +44,15 @@ const Signup = ({ setsignbool, setbool }) => {
                 if (!querySnapshot.empty) {
                     toast.error("User already exist", toast)
                 } else {
-                    addDoc(collection(firestore, "users"), {
+                    const result = await addDoc(collection(firestore, "users"), {
                         name: user.user.displayName,
                         email: user.user.email
-                    }).then((result) => {
-                        // setToastBool(true)
-                        setbool(false)
-                        setTimeout(() => {
-                            setBoolPopPhone(true)
-                        }, 2000);
                     })
+                    setToastBool(true)
+                    setbool(false)
+                    setTimeout(() => {
+                        setBoolPopPhone(true)
+                    }, 2000);
                 }
             }
         })
@@ -150,7 +148,7 @@ const Signup = ({ setsignbool, setbool }) => {
                 email: inputdetails.email,
                 password: inputdetails.password
             })
-            // setToastBool(true)
+            setToastBool(true)
             setbool(false)
             setTimeout(() => {
                 setBoolPopPhone(true)

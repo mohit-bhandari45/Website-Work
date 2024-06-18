@@ -20,8 +20,8 @@ export const BooleanProvider = ({ children }) => {
     };
 
     return (
-        // <BooleanContext.Provider value={{ boolPopPhone, toastBool, setToastBool, phoneToastBool, setPhoneToastBool, setBoolPopPhone, toggleBoolPopPhone }}>
-        <BooleanContext.Provider value={{ boolPopPhone, setBoolPopPhone, toggleBoolPopPhone }}>
+        <BooleanContext.Provider value={{ boolPopPhone, toastBool, setToastBool, phoneToastBool, setPhoneToastBool, setBoolPopPhone, toggleBoolPopPhone }}>
+        {/* <BooleanContext.Provider value={{ boolPopPhone, setBoolPopPhone, toggleBoolPopPhone }}> */}
             {children}
         </BooleanContext.Provider>
     );

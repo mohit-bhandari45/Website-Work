@@ -30,8 +30,9 @@ const auth = getAuth(app)
 
 function LandingPage() {
   const [boolpop, setboolpop] = useState(false)
-  const { boolPopPhone, toastBool, phoneToastBool } = useBooleanContext()
+  const { boolPopPhone, toastBool, phoneToastBool, setToastBool } = useBooleanContext()
   const [bool, setbool] = useState(false)
+  const { setBoolPopPhone } = useBooleanContext()
 
   const toastOptions = {
     position: "top-right",
@@ -48,17 +49,19 @@ function LandingPage() {
     }, 5000);
   }, [])
 
-  // useEffect(() => {
-  //   if (toastBool) {
-  //     toast("Signed Up Successfully", toastOptions)
-  //   }
-  // }, [toastBool])
+  useEffect(() => {
+    if (toastBool) {
+      toast('Signed Up Successfully', { ...toastOptions, position: 'top-right' });
+      // Resetting the toastBool state after showing the toast
+      setToastBool(false);
+    }
+  }, [toastBool, setToastBool]); // Include setToastBool in the dependency array
 
-  // useEffect(() => {
-  //   if (phoneToastBool) {
-  //     toast("Phone Number added Successfully", toastOptions)
-  //   }
-  // }, [phoneToastBool])
+  useEffect(() => {
+    if (phoneToastBool && !toastBool) {
+      toast('Phone Number added Successfully', { ...toastOptions, position: 'top-right' });
+    }
+  }, [phoneToastBool, toastBool]); // Depend on both phoneToastBool and toastBool to ensure correct behavior
 
   return (
     <div>
