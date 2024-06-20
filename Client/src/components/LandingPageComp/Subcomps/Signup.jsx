@@ -11,7 +11,7 @@ import { useBooleanContext } from '../../../context/context';
 
 /* Firebase */
 import { app } from '../../../firebase';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { createUserWithEmailAndPassword, getAuth, getIdToken, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { getFirestore, collection, addDoc, where, query, getDocs } from "firebase/firestore"
 const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
@@ -48,6 +48,7 @@ const Signup = ({ setsignbool, setbool }) => {
                         name: user.user.displayName,
                         email: user.user.email
                     })
+                    
                     setToastBool(true)
                     setbool(false)
                     setTimeout(() => {

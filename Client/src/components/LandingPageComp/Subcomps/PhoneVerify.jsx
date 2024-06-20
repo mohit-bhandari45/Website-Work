@@ -114,10 +114,7 @@ const PhoneVerify = ({ setboolpopphone }) => {
             if (!prevUser) return;
 
             if (prevUser.providerData[0].providerId === 'google.com') {
-                const idToken = await getIdToken(prevUser);
-                // Create a Google credential with the ID token
-                const credential = GoogleAuthProvider.credential(idToken);
-                // Reauthenticate the user with the credential
+                const credential = GoogleAuthProvider.credential(prevUser._tokenResponse.idToken);
                 await reauthenticateWithCredential(prevUser, credential);
                 console.log('User reauthenticated with Google successfully.');
             } else if (prevUser.providerData[0].providerId === 'password') {
