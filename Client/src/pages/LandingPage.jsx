@@ -32,7 +32,7 @@ function LandingPage() {
   const [boolpop, setboolpop] = useState(false)
   const { boolPopPhone, toastBool, phoneToastBool, setToastBool } = useBooleanContext()
   const [bool, setbool] = useState(false)
-  const { setBoolPopPhone } = useBooleanContext()
+  const { setBoolPopPhone,setPhoneToastBool } = useBooleanContext()
 
   const toastOptions = {
     position: "top-right",
@@ -60,6 +60,7 @@ function LandingPage() {
   useEffect(() => {
     if (phoneToastBool && !toastBool) {
       toast('Phone Number added Successfully', { ...toastOptions, position: 'top-right' });
+      setPhoneToastBool(false);
     }
   }, [phoneToastBool, toastBool]); // Depend on both phoneToastBool and toastBool to ensure correct behavior
 

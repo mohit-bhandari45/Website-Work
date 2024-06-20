@@ -80,6 +80,7 @@ const Frames5 = () => {
         },
     ])
 
+    
     const [right, setright] = useState(0)
     return (
         <div className='h-[190vh] py-16 w-full font-[Helvetica] flex flex-col justify-center items-center'>

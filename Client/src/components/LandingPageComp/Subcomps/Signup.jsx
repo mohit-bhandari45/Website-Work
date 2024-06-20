@@ -155,7 +155,6 @@ const Signup = ({ setsignbool, setbool }) => {
             }, 2000);
         }).catch((err) => {
             toast.error("User already exist", toast)
-            console.log("riwgpi3rh3tqtw")
             console.log(err)
         })
     }
