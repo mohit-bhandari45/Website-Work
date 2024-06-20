@@ -48,7 +48,6 @@ const Signup = ({ setsignbool, setbool }) => {
                         name: user.user.displayName,
                         email: user.user.email
                     })
-                    
                     setToastBool(true)
                     setbool(false)
                     setTimeout(() => {

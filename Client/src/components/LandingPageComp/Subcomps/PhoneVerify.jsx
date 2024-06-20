@@ -62,6 +62,7 @@ const PhoneVerify = ({ setboolpopphone }) => {
 
     const sendOtp = async () => {
         try {
+            
             const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
             const confirmation = await signInWithPhoneNumber(auth, number, recaptcha);
             console.log("OTP sent successfully:", confirmation);
@@ -112,9 +113,8 @@ const PhoneVerify = ({ setboolpopphone }) => {
     const reAuthentication = async () => {
         try {
             if (!prevUser) return;
-
             if (prevUser.providerData[0].providerId === 'google.com') {
-                const credential = GoogleAuthProvider.credential(prevUser._tokenResponse.idToken);
+                const credential = GoogleAuthProvider.credential(prevUser.accessToken);
                 await reauthenticateWithCredential(prevUser, credential);
                 console.log('User reauthenticated with Google successfully.');
             } else if (prevUser.providerData[0].providerId === 'password') {
