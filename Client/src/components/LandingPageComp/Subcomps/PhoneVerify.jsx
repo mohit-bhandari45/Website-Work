@@ -64,12 +64,19 @@ const PhoneVerify = ({ setboolpopphone }) => {
     const sendOtp = async () => {
         try {
             setBool1(true)
-            const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
-            const confirmation = await signInWithPhoneNumber(auth, number, recaptcha);
-            toast("OTP sent successfully", toastOptions);
-            setBool1(false)
-            setUser(confirmation)
+            const check=await numberCheck()
+            if (check) {
+                const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
+                const confirmation = await signInWithPhoneNumber(auth, number, recaptcha);
+                toast("OTP sent successfully", toastOptions);
+                setBool1(false)
+                setUser(confirmation)
+            }else{
+                console.log("rgq2rg4")
+                setBool1(false)
+            }
         } catch (err) {
+            setBool1(false)
             console.log("Error sending OTP:", err);
             if (err.code === 'auth/too-many-requests') {
                 console.warn('Too many requests. Retrying after delay...');
@@ -90,7 +97,6 @@ const PhoneVerify = ({ setboolpopphone }) => {
                 if (userData) {
                     toast.error("This number is already registered", toastOptions);
                     setNumber("")
-                    await signOut(auth);
                     return false
                 } else {
                     return true
@@ -106,21 +112,19 @@ const PhoneVerify = ({ setboolpopphone }) => {
             setBool2(true)
             user.confirm(otp).then(async (result) => {
                 setBool2(false)
-                if (numberCheck()) {
-                    const q = query(collection(firestore, "users"), where("email", "==", email));
-                    const querySnapshot = await getDocs(q);
-                    if (!querySnapshot.empty) {
-                        const userDocRef = querySnapshot.docs[0].ref;
-                        await updateDoc(userDocRef, {
-                            number
-                        }).then(async (res) => {
-                            console.log("User document updated successfully.");
-                            setPhoneToastBool(true)
-                            setBoolPopPhone(false)
-                        })
-                    } else {
-                        console.log("No matching documents found.");
-                    }
+                const q = query(collection(firestore, "users"), where("email", "==", email));
+                const querySnapshot = await getDocs(q);
+                if (!querySnapshot.empty) {
+                    const userDocRef = querySnapshot.docs[0].ref;
+                    await updateDoc(userDocRef, {
+                        number
+                    }).then(async (res) => {
+                        console.log("User document updated successfully.");
+                        setPhoneToastBool(true)
+                        setBoolPopPhone(false)
+                    })
+                } else {
+                    console.log("No matching documents found.");
                 }
             })
         } catch (error) {
@@ -164,14 +168,14 @@ const PhoneVerify = ({ setboolpopphone }) => {
                         <div id="recaptcha"></div>
                     </div>
                     <div className="verify flex justify-center items-center gap-5 w-full">
-                        <div className={`${bool2?"w-[50%]":"w-[55%]"} enter`}>
+                        <div className={`${bool2 ? "w-[50%]" : "w-[55%]"} enter`}>
                             <input onChange={(e) => { setOtp(e.target.value) }} value={otp} type="text" className='px-2 py-2 font-[Helvetica] border-2 w-full border-black rounded-md text-xl' placeholder='Enter OTP' /></div>
-                        <div className={`${bool2?"w-[50%]":"w-[45%]"} button`}>
+                        <div className={`${bool2 ? "w-[50%]" : "w-[45%]"} button`}>
                             <button
                                 onClick={verifyOtp}
                                 className='bg-black text-white w-full px-8 flex justify-center items-center gap-2 py-3 rounded-md font-bold font-[Helvetica]'>
                                 {bool2 && <CgSpinner val={20} className='animate-spin' />}
-                                {bool2?"Verifying":"Verify"} Otp
+                                {bool2 ? "Verifying" : "Verify"} Otp
                             </button>
                         </div>
                     </div>

@@ -15,10 +15,10 @@ const Navbar = ({ bool, setbool }) => {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setProfile(true)
-        console.log(profile)
+        // setProfile(true)
+        // console.log(profile)
       } else {
-        setProfile(false)
+        // setProfile(false)
       }
     });
   }, [])
