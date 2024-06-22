@@ -12,7 +12,7 @@ import { useBooleanContext } from '../../../context/context';
 
 /* Firebase */
 import { app } from '../../../firebase';
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, reauthenticateWithCredential, reauthenticateWithPopup, RecaptchaVerifier, signInWithPhoneNumber, signInWithPopup, EmailAuthProvider, getIdToken } from "firebase/auth"
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, reauthenticateWithCredential, reauthenticateWithPopup, RecaptchaVerifier, signInWithPhoneNumber, signInWithPopup, EmailAuthProvider, getIdToken, signOut } from "firebase/auth"
 import { getFirestore, collection, where, query, getDocs, updateDoc, } from "firebase/firestore"
 const auth = getAuth(app)
 const firestore = getFirestore(app)
@@ -22,7 +22,6 @@ const PhoneVerify = ({ setboolpopphone }) => {
     /* userdetails */
     const [email, setEmail] = useState("")
     const [prevUser, setPrevUser] = useState()
-    const [id, setId] = useState("")
 
     /* Rest States */
     const [number, setNumber] = useState()
@@ -31,7 +30,9 @@ const PhoneVerify = ({ setboolpopphone }) => {
     const [user, setUser] = useState(null)
     const [otp, setOtp] = useState("")
     const navigate = useNavigate()
-    const { setBoolPopPhone, setPhoneToastBool } = useBooleanContext()
+    const { setBoolPopPhone, setPhoneToastBool, id } = useBooleanContext()
+    const [bool1, setBool1] = useState(false)
+    const [bool2, setBool2] = useState(false)
 
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
@@ -53,7 +54,7 @@ const PhoneVerify = ({ setboolpopphone }) => {
     }
 
     const toastOptions = {
-        position: "bottom-right",
+        position: "top-right",
         autoClose: 5000,
         pauseOnHover: true,
         draggable: true,
@@ -62,10 +63,11 @@ const PhoneVerify = ({ setboolpopphone }) => {
 
     const sendOtp = async () => {
         try {
-            
+            setBool1(true)
             const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
             const confirmation = await signInWithPhoneNumber(auth, number, recaptcha);
-            console.log("OTP sent successfully:", confirmation);
+            toast("OTP sent successfully", toastOptions);
+            setBool1(false)
             setUser(confirmation)
         } catch (err) {
             console.log("Error sending OTP:", err);
@@ -79,53 +81,52 @@ const PhoneVerify = ({ setboolpopphone }) => {
         }
     }
 
+    const numberCheck = async () => {
+        try {
+            const q = query(collection(firestore, "users"));
+            const querySnapshot = await getDocs(q);
+            if (!querySnapshot.empty) {
+                const userData = querySnapshot.docs.find(doc => doc.data().number === number);
+                if (userData) {
+                    toast.error("This number is already registered", toastOptions);
+                    setNumber("")
+                    await signOut(auth);
+                    return false
+                } else {
+                    return true
+                }
+            }
+        } catch (error) {
+            console.error("Error updating document: ", error);
+        }
+    }
+
     const verifyOtp = async () => {
         try {
+            setBool2(true)
             user.confirm(otp).then(async (result) => {
-                console.log(result)
-                try {
+                setBool2(false)
+                if (numberCheck()) {
                     const q = query(collection(firestore, "users"), where("email", "==", email));
                     const querySnapshot = await getDocs(q);
                     if (!querySnapshot.empty) {
                         const userDocRef = querySnapshot.docs[0].ref;
-                        console.log("prev doc:", userDocRef)
-
                         await updateDoc(userDocRef, {
                             number
                         }).then(async (res) => {
                             console.log("User document updated successfully.");
-                            await reAuthentication()
                             setPhoneToastBool(true)
                             setBoolPopPhone(false)
                         })
                     } else {
                         console.log("No matching documents found.");
                     }
-                } catch (error) {
-                    console.error("Error updating document: ", error);
                 }
             })
         } catch (error) {
+            setBool2(false)
+            toast.error("Invalid OTP", toastOptions);
             console.log(error)
-        }
-    }
-
-    const reAuthentication = async () => {
-        try {
-            if (!prevUser) return;
-            if (prevUser.providerData[0].providerId === 'google.com') {
-                const credential = GoogleAuthProvider.credential(prevUser.accessToken);
-                await reauthenticateWithCredential(prevUser, credential);
-                console.log('User reauthenticated with Google successfully.');
-            } else if (prevUser.providerData[0].providerId === 'password') {
-                // Assuming you have stored the password securely and can access it here
-                const password = prompt('Please enter your password for reauthentication');
-                const credential = EmailAuthProvider.credential(prevUser.email, password);
-                await reauthenticateWithCredential(prevUser, credential);
-                console.log('User reauthenticated with Email and Password successfully.');
-            }
-        } catch (error) {
-            console.error('Error re-authenticating user:', error);
         }
     }
 
@@ -148,7 +149,7 @@ const PhoneVerify = ({ setboolpopphone }) => {
                             className='h-10 pl-4 gap-3 flex justify-center items-center text-xl border-none outline-none focus:ring-0 focus:outline-none focus:border-none'
                             defaultCountry="US"
                             placeholder=" | Phone"
-                            number={number}
+                            value={number}
                             onChange={handleChangenum} />
                     </div>
                     <div className="otp w-full flex flex-col gap-6">
@@ -156,21 +157,21 @@ const PhoneVerify = ({ setboolpopphone }) => {
                             <button
                                 onClick={sendOtp}
                                 className="text text-center w-full bg-[#18122B] flex justify-center items-center gap-3 text-white rounded-md py-3 text-[19px] font-[Helvetica]">
-                                <CgSpinner val={20} className='animate-spin' />
+                                {bool1 && <CgSpinner val={20} className='animate-spin' />}
                                 Send One Time Password
                             </button>
                         </div>
                         <div id="recaptcha"></div>
                     </div>
                     <div className="verify flex justify-center items-center gap-5 w-full">
-                        <div className="enter w-[55%]">
+                        <div className={`${bool2?"w-[50%]":"w-[55%]"} enter`}>
                             <input onChange={(e) => { setOtp(e.target.value) }} value={otp} type="text" className='px-2 py-2 font-[Helvetica] border-2 w-full border-black rounded-md text-xl' placeholder='Enter OTP' /></div>
-                        <div className="button w-[45%]">
+                        <div className={`${bool2?"w-[50%]":"w-[45%]"} button`}>
                             <button
                                 onClick={verifyOtp}
                                 className='bg-black text-white w-full px-8 flex justify-center items-center gap-2 py-3 rounded-md font-bold font-[Helvetica]'>
-                                <CgSpinner val={20} className='animate-spin' />
-                                Verify Otp
+                                {bool2 && <CgSpinner val={20} className='animate-spin' />}
+                                {bool2?"Verifying":"Verify"} Otp
                             </button>
                         </div>
                     </div>

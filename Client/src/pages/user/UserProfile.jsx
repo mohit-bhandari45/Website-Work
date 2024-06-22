@@ -21,24 +21,28 @@ const UserProfile = () => {
   })
 
   useEffect(() => {
-    console.log(userInfo)
-    console.log(auth.currentUser)
-  }, [userInfo])
-
-
-  useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const usersRef = collection(firestore, "users");
-        const q = query(usersRef, where("email", "==", user.email));
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
-          querySnapshot.forEach((doc) => {
-            let details = { ...doc.data() }
-            setuserInfo({ ...details, firstname: details.name.split(" ")[0], lastname: details.name.split(" ")[1], email: details.email })
-          });
+        if (user.phoneNumber) {
+          const usersRef = collection(firestore, "users");
+          const q = query(usersRef, where("number", "==", user.phoneNumber));
+          const querySnapshot = await getDocs(q);
+          if (!querySnapshot.empty) {
+            querySnapshot.forEach((doc) => {
+              let details = { ...doc.data() }
+              setuserInfo({ ...details, firstname: details.name.split(" ")[0], lastname: details.name.split(" ")[1], email: details.email })
+            })
+          }
         } else {
-          console.log("No user found with this email.");
+          const usersRef = collection(firestore, "users");
+          const q = query(usersRef, where("email", "==", user.email));
+          const querySnapshot = await getDocs(q);
+          if (!querySnapshot.empty) {
+            querySnapshot.forEach((doc) => {
+              let details = { ...doc.data() }
+              setuserInfo({ ...details, firstname: details.name.split(" ")[0], lastname: details.name.split(" ")[1], email: details.email })
+            });
+          }
         }
       } else {
         console.log("User is signed out.");
@@ -52,7 +56,7 @@ const UserProfile = () => {
 
   const handleUpdate = () => {
     onAuthStateChanged(auth, async (user) => {
-      if(user){
+      if (user) {
         verifyBeforeUpdateEmail(userInfo.email).then(() => {
           // Email sent.
           console.log('Verification email sent to new email address. Please verify the new email address.');

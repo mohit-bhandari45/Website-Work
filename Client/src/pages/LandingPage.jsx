@@ -29,10 +29,8 @@ import PhoneVerify from '../components/LandingPageComp/Subcomps/PhoneVerify'
 const auth = getAuth(app)
 
 function LandingPage() {
-  const [boolpop, setboolpop] = useState(false)
-  const { boolPopPhone, toastBool, phoneToastBool, setToastBool } = useBooleanContext()
+  const { boolPopPhone, toastBool, phoneToastBool, setToastBool,setBoolPopPhone, setPhoneToastBool,boolpop,setBoolPop } = useBooleanContext()
   const [bool, setbool] = useState(false)
-  const { setBoolPopPhone,setPhoneToastBool } = useBooleanContext()
 
   const toastOptions = {
     position: "top-right",
@@ -44,25 +42,28 @@ function LandingPage() {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      setboolpop(true)
-    }, 5000);
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+         setTimeout(() => {
+           setBoolPop(true)
+         }, 5000);
+      }
+    });
   }, [])
 
   useEffect(() => {
     if (toastBool) {
-      toast('Signed Up Successfully', { ...toastOptions, position: 'top-right' });
-      // Resetting the toastBool state after showing the toast
+      toast('Signed Up Successfully', toastOptions);
       setToastBool(false);
     }
-  }, [toastBool, setToastBool]); // Include setToastBool in the dependency array
+  }, [toastBool, setToastBool]);
 
   useEffect(() => {
     if (phoneToastBool && !toastBool) {
-      toast('Phone Number added Successfully', { ...toastOptions, position: 'top-right' });
+      toast('Phone Number added Successfully', toastOptions);
       setPhoneToastBool(false);
     }
-  }, [phoneToastBool, toastBool]); // Depend on both phoneToastBool and toastBool to ensure correct behavior
+  }, [phoneToastBool, toastBool]);
 
   return (
     <div>
@@ -72,12 +73,12 @@ function LandingPage() {
           <div className="bg-white rounded shadow-lg animate__animated animate__zoomIn flex flex-col gap-8 justify-start items-center w-[40%] z-60 h-[40%]">
 
             <div className="cross w-full h-[20%] flex justify-end items-center px-3">
-              <svg className='cursor-pointer' onClick={() => { setboolpop(false) }} xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="30" height="30" viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img" class="sc-rbbb40-0 fJjczH"><title>cross</title><path d="M11.42 10.42l3.54-3.54c0.38-0.4 0.38-1.040 0-1.42s-1.020-0.4-1.42 0l-3.54 3.54-3.54-3.54c-0.4-0.4-1.020-0.4-1.42 0s-0.38 1.020 0 1.42l3.54 3.54-3.54 3.54c-0.38 0.38-0.38 1.020 0 1.42 0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28l3.54-3.56 3.54 3.56c0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28c0.38-0.4 0.38-1.040 0-1.42l-3.54-3.54z"></path></svg>
+              <div className='cursor-pointer'><svg className='' onClick={() => { setBoolPop(false) }} xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="30" height="30" viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img" class="sc-rbbb40-0 fJjczH"><title>cross</title><path d="M11.42 10.42l3.54-3.54c0.38-0.4 0.38-1.040 0-1.42s-1.020-0.4-1.42 0l-3.54 3.54-3.54-3.54c-0.4-0.4-1.020-0.4-1.42 0s-0.38 1.020 0 1.42l3.54 3.54-3.54 3.54c-0.38 0.38-0.38 1.020 0 1.42 0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28l3.54-3.56 3.54 3.56c0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28c0.38-0.4 0.38-1.040 0-1.42l-3.54-3.54z"></path></svg></div>
             </div>
             <p className="text-4xl font-[Helvetica]">Sign up to be a part of Acrilic</p>
             <button onClick={() => {
               setbool(true)
-              setboolpop(false)
+              setBoolPop(false)
             }}
               className="bg-[#18122B] text-xl font-[Helvetica] hover:bg-[#2c2349] text-white font-bold py-2 px-4 rounded"
             >

@@ -11,7 +11,7 @@ import { useBooleanContext } from '../../../context/context';
 
 /* Firebase */
 import { app } from '../../../firebase';
-import { createUserWithEmailAndPassword, getAuth, getIdToken, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { getFirestore, collection, addDoc, where, query, getDocs } from "firebase/firestore"
 const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
@@ -24,7 +24,7 @@ const Signup = ({ setsignbool, setbool }) => {
     const [bool3, setbool3] = useState(false)
     const [counter, setcounter] = useState(0)
     const [height, setHeight] = useState(85)
-    const { setBoolPopPhone,setToastBool } = useBooleanContext()
+    const { setBoolPopPhone, setToastBool, boolPop, setBoolPop } = useBooleanContext()
 
     const toastOptions = {
         position: "bottom-right",
@@ -34,6 +34,12 @@ const Signup = ({ setsignbool, setbool }) => {
         theme: "dark",
         closeOnClick: true,
     }
+
+    useEffect(() => {
+        console.log(setBoolPop)
+        console.log(boolPop)
+    }, [])
+
 
     const googleProviderFn = () => {
         signInWithPopup(auth, googleProvider).then(async (user) => {
@@ -48,8 +54,10 @@ const Signup = ({ setsignbool, setbool }) => {
                         name: user.user.displayName,
                         email: user.user.email
                     })
+                    const ans = user.user;
                     setToastBool(true)
                     setbool(false)
+                    setBoolPop(false)
                     setTimeout(() => {
                         setBoolPopPhone(true)
                     }, 2000);
@@ -141,7 +149,7 @@ const Signup = ({ setsignbool, setbool }) => {
 
 
     /* Form submit by normal email and password */
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         createUserWithEmailAndPassword(auth, inputdetails.email, inputdetails.password).then(async (credentials) => {
             const result = await addDoc(collection(firestore, "users"), {
                 name: inputdetails.name,
@@ -150,6 +158,7 @@ const Signup = ({ setsignbool, setbool }) => {
             })
             setToastBool(true)
             setbool(false)
+            setBoolPop(false)
             setTimeout(() => {
                 setBoolPopPhone(true)
             }, 2000);
