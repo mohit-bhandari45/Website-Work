@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import Card3 from './Subcomps/Card3'
+import React, { useState } from 'react';
+import Card3 from './Subcomps/Card3';
 
 const FlashSales = () => {
-    const [items, setitems] = useState([
+    const [items] = useState([
         {
             img: "src/assets/g92-2-500x500 1.png",
             discount: "-40%",
@@ -48,54 +48,75 @@ const FlashSales = () => {
             stars: "src/assets/Vector (2).png",
             amount: "(99)"
         }
-    ])
+    ]);
 
-    const [right, setright] = useState(0)
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const nextSlide = () => {
+        setCurrentIndex(prevIndex => (prevIndex + 1) % items.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentIndex(prevIndex => (prevIndex - 1 + items.length) % items.length);
+    };
+
     return (
-        <div className='h-[120vh] py-16 w-full font-[Helvetica] flex flex-col justify-center items-center'>
-            <div className="head h-[30vh] w-[90%]">
-                <div className="head2 h-[10vh] flex justify-start items-center gap-4 w-full">
-                    <div className="bar w-[1.5%] h-[70%] rounded-sm bg-[#ED8A73]"></div>
+        <div className='h-screen py-16 w-full font-[Helvetica] flex flex-col justify-center items-center'>
+            <div className="head h-1/3 w-11/12 sm:w-10/12 md:w-9/12 lg:w-8/12 xl:w-7/12">
+                <div className="head2 h-1/2 flex justify-start items-center gap-4 w-full">
+                    <div className="bar w-1/12 h-3/4 rounded-sm bg-[#ED8A73]"></div>
                     <div className="title text-[#ED8A73] font-medium">Today's</div>
                 </div>
-                <div className="cont w-full flex justify-between items-center h-[15vh]">
-                    <div className="first flex justify-center items-center gap-16 h-full">
-                        <div className="title text-4xl font-semibold">Flash Sales</div>
-                        <div className="time flex justify-center items-center gap-5">
-                            <div className="days">
+                <div className="cont w-full flex justify-between items-center h-1/2">
+                    <div className="first flex flex-col sm:flex-row justify-center items-center gap-4 h-full">
+                        <div className="title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">Flash Sales</div>
+                        <div className="time flex flex-wrap justify-center items-center gap-3 sm:gap-5">
+                            <div className="time-part flex flex-col items-center gap-1">
                                 <div className="d1 font-semibold">Days</div>
-                                <div className="time text-5xl font-bold">03</div>
+                                <div className="time text-4xl sm:text-5xl font-bold">03</div>
                             </div>
-                            <div className="colon text-4xl rounded-full text-[#E07575]">:</div>
-                            <div className="hours">
+                            <div className="colon text-4xl sm:text-5xl rounded-full text-[#E07575]">:</div>
+                            <div className="time-part flex flex-col items-center gap-1">
                                 <div className="d1 font-semibold">Hours</div>
-                                <div className="time text-5xl font-bold">23</div>
+                                <div className="time text-4xl sm:text-5xl font-bold">23</div>
                             </div>
-                            <div className="colon text-4xl rounded-full text-[#E07575]">:</div>
-                            <div className="minutes">
+                            <div className="colon text-4xl sm:text-5xl rounded-full text-[#E07575]">:</div>
+                            <div className="time-part flex flex-col items-center gap-1">
                                 <div className="d1 font-semibold">Minutes</div>
-                                <div className="time text-5xl font-bold">19</div>
+                                <div className="time text-4xl sm:text-5xl font-bold">19</div>
                             </div>
-                            <div className="colon text-4xl rounded-full text-[#E07575]">:</div>
-                            <div className="minutes">
+                            <div className="colon text-4xl sm:text-5xl rounded-full text-[#E07575]">:</div>
+                            <div className="time-part flex flex-col items-center gap-1">
                                 <div className="d1 font-semibold">Seconds</div>
-                                <div className="time text-5xl font-bold">56</div>
+                                <div className="time text-4xl sm:text-5xl font-bold">56</div>
                             </div>
                         </div>
                     </div>
                     <div className="second flex justify-center items-center gap-2">
-                        <div className="arrow1 bg-[#F5F5F5] rounded-full p-4"><img src="src/assets/icons_arrow-left.png" alt="" /></div>
-                        <div onClick={() => { setright(prevright => prevright + 20) }} className="arrow2 bg-[#F5F5F5] rounded-full p-4"><img src="src/assets/icons arrow-right.png" alt="" /></div>
+                        <div className="arrow1 bg-[#F5F5F5] rounded-full p-4" onClick={prevSlide}><img src="src/assets/icons_arrow-left.png" alt="Previous" /></div>
+                        <div className="arrow2 bg-[#F5F5F5] rounded-full p-4" onClick={nextSlide}><img src="src/assets/icons_arrow-right.png" alt="Next" /></div>
                     </div>
                 </div>
             </div>
-            <div style={{ right: right + "vw" }} className={`w-[90%] gap-5 h-[90vh] justify-start items-center flex relative font-[Helvetica]`}>
-                {items.map((element) => {
-                    return <Card3 img={element.img} discount={element.discount} title={element.title} mainprice={element.mainprice} prevprice={element.prevprice} stars={element.stars} amount={element.amount} />
-                })}
+            <div className="slider-container w-full md:w-11/12 lg:w-10/12 xl:w-9/12 h-[60vh] sm:h-[70vh] lg:h-[80vh] xl:h-[90vh] flex justify-center items-center overflow-hidden relative">
+                <div className="slider w-full h-full flex" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                    {items.map((element, index) => (
+                        <div key={index} className="w-full flex-shrink-0">
+                            <Card3
+                                img={element.img}
+                                discount={element.discount}
+                                title={element.title}
+                                mainprice={element.mainprice}
+                                prevprice={element.prevprice}
+                                stars={element.stars}
+                                amount={element.amount}
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default FlashSales
+export default FlashSales;
