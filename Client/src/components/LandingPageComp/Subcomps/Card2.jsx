@@ -1,17 +1,17 @@
-import React from 'react'
+import React from 'react';
 
 const Card2 = ({ state, image }) => {
   return (
-    <div className='flex flex-col gap-4 justify-center items-center font-[Helvetica] h-[60vh]'>
-      <div className="image hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer">
-        <img className='w-60 h-60' src={image} alt="" />
+    <div className="flex flex-col items-center gap-4 text-center font-[Helvetica]">
+      <div className="w-60 h-60 md:w-72 md:h-72 overflow-hidden rounded-lg shadow-lg">
+        <img className="object-cover w-full h-full transform hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer" src={image} alt={state} />
       </div>
-      <div className='flex flex-col gap-3 justify-center items-center'>
-        <div className="head font-medium text-gray-400 text-lg">Explore</div>
-        <div className="state font-bold text-xl">{state}</div>
+      <div className="flex flex-col justify-center items-center gap-3">
+        <div className="text-gray-400 text-lg font-medium">Explore</div>
+        <div className="text-xl font-bold">{state}</div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Card2
+export default Card2;
