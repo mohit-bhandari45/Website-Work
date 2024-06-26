@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import About from './pages/About.jsx'
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import LandingPage from './pages/LandingPage.jsx'
 import Catalog from './pages/Catalog.jsx'
 import Contacts from './pages/Contacts.jsx'
@@ -33,23 +32,23 @@ const router = createBrowserRouter([
     },
     {
         path: "/catalog",
-        element: <Catalog/>
+        element: <Catalog />
     },
     {
         path: "/contact",
-        element: <Contacts/>
+        element: <Contacts />
     },
     {
         path: "/gallery",
-        element: <Gallery/>
+        element: <Gallery />
     },
     {
         path: "/showmore",
-        element: <ShowMore/>
+        element: <ShowMore />
     },
     {
         path: "/404",
-        element: <Page404/>
+        element: <Page404 />
     },
 
     //artist routes
@@ -65,30 +64,28 @@ const router = createBrowserRouter([
     //userroutes
     {
         path: "/shoppingcart",
-        element: <ShoppingCart/>
+        element: <ShoppingCart />
     },
     {
         path: "/userprofile",
-        element: <UserProfile/>
+        element: <UserProfile />
     },
     {
         path: "/wishlist",
-        element: <WishList/>
+        element: <WishList />
     },
     {
         path: "/checkout",
-        element: <Checkout/>
+        element: <Checkout />
     },
     {
         path: "/productdetails",
-        element: <ProductDetails/>
+        element: <ProductDetails />
     },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <GoogleOAuthProvider clientId="1013003077692-bp8uca4g508sh0ejjmr2uichvo62t6nh.apps.googleusercontent.com">
-        <BooleanProvider>
+    <BooleanProvider>
         <RouterProvider router={router}></RouterProvider>
-        </BooleanProvider>
-    </GoogleOAuthProvider>
+    </BooleanProvider>
 )
