@@ -52,7 +52,8 @@ const Signup = ({ setsignbool, setbool }) => {
                 } else {
                     const result = await addDoc(collection(firestore, "users"), {
                         name: user.user.displayName,
-                        email: user.user.email
+                        email: user.user.email,
+                        userType:"user"
                     })
                     const ans = user.user;
                     setToastBool(true)
@@ -154,7 +155,8 @@ const Signup = ({ setsignbool, setbool }) => {
             const result = await addDoc(collection(firestore, "users"), {
                 name: inputdetails.name,
                 email: inputdetails.email,
-                password: inputdetails.password
+                password: inputdetails.password,
+                userType:"user"
             })
             setToastBool(true)
             setbool(false)

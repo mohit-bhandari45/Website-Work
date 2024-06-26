@@ -5,7 +5,7 @@ import HeroSec from '../components/AboutComps/HeroSec';
 import Card from '../components/AboutComps/Card';
 import SubFooter from '../components/LandingPageComp/SubFooter';
 
-const AboutPage = () => {
+const About = () => {
   const [stats, setstats] = useState([
     {
       icon:"icon_shop.png",
@@ -44,4 +44,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default About;

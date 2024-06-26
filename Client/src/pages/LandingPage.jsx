@@ -29,7 +29,7 @@ import PhoneVerify from '../components/LandingPageComp/Subcomps/PhoneVerify'
 const auth = getAuth(app)
 
 function LandingPage() {
-  const { boolPopPhone, toastBool, phoneToastBool, setToastBool,setBoolPopPhone, setPhoneToastBool,boolpop,setBoolPop } = useBooleanContext()
+  const { boolPopPhone, toastBool, phoneToastBool, setToastBool, setBoolPopPhone, setPhoneToastBool, boolPop, setBoolPop } = useBooleanContext()
   const [bool, setbool] = useState(false)
 
   const toastOptions = {
@@ -44,9 +44,9 @@ function LandingPage() {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
-         setTimeout(() => {
-           setBoolPop(true)
-         }, 5000);
+        setTimeout(() => {
+          setBoolPop(true)
+        }, 5000);
       }
     });
   }, [])
@@ -67,11 +67,10 @@ function LandingPage() {
 
   return (
     <div>
-      {boolpop && !bool && <div className="popup absolute w-full h-[100vh] z-40 flex justify-center items-center">
+      {boolPop && !bool && <div className="popup absolute w-full h-[100vh] z-40 flex justify-center items-center">
         <div className="bgblack bg-black w-full h-full absolute opacity-50 transition-all duration-500 ease-in-out"></div>
         <div className="fixed inset-0 flex items-center justify-center z-30 bg-black bg-opacity-50 w-full h-full">
           <div className="bg-white rounded shadow-lg animate__animated animate__zoomIn flex flex-col gap-8 justify-start items-center w-[40%] z-60 h-[40%]">
-
             <div className="cross w-full h-[20%] flex justify-end items-center px-3">
               <div className='cursor-pointer'><svg className='' onClick={() => { setBoolPop(false) }} xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="30" height="30" viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img" class="sc-rbbb40-0 fJjczH"><title>cross</title><path d="M11.42 10.42l3.54-3.54c0.38-0.4 0.38-1.040 0-1.42s-1.020-0.4-1.42 0l-3.54 3.54-3.54-3.54c-0.4-0.4-1.020-0.4-1.42 0s-0.38 1.020 0 1.42l3.54 3.54-3.54 3.54c-0.38 0.38-0.38 1.020 0 1.42 0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28l3.54-3.56 3.54 3.56c0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28c0.38-0.4 0.38-1.040 0-1.42l-3.54-3.54z"></path></svg></div>
             </div>

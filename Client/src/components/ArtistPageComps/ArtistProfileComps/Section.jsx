@@ -1,5 +1,8 @@
-import React from 'react'
-const Section = () => {
+import React, { useEffect } from 'react'
+
+
+const Section = ({name}) => {
+
   return (
     <>
       <div className='w-full h-[125vh] relative flex flex-col justify-center items-center'>
@@ -10,7 +13,7 @@ const Section = () => {
         <div className="details w-[95%] flex justify-end items-center h-[20%]">
           <div className="main w-[60%]">
             <div className="name flex justify-start items-center py-6 gap-5">
-              <h1 className='text-4xl font-bold font-[Helvetica]'>Vasundhara Devi</h1>
+              <h1 className='text-4xl font-bold font-[Helvetica]'>{name}</h1>
               <div className="rating flex justify-center items-center gap-1">
                 <img className='h-4' src="src/assets/Star.png" alt="" />
                 <img className='h-4' src="src/assets/Star.png" alt="" />
