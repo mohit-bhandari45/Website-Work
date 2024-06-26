@@ -1,10 +1,12 @@
-import React from 'react';
-import Card2 from './Subcomps/Card2';
+import React from 'react'
+import Card2 from './Subcomps/Card2'
+import { useState, useEffect } from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
+
 const Frames3 = () => {
-  const details = [
+  const [details, setdetails] = useState([
     {
       state: "Delhi",
       image: "src/assets/Ellipse 54 (4).png",
@@ -17,12 +19,13 @@ const Frames3 = () => {
       state: "Delhi",
       image: "src/assets/Ellipse 54 (6).png",
     },
+
     {
       state: "Odisha",
       image: "src/assets/Ellipse 54 (7).png",
     },
     {
-      state: "Maharashtra",
+      state: "Maharastra",
       image: "src/assets/Ellipse 54 (8).png",
     },
     {
@@ -37,7 +40,7 @@ const Frames3 = () => {
       state: "South India",
       image: "src/assets/Ellipse 54 (11).png",
     },
-  ];
+  ])
 
   const responsive = {
     superLargeDesktop: {
@@ -59,29 +62,12 @@ const Frames3 = () => {
   };
 
   return (
-    <div className="w-full px-4 py-8">
-      <Carousel
-        autoPlay={true}
-        centerMode={true}
-        infinite
-        showDots={true}
-        arrows={false}
-        keyBoardControl={true}
-        shouldResetAutoplay={true}
-        focusOnSelect={true}
-        autoPlaySpeed={1500}
-        responsive={responsive}
-        containerClass="carousel-container"
-        itemClass="carousel-item"
-      >
-        {details.map((detail, index) => (
-          <div key={index} className="flex justify-center items-center">
-            <Card2 state={detail.state} image={detail.image} />
-          </div>
-        ))}
-      </Carousel>
-    </div>
-  );
+    <Carousel autoPlay={true} centerMode={true} infinite showDots={true} arrows={false} keyBoardControl={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
+      {details.map((detail) => {
+        return <Card2 state={detail.state} image={detail.image} />
+      })}
+    </Carousel>
+  )
 }
 
-export default Frames3;
+export default Frames3
