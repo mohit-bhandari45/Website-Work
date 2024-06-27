@@ -11,6 +11,8 @@ const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
 /* Firebase */
 
+import { useBooleanContext } from '../../context/context'
+
 const ArtistSignup = () => {
   const navigate = useNavigate()
   const [artistDetails, setArtistDetails] = useState({
@@ -18,6 +20,7 @@ const ArtistSignup = () => {
     email: "",
     password: ""
   })
+  const {authBool,setAuthBool}=useBooleanContext()
 
   const handleChange = (e) => {
     setArtistDetails({ ...artistDetails, [e.target.name]: e.target.value })
@@ -35,17 +38,18 @@ const ArtistSignup = () => {
   const googleProviderFn = () => {
     signInWithPopup(auth, googleProvider).then(async (user) => {
         if (user) {
-            const usersRef = collection(firestore, "artist");
+            const usersRef = collection(firestore, "artists");
             const q = query(usersRef, where("email", "==", user.user.email));
             const querySnapshot = await getDocs(q);
             if (!querySnapshot.empty) {
                 toast.error("User already exist", toast)
             } else {
-                const result = await addDoc(collection(firestore, "artist"), {
+                const result = await addDoc(collection(firestore, "artists"), {
                     name: user.user.displayName,
                     email: user.user.email,
                     userType:"artist"
                 })
+                setAuthBool(!authBool)
                 navigate("/")
             }
         }
@@ -55,12 +59,13 @@ const ArtistSignup = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     createUserWithEmailAndPassword(auth, artistDetails.email, artistDetails.password).then(async (credentials) => {
-      const result = await addDoc(collection(firestore, "artist"), {
+      const result = await addDoc(collection(firestore, "artists"), {
         name: artistDetails.name,
         email: artistDetails.email,
         password: artistDetails.password,
         userType: "artist"
       })
+      setAuthBool(!authBool)
       navigate("/")
     }).catch((err) => {
       toast.error("User already exist", toastOptions)

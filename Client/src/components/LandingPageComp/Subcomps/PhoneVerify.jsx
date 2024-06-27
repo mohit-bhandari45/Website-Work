@@ -30,7 +30,7 @@ const PhoneVerify = ({ setboolpopphone }) => {
     const [user, setUser] = useState(null)
     const [otp, setOtp] = useState("")
     const navigate = useNavigate()
-    const { setBoolPopPhone, setPhoneToastBool, id } = useBooleanContext()
+    const { setBoolPopPhone, setPhoneToastBool, authBool, setAuthBool } = useBooleanContext()
     const [bool1, setBool1] = useState(false)
     const [bool2, setBool2] = useState(false)
 
@@ -64,15 +64,14 @@ const PhoneVerify = ({ setboolpopphone }) => {
     const sendOtp = async () => {
         try {
             setBool1(true)
-            const check=await numberCheck()
+            const check = await numberCheck()
             if (check) {
                 const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
                 const confirmation = await signInWithPhoneNumber(auth, number, recaptcha);
                 toast("OTP sent successfully", toastOptions);
                 setBool1(false)
                 setUser(confirmation)
-            }else{
-                console.log("rgq2rg4")
+            } else {
                 setBool1(false)
             }
         } catch (err) {
@@ -123,6 +122,7 @@ const PhoneVerify = ({ setboolpopphone }) => {
                         setPhoneToastBool(true)
                         setBoolPopPhone(false)
                     })
+                    setAuthBool(!authBool)
                 } else {
                     console.log("No matching documents found.");
                 }

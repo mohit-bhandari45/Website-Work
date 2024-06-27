@@ -24,7 +24,7 @@ const Signup = ({ setsignbool, setbool }) => {
     const [bool3, setbool3] = useState(false)
     const [counter, setcounter] = useState(0)
     const [height, setHeight] = useState(85)
-    const { setBoolPopPhone, setToastBool, boolPop, setBoolPop } = useBooleanContext()
+    const { setBoolPopPhone, setToastBool, boolPop, setBoolPop,authBool,setAuthBool } = useBooleanContext()
 
     const toastOptions = {
         position: "bottom-right",
@@ -34,11 +34,6 @@ const Signup = ({ setsignbool, setbool }) => {
         theme: "dark",
         closeOnClick: true,
     }
-
-    useEffect(() => {
-        console.log(setBoolPop)
-        console.log(boolPop)
-    }, [])
 
 
     const googleProviderFn = () => {
@@ -55,7 +50,7 @@ const Signup = ({ setsignbool, setbool }) => {
                         email: user.user.email,
                         userType:"user"
                     })
-                    const ans = user.user;
+                    setAuthBool(!authBool)
                     setToastBool(true)
                     setbool(false)
                     setBoolPop(false)
@@ -158,6 +153,7 @@ const Signup = ({ setsignbool, setbool }) => {
                 password: inputdetails.password,
                 userType:"user"
             })
+            setAuthBool(!authBool)
             setToastBool(true)
             setbool(false)
             setBoolPop(false)

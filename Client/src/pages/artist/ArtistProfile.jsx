@@ -21,7 +21,7 @@ const ArtistProfile = () => {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const usersRef2 = collection(firestore, "artist");
+        const usersRef2 = collection(firestore, "artists");
         const q2 = query(usersRef2, where("email", "==", user.email));
         let querySnapshot = await getDocs(q2);
         if (!querySnapshot.empty) {

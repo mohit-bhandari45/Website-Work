@@ -20,7 +20,7 @@ const Navbar = ({ bool, setbool }) => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         setProfile(true)
-        const usersRef = collection(firestore, "artist");
+        const usersRef = collection(firestore, "users");
         const q = query(usersRef, where("email", "==", user.email));
         let querySnapshot = await getDocs(q);
         if (!querySnapshot.empty) {
@@ -64,7 +64,7 @@ const Navbar = ({ bool, setbool }) => {
               {!profile && <button onClick={() => setbool(true)} className='text-lg md:text-xl font-light flex justify-center items-center border-black border-[3px] text-black py-0 md:py-1 px-2 md:px-4 rounded-full'>Sign Up</button>}
             </div>
             <div className="cart flex justify-center items-center gap-6">
-              {userType === "user" ? <Link to="/cart">
+              {userType === "user" && <Link to="/cart">
                 <svg className='cursor-pointer' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" color="#000000" fill="none">
                   <path d="M8 16H15.2632C19.7508 16 20.4333 13.1808 21.261 9.06908C21.4998 7.88311 21.6192 7.29013 21.3321 6.89507C21.045 6.5 20.4947 6.5 19.3941 6.5H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                   <path d="M8 16L5.37873 3.51493C5.15615 2.62459 4.35618 2 3.43845 2H2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
@@ -72,7 +72,7 @@ const Navbar = ({ bool, setbool }) => {
                   <circle cx="10.5" cy="20.5" r="1.5" stroke="currentColor" stroke-width="1.5" />
                   <circle cx="17.5" cy="20.5" r="1.5" stroke="currentColor" stroke-width="1.5" />
                 </svg>
-              </Link> : ""}
+              </Link>}
 
               {profile && <Link to="/profile">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" color="#18122b" fill="none">

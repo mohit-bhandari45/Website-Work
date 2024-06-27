@@ -15,6 +15,7 @@ export const BooleanProvider = ({ children }) => {
     const [phoneToastBool, setPhoneToastBool] = useState(false)
     const [boolPop, setBoolPop] = useState(false)
     const [profile, setProfile] = useState(false)
+    const [authBool, setAuthBool] = useState(false)
 
     // Toggle function
     const toggleBoolPopPhone = () => {
@@ -22,7 +23,7 @@ export const BooleanProvider = ({ children }) => {
     };
 
     return (
-        <BooleanContext.Provider value={{ boolPopPhone, toastBool,boolPop,setBoolPop,profile,setProfile, setToastBool, phoneToastBool, setPhoneToastBool, setBoolPopPhone, toggleBoolPopPhone }}>
+        <BooleanContext.Provider value={{ boolPopPhone,authBool,setAuthBool, toastBool,boolPop,setBoolPop,profile,setProfile, setToastBool, phoneToastBool, setPhoneToastBool, setBoolPopPhone, toggleBoolPopPhone }}>
         {/* <BooleanContext.Provider value={{ boolPopPhone, setBoolPopPhone, toggleBoolPopPhone }}> */}
             {children}
         </BooleanContext.Provider>
