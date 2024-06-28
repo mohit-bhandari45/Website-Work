@@ -1,9 +1,10 @@
 import React from 'react'
+import { getLogo } from '../../../apis/apis'
 
 const Navbar = () => {
     return (
         <div className="nav w-full h-[15vh] px-16 py-3 flex justify-between items-end border-b-2 border-opacity-20 border-black font-[Helvetica]">
-            <div className="logo"><img className='w-32 h-16' src="src/assets/acrilc logo-09.png" alt="" /></div>
+            <div className="logo"><img className='w-32 h-16' src={getLogo} alt="" /></div>
             <div className="elements flex justify-center items-center gap-4">
                 <div className="input flex justify-center items-center bg-[#F5F5F5] rounded-sm px-2 w-72 h-10">
                     <input type="text" className='w-full pl-1 bg-transparent h-full focus:border-none focus:outline-none' placeholder='What are you looking for?' name="" id="" />

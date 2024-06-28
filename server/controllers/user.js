@@ -1,5 +1,6 @@
 const User = require("../models/user")
 
+/* Creating a new user */
 async function usersControllers(req, res) {
     const user = await User.create(req.body)
     if (user) {

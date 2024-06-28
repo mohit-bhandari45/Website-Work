@@ -1,6 +1,8 @@
+/* React Imports */
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Credentials from './Credentials'
+import { getLogo } from '../../apis/apis'
 
 /* Context API */
 import { useBooleanContext } from '../../context/context'
@@ -41,7 +43,7 @@ const Navbar = ({ bool, setbool }) => {
       <div className="main flex justify-center gap-8 h-[18vh] w-full font-[Helvetica]">
         <div className="nav flex justify-between items-center w-[95%]">
           <div className="logo flex justify-center items-center gap-2">
-            <a href="/"><img className='w-44 h-20' src="src/assets/acrilc logo-09.png" alt="" /></a>
+            <a href="/"><img className='w-44 h-20' src={getLogo} alt="" /></a>
           </div>
 
           <div className="elements flex gap-32 text-xl font-semibold">

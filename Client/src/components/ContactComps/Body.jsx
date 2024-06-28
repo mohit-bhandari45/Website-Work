@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { getLogo } from '../../apis/apis'
 
 const Body = () => {
 
@@ -11,7 +12,7 @@ const Body = () => {
     return (
         <div className='body flex w-[100vw] h-[75vh] gap-64 font-[Helvetica] relative justify-center px-10'>
             <div className="content w-[35%] pl-16 py-10 flex flex-col gap-1">
-                <img className='w-[360px] h-[130px] pl-6' src="src/assets/logo full.png" alt="" />
+                <img className='w-[360px] h-[130px] pl-6' src={getLogo} alt="" />
                 <div className="para font-medium py-4 text-[20px] w-[500px] flex flex-col gap-0">
                     <span className='font-medium'>Your personalized e-commerce platform for artists! Explore a curated collection of art accessories and products, designed to inspire and </span>
                     <span className='font-medium'>empower your creativity.</span>

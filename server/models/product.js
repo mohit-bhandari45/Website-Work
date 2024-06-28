@@ -6,6 +6,10 @@ const productSchema = mongoose.Schema({
         required: true
     },
     discount: Number,
+    imageUrl: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

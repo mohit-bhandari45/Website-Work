@@ -1,14 +1,20 @@
 const express = require("express")
 const { ReqRes } = require("./middlewares/ReqRes.js")
-const cors=require("cors")
+const cors = require("cors")
 const userRouter = require("./routes/user.js")
-const cartRouter=require("./routes/cart.js")
+const artistRouter = require("./routes/artist.js")
+const productRouter = require("./routes/product.js")
+const cartRouter = require("./routes/cart.js")
+const assetRouter=require("./routes/asset.js")
 require("dotenv").config()
+const path = require("path")
+const fs = require("fs")
 
 //Database connection
 require("./connection.js").connectDB()
 
 const app = express()
+const PORT = process.env.PORT || 3000
 
 //Middlewares
 app.use(ReqRes("./log.txt"))
@@ -17,8 +23,11 @@ app.use(express.json())
 
 //Routes
 app.use("/api/users", userRouter)
-app.use("/api/cart",cartRouter)
+app.use("/api/artist", artistRouter)
+app.use("/api/products", productRouter)
+app.use("/api/cart", cartRouter)
+app.use("/api/assets",assetRouter)
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server Started on Port: ${process.env.PORT}`)
+app.listen(PORT, () => {
+    console.log(`Server Started on Port: ${PORT}`)
 })

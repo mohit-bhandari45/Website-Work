@@ -25,8 +25,8 @@ const Checkout = () => {
                         </div>
                     </div>
                     <div className="content w-full h-[115vh] flex justify-start items-start">
-                        <Left/>
-                        <Right/>
+                        <Left />
+                        <Right />
                     </div>
                 </div>
             </div>
