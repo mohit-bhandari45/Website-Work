@@ -6,9 +6,10 @@ const artistRouter = require("./routes/artist.js")
 const productRouter = require("./routes/product.js")
 const cartRouter = require("./routes/cart.js")
 const assetRouter=require("./routes/asset.js")
+const videoRouter=require("./routes/video.js")
+
+/* Dotenv */
 require("dotenv").config()
-const path = require("path")
-const fs = require("fs")
 
 //Database connection
 require("./connection.js").connectDB()
@@ -27,6 +28,7 @@ app.use("/api/artist", artistRouter)
 app.use("/api/products", productRouter)
 app.use("/api/cart", cartRouter)
 app.use("/api/assets",assetRouter)
+app.use("/api/videos",videoRouter)
 
 app.listen(PORT, () => {
     console.log(`Server Started on Port: ${PORT}`)

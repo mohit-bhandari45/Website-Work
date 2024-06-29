@@ -1,42 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Story from './Subcomps/Story'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { getStories } from '../../apis/apis';
 
 const Frames = () => {
-    const [storydetails, setstorydetails] = useState([
-        {
-            mainimage: "src/assets/Rectangle 52.png",
-            image: "src/assets/Ellipse 40.png",
-            name: "Ayushi",
-            para: "One of the fathers of modern Indian art, a leading painter in India's nationalist art school in Calcutta."
-        },
-        {
-            mainimage: "src/assets/Rectangle 53.png",
-            image: "src/assets/Ellipse 39.png",
-            name: "Jack",
-            para: "One of the fathers of modern Indian art, a leading painter in India's nationalist art school in Calcutta."
-        },
-        {
-            mainimage: "src/assets/Rectangle 54.png",
-            image: "src/assets/Ellipse 51.png",
-            name: "Tony",
-            para: "One of the fathers of modern Indian art, a leading painter in India's nationalist art school in Calcutta."
-        },
-        {
-            mainimage: "src/assets/Rectangle 54.png",
-            image: "src/assets/Ellipse 51.png",
-            name: "Tony",
-            para: "One of the fathers of modern Indian art, a leading painter in India's nationalist art school in Calcutta."
-        },
-        {
-            mainimage: "src/assets/Rectangle 54.png",
-            image: "src/assets/Ellipse 51.png",
-            name: "Tony",
-            para: "One of the fathers of modern Indian art, a leading painter in India's nationalist art school in Calcutta."
-        },
-    ])
+    const [storyDetails, setStoryDetails] = useState([])
+    async function getVideos() {
+        let req = await fetch(getStories)
+        let res = await req.json()
+        setStoryDetails(res)
+        console.log(storyDetails)
+    }
+
+    useEffect(() => {
+        getVideos()
+    }, [])
+
+
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 3000 },
@@ -57,9 +39,9 @@ const Frames = () => {
     };
 
     return (
-            <Carousel autoPlay={false} slidesToSlide={1} keyBoardControl={true} draggable={true} centerMode={true} infinite showDots={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
-            {storydetails.map((storydetail) => {
-                return <Story mainimage={storydetail.mainimage} image={storydetail.image} name={storydetail.name} para={storydetail.para} />
+        <Carousel autoPlay={false} slidesToSlide={1} keyBoardControl={true} draggable={true} centerMode={true} infinite showDots={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
+            {storyDetails.map((storydetail) => {
+                return <Story mainVideo={storydetail} />
             })}
         </Carousel>
     )

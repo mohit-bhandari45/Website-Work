@@ -5,10 +5,14 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    discount: Number,
+    discount: {
+        type:Number,
+        default:0
+    },
     imageUrl: {
         type: String,
-        required: true
+        required: true,
+        unique:true
     },
     title: {
         type: String,
@@ -19,6 +23,12 @@ const productSchema = mongoose.Schema({
     description: {
         type: String,
         required: true
+    },
+    uploadedAt: {
+        type: Date,
+        default: () => {
+            return new Date()
+        }
     }
 })
 
