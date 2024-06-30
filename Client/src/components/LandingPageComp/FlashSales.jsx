@@ -1,54 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card3 from './Subcomps/Card3'
+import { getSalesProducts } from '../../apis/apis'
 
 const FlashSales = () => {
-    const [items, setitems] = useState([
-        {
-            img: "src/assets/g92-2-500x500 1.png",
-            discount: "-40%",
-            title: "Brass Murti",
-            mainprice: "$120",
-            prevprice: "$160",
-            stars: "src/assets/Vector (2).png",
-            amount: "(88)"
-        },
-        {
-            img: "src/assets/ak-900-01-500x500 1.png",
-            discount: "-35%",
-            title: "Khadi Handloom Saree",
-            mainprice: "$960",
-            prevprice: "$1160",
-            stars: "src/assets/Vector (2).png",
-            amount: "(75)"
-        },
-        {
-            img: "src/assets/g27cq4-500x500 1.png",
-            discount: "-30%",
-            title: "Brass Pncha Pradip",
-            mainprice: "$370",
-            prevprice: "$400",
-            stars: "src/assets/Vector (2).png",
-            amount: "(99)"
-        },
-        {
-            img: "src/assets/sam-moghadam-khamseh-kvmdsTrGOBM-unsplash 1.png",
-            discount: "-25%",
-            title: "Odisha Style Painting on Plate",
-            mainprice: "$375",
-            prevprice: "$400",
-            stars: "src/assets/Vector (2).png",
-            amount: "(99)"
-        },
-        {
-            img: "src/assets/sam-moghadam-khamseh-kvmdsTrGOBM-unsplash 1.png",
-            discount: "-25%",
-            title: "Dokra on Brass",
-            mainprice: "$375",
-            prevprice: "$400",
-            stars: "src/assets/Vector (2).png",
-            amount: "(99)"
-        }
-    ])
+    const [items, setItems] = useState([])
+
+    async function getProductBySalesFn() {
+        const req = await fetch(getSalesProducts)
+        const result = await req.json()
+        setItems(result)
+        console.log(items)
+    }
+
+    useEffect(() => {
+        getProductBySalesFn()
+    }, [])
 
     const [right, setright] = useState(0)
     return (
@@ -84,14 +50,16 @@ const FlashSales = () => {
                         </div>
                     </div>
                     <div className="second flex justify-center items-center gap-2">
-                        <div className="arrow1 bg-[#F5F5F5] rounded-full p-4"><img src="src/assets/icons_arrow-left.png" alt="" /></div>
-                        <div onClick={() => { setright(prevright => prevright + 20) }} className="arrow2 bg-[#F5F5F5] rounded-full p-4"><img src="src/assets/icons arrow-right.png" alt="" /></div>
+                        <div className="arrow1 bg-[#F5F5F5] rounded-full p-4">
+                            <img src="src/assets/icons_arrow-left.png" alt="" /></div>
+                        <div onClick={() => { setright(prevright => prevright + 20) }} className="arrow2 bg-[#F5F5F5] rounded-full p-4">
+                            <img src="src/assets/icons arrow-right.png" alt="" /></div>
                     </div>
                 </div>
             </div>
             <div style={{ right: right + "vw" }} className={`w-[90%] gap-5 h-[90vh] justify-start items-center flex relative font-[Helvetica]`}>
                 {items.map((element) => {
-                    return <Card3 img={element.img} discount={element.discount} title={element.title} mainprice={element.mainprice} prevprice={element.prevprice} stars={element.stars} amount={element.amount} />
+                    return <Card3 img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} stars={element.stars} amount={element.amount} />
                 })}
             </div>
         </div>

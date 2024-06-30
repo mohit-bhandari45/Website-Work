@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from './Subcomps/Card'
+import { getComingSoonProducts } from '../../apis/apis'
 
 const Frames2 = () => {
+    const [comingProducts, setComingProducts] = useState([])
+
+    async function getComingSoonProductsFn() {
+        const req = await fetch(getComingSoonProducts)
+        const res = await req.json();
+        setComingProducts(res)
+    }
+
+    useEffect(() => {
+        getComingSoonProductsFn()
+    }, [])
+
+
     return (
-        <div className='main px-2 min-h-[50vh] xl:min-h-[100vh] py-10 overflow-hidden xl:w-full flex xl:flex-row flex-wrap justify-center items-center gap-10 font-[Helvetica]'>
-            <Card image="src/assets/Rectangle 7.png" price="1000"/>
-            <Card image="src/assets/Rectangle 8.png" price="5000"/>
-            <Card image="src/assets/Rectangle 9.png" price="10000"/>
-            <Card image="src/assets/Rectangle 10.png" price="23000"/>
+        <div className='main px-2 min-h-[100vh] py-10 overflow-hidden w-full flex justify-center items-center gap-10 font-[Helvetica]'>
+            {comingProducts.map((product) => {
+                return <Card image={product.imageUrl} price={product.mainPrice} />
+            })}
         </div>
     )
 }

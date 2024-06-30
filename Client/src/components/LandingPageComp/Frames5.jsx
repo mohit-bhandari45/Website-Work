@@ -1,87 +1,40 @@
-import React, { useState } from 'react'
-import Card3 from './Subcomps/Card3'
+import React, { useEffect, useState } from 'react'
+import { getAllProducts } from '../../apis/apis'
+import Card4 from './Subcomps/Card4'
 
 const Frames5 = () => {
-    const [items1, setitems1] = useState([
-        {
-            img: "src/assets/g92-2-500x500 1.png",
-            discount: "-40%",
-            title: "Brass Murti",
-            mainprice: "$120",
-            prevprice: "$160",
-            stars: "src/assets/Vector (2).png",
-            amount: "(88)"
-        },
-        {
-            img: "src/assets/ak-900-01-500x500 1.png",
-            discount: "-35%",
-            title: "Khadi Handloom Saree",
-            mainprice: "$960",
-            prevprice: "$1160",
-            stars: "src/assets/Vector (2).png",
-            amount: "(75)"
-        },
-        {
-            img: "src/assets/g27cq4-500x500 1.png",
-            discount: "-30%",
-            title: "Brass Pncha Pradip",
-            mainprice: "$370",
-            prevprice: "$400",
-            stars: "src/assets/Vector (2).png",
-            amount: "(99)"
-        },
-        {
-            img: "src/assets/sam-moghadam-khamseh-kvmdsTrGOBM-unsplash 1.png",
-            discount: "-25%",
-            title: "Odisha Style Painting on Plate",
-            mainprice: "$375",
-            prevprice: "$400",
-            stars: "src/assets/Vector (2).png",
-            amount: "(99)"
-        },
-    ])
-
-    const [items2, setitems2] = useState([
-        {
-            img: "src/assets/g92-2-500x500 1.png",
-            discount: "-40%",
-            title: "Brass Murti",
-            mainprice: "$120",
-            prevprice: "$160",
-            stars: "src/assets/Vector (2).png",
-            amount: "(88)"
-        },
-        {
-            img: "src/assets/ak-900-01-500x500 1.png",
-            discount: "-35%",
-            title: "Khadi Handloom Saree",
-            mainprice: "$960",
-            prevprice: "$1160",
-            stars: "src/assets/Vector (2).png",
-            amount: "(75)"
-        },
-        {
-            img: "src/assets/g27cq4-500x500 1.png",
-            discount: "-30%",
-            title: "Brass Pncha Pradip",
-            mainprice: "$370",
-            prevprice: "$400",
-            stars: "src/assets/Vector (2).png",
-            amount: "(99)"
-        },
-        {
-            img: "src/assets/sam-moghadam-khamseh-kvmdsTrGOBM-unsplash 1.png",
-            discount: "-25%",
-            title: "Odisha Style Painting on Plate",
-            mainprice: "$375",
-            prevprice: "$400",
-            stars: "src/assets/Vector (2).png",
-            amount: "(99)"
-        },
-    ])
-
-    
     const [right, setright] = useState(0)
+    const [items1, setItems1] = useState([])
+    const [items2, setItems2] = useState([])
+
+    function shuffleItems(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    async function getAllProductsFn() {
+        try {
+            const req = await fetch(getAllProducts);
+            const result = await req.json();
+            const shuffledItems = shuffleItems([...result]);
+            const array1 = shuffledItems.slice(0, shuffleItems.length % 2);
+            const array2 = shuffledItems.slice(shuffleItems.length % 2, 8);
+            setItems1(array1);
+            setItems2(array2);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
+
+    useEffect(() => {
+        getAllProductsFn()
+        console.log(items1)
+        console.log(items2)
+    }, [])
+
     return (
         <div className='h-[190vh] py-16 w-full font-[Helvetica] flex flex-col justify-center items-center'>
             <div className="head h-[30vh] w-[90%]">
@@ -102,12 +55,12 @@ const Frames5 = () => {
             <div className={`w-[90%] gap-7 h-[150vh] justify-center items-center flex flex-col relative font-[Helvetica]`}>
                 <div className="one flex gap-7">
                     {items1.map((element) => {
-                        return <Card3 img={element.img} discount={element.discount} title={element.title} mainprice={element.mainprice} prevprice={element.prevprice} stars={element.stars} amount={element.amount} />
+                        return <Card4 img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} stars={element.stars} amount={element.amount} />
                     })}
                 </div>
                 <div className="two flex gap-7">
                     {items2.map((element) => {
-                        return <Card3 img={element.img} discount={element.discount} title={element.title} mainprice={element.mainprice} prevprice={element.prevprice} stars={element.stars} amount={element.amount} />
+                        return <Card4 img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} stars={element.stars} amount={element.amount} />
                     })}
                 </div>
                 <div className="button"><button className='bg-[#ED8A73] py-4 px-12 text-white rounded-md text-xl'>View All Products</button></div>

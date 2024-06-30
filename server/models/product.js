@@ -24,7 +24,13 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    uploadedAt: {
+    listedAt: {
+        type: Date,
+        default: () => {
+            return new Date()
+        }
+    },
+    releaseDate: {
         type: Date,
         default: () => {
             return new Date()

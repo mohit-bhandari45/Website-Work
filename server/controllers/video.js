@@ -19,7 +19,7 @@ async function videoById(req, res) {
     const currentPath = __dirname;
     const parentPath = path.resolve(currentPath, "..")
     const filePath = path.join(parentPath, "assets", "videos",videoName)
-    res.sendFile(filePath);
+    return res.sendFile(filePath);
 }
 
 module.exports = {

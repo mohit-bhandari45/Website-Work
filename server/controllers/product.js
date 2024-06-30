@@ -3,29 +3,60 @@ const path = require("path")
 
 /* Get All Products */
 async function getAllProducts(req, res) {
-    res.send("Got Every Item")
+    const items = await Product.find({ releaseDate: { $lt: Date.now() } })
+    return res.json(items)
+}
+
+/* Get All Products By Id*/
+async function getAllProductsById(req, res) {
+    const imageName = req.params.id;
+    const currentDir = __dirname
+    const parentDir = path.resolve(currentDir, "..")
+    const imagePath = path.join(parentDir, "assets", "products", imageName)
+    return res.sendFile(imagePath)
 }
 
 /* Get Product By Id */
 async function getProductById(req, res) {
-    res.send("Got Item with id")
+    return res.send("Got Item with id")
 }
 
 /* Get Product By Sales */
 async function getProductBySales(req, res) {
-    res.send("Got Item with sales")
+    const items = await Product.find({ discount: { $gt: 0 } }).sort({ discount: -1 }).limit(5)
+    return res.json(items)
+}
+
+/* Get Individual Product By Sales */
+async function getProductBySalesById(req, res) {
+    const imageName = req.params.id;
+    const currentDir = __dirname
+    const parentDir = path.resolve(currentDir, "..")
+    const imagePath = path.join(parentDir, "assets", "products", imageName)
+    return res.sendFile(imagePath)
 }
 
 /* Get Product By Soon Coming */
 async function getComingSoonProducts(req, res) {
-    res.send("Got Item with coming soon")
+    const now = Date.now();
+    const comingSoonItems = await Product.find({ releaseDate: { $gt: now } }).sort({ releaseDate: 1 }).limit(4)
+    return res.json(comingSoonItems)
+}
+
+/* Get Individual Product By Soon Coming */
+async function getComingSoonProductsById(req, res) {
+    const imageName = req.params.id;
+    const currentDir = __dirname
+    const parentDir = path.resolve(currentDir, "..")
+    const imagePath = path.join(parentDir, "assets", "products", imageName)
+    return res.sendFile(imagePath)
 }
 
 /* Get Product By recently added */
 async function getRecentProducts(req, res) {
-    const items = await Product.find({}).sort({ uploadedAt: -1 }).limit(4)
-    console.log(items)
-    res.json(items)
+    const now = Date.now();
+    const items = await Product.find({ listedAt: { $lt: now } }).sort({ listedAt: -1 }).limit(4)
+    return res.json(items)
 }
 
 /* Get Individual Product By recently added */
@@ -34,14 +65,17 @@ async function getRecentProductsById(req, res) {
     const currentDir = __dirname
     const parentDir = path.resolve(currentDir, "..")
     const imagePath = path.join(parentDir, "assets", "products", imageName)
-    res.sendFile(imagePath)
+    return res.sendFile(imagePath)
 }
 
 /* Add Product */
 async function addProducts(req, res) {
-    const product = await Product.create(req.body)
-    console.log(product)
-    res.status(201).send("Product Added")
+    const data = req.body
+    if (data.releaseDate) {
+        data.listedAt = data.releaseDate;
+    }
+    const product = await Product.create(data)
+    return res.status(201).send(`Product Added with id ${product._id}`)
 }
 
 module.exports = {
@@ -51,5 +85,8 @@ module.exports = {
     getComingSoonProducts,
     getRecentProducts,
     addProducts,
-    getRecentProductsById
+    getRecentProductsById,
+    getComingSoonProductsById,
+    getProductBySalesById,
+    getAllProductsById
 }

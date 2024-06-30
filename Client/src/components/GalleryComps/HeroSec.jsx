@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const HeroSec = () => {
     return (
@@ -47,7 +48,9 @@ const HeroSec = () => {
                             <button className='bg-[#EED9AE] rounded-lg text-xl font-bold font-[Helvetica] h-full w-full text-[#3D395E]'>Add to Cart</button>
                         </div>
                         <div className="btn1 h-full w-full">
-                            <button className='bg-[#3D395E] rounded-lg text-xl font-bold font-[Helvetica] h-full w-full text-[#EED9AE]'>Buy Now</button>
+                            <button className='bg-[#3D395E] rounded-lg text-xl font-bold font-[Helvetica] h-full w-full text-[#EED9AE]'>
+<Link to="/checkout">Buy Now</Link>
+                            </button>
                         </div>
                     </div>
                 </div>

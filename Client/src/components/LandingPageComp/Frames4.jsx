@@ -10,18 +10,13 @@ const Frames4 = () => {
         const req = await fetch(getRecentProducts)
         const res = await req.json();
         setRecentProducts(res)
-        // console.log(recentProducts[0].imageUrl)
-        // console.log(recentProducts[0].title)
-        // console.log(recentProducts[0].description)
-        
     }
 
     useEffect(() => {
         getProducts()
     }, [])
 
-    if(recentProducts.length===0){
-        console.log("Not loaded")
+    if (recentProducts.length === 0) {
         return <div>...Loading</div>
     }
 
@@ -58,10 +53,11 @@ const Frames4 = () => {
                     </div>
                     <div className='bottom h-[50%] w-full flex justify-center items-center gap-10'>
                         <div className="first w-1/2 bg-black h-full rounded-md relative flex flex-col justify-end py-4 px-4">
-                            <img className='absolute top-8 left-28 z-10' src={`${getRecentProducts}/${recentProducts[2].imageUrl}`} alt="" />                            <div className='content text-white flex gap-2 flex-col justify-center '>
+                            <img className='absolute top-8 left-28 z-10 w-56 h-56' src={`${getRecentProducts}/${recentProducts[2].imageUrl}`} alt="" />
+                            <div className='content text-white flex gap-2 flex-col justify-center '>
                                 <div className=''><button className='outline-none border-b-2 border-white'>Shop Now</button></div>
-                                <h1 className='font-bold text-xl'>{recentProducts[1].title}</h1>
-                                <p className='w-[70%] text-sm opacity-80 font-thin'>{recentProducts[1].description}</p>
+                                <h1 className='font-bold text-xl'>{recentProducts[2].title}</h1>
+                                <p className='w-[70%] text-sm opacity-80 font-thin'>{recentProducts[2].description}</p>
                             </div>
                         </div>
                         <div className="second w-1/2 bg-black h-full rounded-lg flex justify-center items-center">
