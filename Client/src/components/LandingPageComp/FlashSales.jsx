@@ -9,7 +9,6 @@ const FlashSales = () => {
         const req = await fetch(getSalesProducts)
         const result = await req.json()
         setItems(result)
-        console.log(items)
     }
 
     useEffect(() => {
@@ -59,7 +58,7 @@ const FlashSales = () => {
             </div>
             <div style={{ right: right + "vw" }} className={`w-[90%] gap-5 h-[90vh] justify-start items-center flex relative font-[Helvetica]`}>
                 {items.map((element) => {
-                    return <Card3 img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} stars={element.stars} amount={element.amount} />
+                    return <Card3 key={element._id} imageId={element._id} img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} />
                 })}
             </div>
         </div>

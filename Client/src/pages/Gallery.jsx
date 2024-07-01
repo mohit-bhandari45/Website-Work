@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/GalleryComps/Navbar'
 import Search from '../components/UniversalComp/Search'
 import Card2 from "../components/LandingPageComp/Subcomps/Card2"
@@ -13,46 +13,70 @@ import Footer from '../components/UniversalComp/Footer'
 import Mid2 from '../components/GalleryComps/Mid2'
 import Card from '../components/GalleryComps/Card'
 import Frames5 from '../components/LandingPageComp/Frames5'
+import { useParams } from 'react-router-dom'
+
+/* Images */
+import State1 from "../assets/Ellipse 54 (4).png"
+import State2 from "../assets/Ellipse 54 (5).png"
+import State3 from "../assets/Ellipse 54 (6).png"
+import State4 from "../assets/Ellipse 54 (7).png"
+import State5 from "../assets/Ellipse 54 (8).png"
+import State6 from "../assets/Ellipse 54 (9).png"
+import State7 from "../assets/Ellipse 54 (10).png"
+import State8 from "../assets/Ellipse 54 (11).png"
+import image from "../assets/Rectangle 4163.png"
+import { getProductById } from '../apis/apis'
 
 const Gallery = () => {
+  const params = useParams();
+  const { id } = params
+  const [item, setItem] = useState()
+
+  async function getProductByIdFn() {
+    const req = await fetch(`${getProductById}/${id}`);
+    const result = await req.json();
+    setItem(result)
+  }
+
+  useEffect(() => {
+    getProductByIdFn()
+      window.scrollTo(0, 0);
+  }, [id])
+
   const [details, setdetails] = useState([
     {
-      state: "West Bengal",
-      image: "src/assets/Ellipse 54 (3).png",
-    },
-    {
-      state: "Uttarakhand",
-      image: "src/assets/Ellipse 54 (3).png",
-    },
-    {
       state: "Delhi",
-      image: "src/assets/Ellipse 54.png",
-    },
-
-    {
-      state: "Bihar",
-      image: "src/assets/Ellipse 54 (2).png",
+      image: State1,
     },
     {
       state: "Punjab",
-      image: "src/assets/Ellipse 54 (1).png",
+      image: State2,
     },
+    {
+      state: "Delhi",
+      image: State3,
+    },
+
     {
       state: "Odissa",
-      image: "src/assets/Ellipse 54 (1).png",
+      image: State4,
     },
     {
-      state: "Kerala",
-      image: "src/assets/Ellipse 54 (1).png",
+      state: "Maharastra",
+      image: State5,
     },
     {
-      state: "Karnataka",
-      image: "src/assets/Ellipse 54 (1).png",
+      state: "West Bengal",
+      image: State6,
     },
     {
-      state: "Chennai",
-      image: "src/assets/Ellipse 54 (1).png",
+      state: "Jaipur",
+      image: State7,
     },
+    {
+      state: "South India",
+      image: State8,
+    }
   ])
 
   const responsive = {
@@ -72,7 +96,8 @@ const Gallery = () => {
       breakpoint: { max: 464, min: 0 },
       items: 1
     }
-  };
+  }
+
   return (
     <>
       <Navbar />
@@ -86,30 +111,30 @@ const Gallery = () => {
         })}
       </Carousel>
       <Mid />
-      <HeroSec />
-      <MinorSec />
+      <HeroSec item={item} />
+      <MinorSec item={item}/>
       <div className="hero3 h-[120vh] w-full flex flex-col py-16">
         <Mid2 />
         <div className="cards w-full h-[100vh] flex justify-center items-center">
           <div className="inner w-[90%] h-full flex flex-col justify-center items-center gap-3">
             <div className="one flex">
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
+              <Card image={image} />
+              <Card image={image} />
+              <Card image={image} />
+              <Card image={image} />
+              <Card image={image} />
             </div>
             <div className="two flex">
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
+              <Card image={image} />
+              <Card image={image} />
+              <Card image={image} />
+              <Card image={image} />
+              <Card image={image} />
             </div>
           </div>
         </div>
       </div>
-      <Frames5/>
+      <Frames5 />
       <SubFooter />
       <Footer />
     </>

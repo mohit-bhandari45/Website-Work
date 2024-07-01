@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Card = () => {
+const Card = ({image}) => {
   return (
     <div className='w-[18vw] h-[40vh] flex flex-col gap-2 justify-center items-center'>
       <div className="image w-[75%] h-[70%]">
-        <img className='w-full h-full' src="src/assets/Rectangle 4163.png" alt="" />
+        <img className='w-full h-full' src={image} alt="" />
       </div>
       <div className="firstelements w-[75%] text-sm font-[Helvetica] flex justify-between items-center">
         <div className="one">4.3</div>

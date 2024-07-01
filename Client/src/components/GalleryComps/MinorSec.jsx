@@ -1,8 +1,16 @@
 import React, { useState } from 'react'
 
-const MinorSec = () => {
+/* Image */
+import Vector from "../../assets/Vector.png"
+
+const MinorSec = ({item}) => {
     const [bool1, setbool1] = useState(false)
     const [bool2, setbool2] = useState(false)
+
+    if (!item) {
+        return <div>Loading...</div>;
+    }
+
 
     return (
         <>
@@ -12,7 +20,7 @@ const MinorSec = () => {
                         <div className="first font-[Helvetica] font-bold text-xl flex justify-center items-center gap-4">
                             <div className="title">Description</div>
                             <div onClick={() => { setbool1(!bool1) }} className="icon cursor-pointer">
-                                <img className={`transition-all duration-700 ease-in-out w-4 py-4`} src="src/assets/Vector.png" alt="" />
+                                <img className={`${bool1?"rotate-180":"rotate-0"} transition-all duration-700 ease-in-out w-4 py-4`} src={Vector} alt="" />
                             </div>
                         </div>
                     </div>
@@ -20,7 +28,7 @@ const MinorSec = () => {
                         <div className="first font-[Helvetica] font-bold text-xl flex justify-center items-center gap-4">
                             <div className="title">Features</div>
                             <div onClick={() => { setbool2(!bool2) }} className="icon cursor-pointer">
-                                <img className={`transition-all duration-700 ease-in-out w-4 py-4`} src="src/assets/Vector.png" alt="" />
+                                <img className={`${bool2?"rotate-180":"rotate-0"} transition-all duration-700 ease-in-out w-4 py-4`} src={Vector} alt="" />
                             </div>
                         </div>
                         <div className="second">
@@ -37,9 +45,7 @@ const MinorSec = () => {
             <div className={`${bool1 || bool2 ?"h-[50vh]":"h-0"} boolean flex w-full transition-all duration-700 ease-in-out justify-center items-center`}>
                 <div className="content w-[76%] h-full flex justify-center items-center gap-5 font-semibold">
                     <div className={`${bool1 ? "h-[40vh] opacity-100" : "h-0 opacity-0 overflow-hidden"} transition-all duration-700 ease-in-out w-[100%] left`}>
-                        Meticulously hand-moulded by skilled artisans, this Indian God Sculpture Figurine captures the essence of traditional craftsmanship and spiritual reverence.
-                        Crafted with precision and attention to detail, each Laxmi Murti reflects the artistry and devotion of our artisans, making it a cherished addition to your home décor. The intricate detailing on the figurine, from the delicate features of Goddess Laxmi to the ornate motifs adorning her attire, showcases the craftsmanship steeped in centuries-old traditions.
-                        This Handicraft Laxmi Murti is not just a piece of art but a symbol of auspiciousness and prosperity, ideal for adorning your puja room, living room, or office space. Whether as a centerpiece for your home altar or a thoughtful gift for loved ones, this divine sculpture brings blessings, positivity, and a touch of cultural richness to any environment.
+                        {item.description}
                     </div>
                     <div className={`${bool2 ? "h-[40vh] opacity-100" : "h-0 opacity-0 overflow-hidden"} transition-all duration-700 ease-in-out w-[80%] right`}>
                         <div>Theme - Religious</div>

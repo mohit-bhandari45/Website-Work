@@ -1,10 +1,10 @@
 import React from 'react'
-import { getComingSoonProducts } from '../../../apis/apis'
+import { getImage } from '../../../apis/apis'
 
 const Card = ({ image, price }) => {
     return (
         <div className="img4 min-h-[70%] flex flex-col justify-center items-stretch">
-            <div className="imagemain h-[80%]"><img className="object-cover h-full" src={`${getComingSoonProducts}/${image}`} alt="" /></div>
+            <div className="imagemain h-[80%]"><img className="object-cover h-full" src={`${getImage}/${image}`} alt="" /></div>
             <div className='h-[20%]'>
                 <div className="text1 flex justify-between py-1">
                     <div className="flex1 flex justify-center items-center gap-4 px-1">

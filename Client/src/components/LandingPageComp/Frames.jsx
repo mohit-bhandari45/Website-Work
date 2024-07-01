@@ -40,8 +40,8 @@ const Frames = () => {
 
     return (
         <Carousel autoPlay={false} slidesToSlide={1} keyBoardControl={true} draggable={true} centerMode={true} infinite showDots={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
-            {storyDetails.map((storydetail) => {
-                return <Story mainVideo={storydetail} />
+            {storyDetails.map((storydetail,index) => {
+                return <Story key={index} mainVideo={storydetail} />
             })}
         </Carousel>
     )

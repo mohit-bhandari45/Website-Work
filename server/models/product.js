@@ -6,13 +6,13 @@ const productSchema = mongoose.Schema({
         required: true
     },
     discount: {
-        type:Number,
-        default:0
+        type: Number,
+        default: 0
     },
     imageUrl: {
         type: String,
         required: true,
-        unique:true
+        unique: true
     },
     title: {
         type: String,
@@ -20,6 +20,12 @@ const productSchema = mongoose.Schema({
     },
     mainPrice: Number,
     prevPrice: Number,
+    rating: {
+        type: Number
+    },
+    reviews: {
+        type: Number
+    },
     description: {
         type: String,
         required: true

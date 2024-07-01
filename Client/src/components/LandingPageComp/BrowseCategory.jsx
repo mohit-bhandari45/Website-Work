@@ -28,8 +28,8 @@ const BrowseCategory = () => {
                 </div>
             </div>
             <div className='w-[90%] h-[40vh] flex justify-start items-center gap-8'>
-                {items.map((item)=>{
-                    return <Browses item={item}/>
+                {items.map((item,index)=>{
+                    return <Browses key={index} item={item}/>
                 })}
             </div>
         </div>

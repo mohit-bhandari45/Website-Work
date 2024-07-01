@@ -50,9 +50,6 @@ const Navbar = ({ bool, setbool }) => {
             <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
               <Link to="/catalog">Catalog</Link>
             </div>
-            <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
-              <Link to="/gallery">Gallery</Link>
-            </div>
             <div className="about cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
               <Link to="/about">About Us</Link>
             </div>

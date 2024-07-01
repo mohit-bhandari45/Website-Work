@@ -12,6 +12,9 @@ export const getVideoById=`${host}/api/videos/get-Video`
 /* All Products APIs */
 export const getAllProducts=`${host}/api/products/get-All`
 
+/* Product Fetch API */
+export const getProductById=`${host}/api/products/get`
+
 /* Products On Sale APIs */
 export const getSalesProducts=`${host}/api/products/get-Sales`
 
@@ -20,3 +23,6 @@ export const getRecentProducts=`${host}/api/products/get-Recent`
 
 /* Coming Soon Products APIs */
 export const getComingSoonProducts=`${host}/api/products/get-Soon`
+
+/* Image Fetch API */
+export const getImage=`${host}/api/products/get-Image`

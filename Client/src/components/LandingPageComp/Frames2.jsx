@@ -19,7 +19,7 @@ const Frames2 = () => {
     return (
         <div className='main px-2 min-h-[100vh] py-10 overflow-hidden w-full flex justify-center items-center gap-10 font-[Helvetica]'>
             {comingProducts.map((product) => {
-                return <Card image={product.imageUrl} price={product.mainPrice} />
+                return <Card key={product._id} image={product.imageUrl} price={product.mainPrice} />
             })}
         </div>
     )

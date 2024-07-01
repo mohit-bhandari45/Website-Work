@@ -20,8 +20,8 @@ const Frames5 = () => {
             const req = await fetch(getAllProducts);
             const result = await req.json();
             const shuffledItems = shuffleItems([...result]);
-            const array1 = shuffledItems.slice(0, shuffleItems.length % 2);
-            const array2 = shuffledItems.slice(shuffleItems.length % 2, 8);
+            const array1 = shuffledItems.slice(0, 4);
+            const array2 = shuffledItems.slice(4, 8);
             setItems1(array1);
             setItems2(array2);
         } catch (error) {
@@ -31,8 +31,6 @@ const Frames5 = () => {
 
     useEffect(() => {
         getAllProductsFn()
-        console.log(items1)
-        console.log(items2)
     }, [])
 
     return (
@@ -55,12 +53,12 @@ const Frames5 = () => {
             <div className={`w-[90%] gap-7 h-[150vh] justify-center items-center flex flex-col relative font-[Helvetica]`}>
                 <div className="one flex gap-7">
                     {items1.map((element) => {
-                        return <Card4 img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} stars={element.stars} amount={element.amount} />
+                        return <Card4 key={element._id} id={element._id} img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} />
                     })}
                 </div>
                 <div className="two flex gap-7">
                     {items2.map((element) => {
-                        return <Card4 img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} stars={element.stars} amount={element.amount} />
+                        return <Card4 key={element._id} id={element._id} img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} />
                     })}
                 </div>
                 <div className="button"><button className='bg-[#ED8A73] py-4 px-12 text-white rounded-md text-xl'>View All Products</button></div>

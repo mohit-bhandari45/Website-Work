@@ -1,36 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Star from '../LandingPageComp/Subcomps/Star';
 
-const HeroSec = () => {
+/* APIs */
+import { getProductById, getImage } from '../../apis/apis';
+
+const HeroSec = ({item}) => {
+    if (!item) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className='w-full h-[80vh] flex justify-center items-center'>
             <div className="content w-[90%] h-full flex">
                 <div className="left w-1/2 h-full flex justify-center items-center">
-                    <img className='w-[60%] h-[100%]' src="src/assets/product-img.png" alt="" />
+                    <img className='w-[60%] h-[100%]' src={`${getImage}/${item.imageUrl}`} alt="" />
                 </div>
                 <div className="right w-1/2 h-full px-10 flex flex-col justify-center gap-2">
-                    <h1 className='font-bold w-[80%] text-3xl font-[Helvetica]'>Handicraft Laxmi Murti: Indian God Sculpture Figurine Home Decor</h1>
+                    <h1 className='font-bold w-[80%] text-3xl font-[Helvetica]'>{item.title}</h1>
                     <div className="elements py-2 flex justify-start items-center gap-3">
                         <div className="stars flex justify-start items-center gap-1">
-                            <img className='w-4' src="/src/assets/020---Star.png" alt="" />
-                            <img className='w-4' src="/src/assets/020---Star.png" alt="" />
-                            <img className='w-4' src="/src/assets/020---Star.png" alt="" />
-                            <img className='w-4' src="/src/assets/020---Star.png" alt="" />
-                            <img className='w-4' src="/src/assets/020---Star.png" alt="" />
+                            <Star rating={item.rating} />
                         </div>
                         <div className="rating font-semibold font-[Helvetica]">
-                            3,345
+                            {item.rating}
                         </div>
                     </div>
                     <div className="price flex justify-start items-end py-5 gap-3">
                         <div className="main text-xl font-bold">
-                            $669
+                            ${item.mainPrice}
                         </div>
-                        <div className="submain1 text-xs">
-                            1,599
+                        <div className="submain1 text-xs line-through">
+                            ${item.prevPrice}
                         </div>
                         <div className="off text-xs">
-                            58% off
+                            {item.discount}% off
                         </div>
                     </div>
                     <div className="color flex flex-col gap-2">
@@ -49,7 +53,7 @@ const HeroSec = () => {
                         </div>
                         <div className="btn1 h-full w-full">
                             <button className='bg-[#3D395E] rounded-lg text-xl font-bold font-[Helvetica] h-full w-full text-[#EED9AE]'>
-<Link to="/checkout">Buy Now</Link>
+                                <Link to="/checkout">Buy Now</Link>
                             </button>
                         </div>
                     </div>

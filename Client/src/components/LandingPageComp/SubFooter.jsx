@@ -1,4 +1,7 @@
 import React from 'react'
+import deliveryIcon from "../../assets/icon-delivery.png"
+import customerIcon from "../../assets/Icon-Customer service.png"
+import secureIcon from "../../assets/Icon-secure.png"
 
 const SubFooter = () => {
     return (
@@ -6,7 +9,7 @@ const SubFooter = () => {
             <div className="first flex flex-col justify-center items-center gap-5">
                 <div className="logo p-6 bg-gray-300 rounded-full">
                     <div className="circle p-6 bg-black rounded-full">
-                        <img className='w-16 h-16' src="src/assets/icon-delivery.png" alt="" />
+                        <img className='w-16 h-16' src={deliveryIcon} alt="" />
                     </div>
                 </div>
                 <div className='flex flex-col justify-center items-center gap-2'>
@@ -17,7 +20,7 @@ const SubFooter = () => {
             <div className="second flex flex-col justify-center items-center gap-5">
                 <div className="logo p-6 bg-gray-300 rounded-full">
                     <div className="circle p-6 bg-black rounded-full">
-                        <img className='w-16 h-16' src="src/assets/Icon-Customer service.png" alt="" />
+                        <img className='w-16 h-16' src={customerIcon} alt="" />
                     </div>
                 </div>
                 <div className='flex flex-col justify-center items-center gap-2'>
@@ -28,7 +31,7 @@ const SubFooter = () => {
             <div className="third flex flex-col justify-center items-center gap-5">
                 <div className="logo p-6 bg-gray-300 rounded-full">
                     <div className="circle p-6 bg-black rounded-full">
-                        <img className='w-16 h-16' src="src/assets/Icon-secure.png" alt="" />
+                        <img className='w-16 h-16' src={secureIcon} alt="" />
                     </div>
                 </div>
                 <div className='flex flex-col justify-center items-center gap-2'>

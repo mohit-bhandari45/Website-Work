@@ -100,21 +100,23 @@ const App = () => {
     <BrowserRouter>
       <Routes>
 
-          /* General Routes-But here noraml user can signup */
+        /* General Routes-But here normal user can signup */
         <Route path='/' element={<LandingPage />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contacts />} />
-        <Route path='/gallery' element={<Gallery />} />
         <Route path='/showmore' element={<ShowMore />} />
         <Route path='/404' element={<Page404 />} />
 
-          /* Artist Routes */
+        /* Dynamic Routes */
+        <Route path="gallery/:id" element={<Gallery />} />
+
+        /* Artist Routes */
         <Route path='/artistsignup' element={<ArtistSignup />} />
 
-          /* Profiles depending upon userType */
+        /* Profiles depending upon userType */
         <Route path='/profile' element={getProfileComponent()} />
 
-          /* UserRoutes */
+        /* UserRoutes */
         <Route path='/cart' element={getCartComponent()} />
         <Route path='/wishlist' element={<WishList />} />
         <Route path='/checkout' element={getCheckoutComponent()} />

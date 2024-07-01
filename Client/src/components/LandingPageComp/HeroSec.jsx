@@ -21,7 +21,7 @@ const HeroSec = () => {
     <div className="slide-container">
       <Fade duration="2000" arrows={false} pauseOnHover={false}>
         {images.map((img) => {
-          return <img className='w-[95%] h-[62vh] mx-auto' src={`${getImagesHerosec}/${img}`} />
+          return <img key={img._id} className='w-[95%] h-[62vh] mx-auto' src={`${getImagesHerosec}/${img}`} />
         })}
       </Fade>
     </div>
