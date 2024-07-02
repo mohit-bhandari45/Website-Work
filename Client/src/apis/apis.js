@@ -9,6 +9,7 @@ export const getFavicon=`${host}/api/assets/favicon`
 export const getStories=`${host}/api/videos/get-All`
 export const getVideoById=`${host}/api/videos/get-Video`
 
+/* Product APIs */
 /* All Products APIs */
 export const getAllProducts=`${host}/api/products/get-All`
 
@@ -26,3 +27,17 @@ export const getComingSoonProducts=`${host}/api/products/get-Soon`
 
 /* Image Fetch API */
 export const getImage=`${host}/api/products/get-Image`
+
+
+/* Cart APIs */
+/* Get All Cart elements */
+export const getCart=`${host}/api/cart/get-Cart`
+
+/* Add to Cart */
+export const addCart=`${host}/api/cart/add-Cart`
+
+/* Update Cart */
+export const updateCart=`${host}/api/cart/update-Cart`
+
+/* Update Cart */
+export const deleteCart=`${host}/api/cart/delete-Cart`

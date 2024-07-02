@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Navbar from '../../components/UserPageComps/UniversalComps/Navbar'
 import Footer from '../../components/UniversalComp/Footer'
 import RelatedItems from '../../components/UserPageComps/ProductDetailsComps/RelatedItems'
 import HeroSec from '../../components/UserPageComps/ProductDetailsComps/HeroSec'
+import { useParams } from "react-router-dom"
+
+/* Images */
+import Img1 from "../../assets/ak-900-01-500x500 1.png"
+import Img2 from "../../assets/g27cq4-500x500 1.png"
+import Img3 from "../../assets/sam-moghadam-khamseh-kvmdsTrGOBM-unsplash 1.png"
+import Img4 from "../../assets/sam-moghadam-khamseh-kvmdsTrGOBM-unsplash 1.png"
 
 const ProductDetails = () => {
+    const params = useParams();
+    const { id } = params
+
     const [items, setitems] = useState([
         {
-            img: "src/assets/ak-900-01-500x500 1.png",
+            img: Img1,
             discount: "-35%",
             title: "Khadi Handloom Saree",
             mainprice: "$960",
@@ -17,7 +27,7 @@ const ProductDetails = () => {
             amount: "(75)"
         },
         {
-            img: "src/assets/g27cq4-500x500 1.png",
+            img: Img2,
             discount: "-30%",
             title: "Brass Pncha Pradip",
             mainprice: "$370",
@@ -26,7 +36,7 @@ const ProductDetails = () => {
             amount: "(99)"
         },
         {
-            img: "src/assets/sam-moghadam-khamseh-kvmdsTrGOBM-unsplash 1.png",
+            img: Img3,
             discount: "-25%",
             title: "Odisha Style Painting on Plate",
             mainprice: "$375",
@@ -35,7 +45,7 @@ const ProductDetails = () => {
             amount: "(99)"
         },
         {
-            img: "src/assets/sam-moghadam-khamseh-kvmdsTrGOBM-unsplash 1.png",
+            img: Img4,
             discount: "-25%",
             title: "Dokra on Brass",
             mainprice: "$375",
@@ -47,7 +57,7 @@ const ProductDetails = () => {
     return (
         <>
             <Navbar />
-            <HeroSec/>
+            <HeroSec id={id}/>
             <div className='h-[100vh] py-16 w-full font-[Helvetica] flex flex-col justify-center items-center'>
                 <div className="head h-[10vh] w-[90%] flex justify-center items-center">
                     <div className="head2 h-[10vh] flex justify-start items-center gap-4 w-full">

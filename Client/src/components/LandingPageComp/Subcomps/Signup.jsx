@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
+/* Toast */
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

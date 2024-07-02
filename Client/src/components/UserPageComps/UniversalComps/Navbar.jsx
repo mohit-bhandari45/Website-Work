@@ -1,5 +1,6 @@
 import React from 'react'
 import { getLogo } from '../../../apis/apis'
+import profile from "../../../assets/User_alt_fill.png"
 
 const Navbar = () => {
     return (
@@ -12,7 +13,7 @@ const Navbar = () => {
                 </div>
                 <div className="wish"><img src="src/assets/Wishlist.png" alt="" /></div>
                 <div className="cart"><img src="src/assets/Cart1 with buy.png" alt="" /></div>
-                <div className="account bg-black p-1 rounded-full"><img className='invert h-6' src="src/assets/User_alt_fill.png" alt="" /></div>
+                <div className="account bg-black p-1 rounded-full"><img className='invert h-6' src={profile} alt="" /></div>
             </div>
         </div>
     )

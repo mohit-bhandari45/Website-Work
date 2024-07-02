@@ -1,5 +1,15 @@
 import React from 'react'
 
+/* Images */
+import FaceBook from "../../assets/Icon-Facebook.png"
+import Group from "../../assets/Group.png"
+import Instagram from "../../assets/icon-instagram.png"
+// import Group from "../../assets/Group.png"
+import LinkedIn from "../../assets/Icon-Linkedin.png"
+import PlayStore from "../../assets/png-transparent-google-play-store-logo-google-play-app-store-android-wallets-text-label-logo.png"
+import AppStore from "../../assets/download-appstore.png"
+import QRCode from "../../assets/Qrcode 1.png"
+
 const Footer = () => {
     return (
         <div className="footer h-[60vh] px-16 py-5 flex justify-center items-center gap-3 bg-black w-full font-[Helvetica] text-white">
@@ -50,18 +60,18 @@ const Footer = () => {
                     <div className="content flex flex-col gap-3">
                         <div className='text-sm'>Save 30% with App New User Only</div>
                         <div className="images flex gap-4">
-                            <div className="qr"><img className='w-24 h-24' src="src/assets/Qrcode 1.png" alt="" /></div>
+                            <div className="qr"><img className='w-24 h-24' src={QRCode} alt="" /></div>
                             <div className='flex flex-col justify-center items-center gap-4'>
-                                <img className='h-9 w-28' src="src/assets/png-transparent-google-play-store-logo-google-play-app-store-android-wallets-text-label-logo.png" alt="" />
-                                <img className='h-9 w-28' src="src/assets/download-appstore.png" alt="" />
+                                <img className='h-9 w-28' src={PlayStore} alt="" />
+                                <img className='h-9 w-28' src={AppStore} alt="" />
                             </div>
                         </div>
                     </div>
                     <div className="icons flex justify-center items-center gap-8">
-                        <div className="facebook"><img src="src/assets/Icon-Facebook.png" alt="" /></div>
+                        <div className="facebook"><img src={FaceBook} alt="" /></div>
                         <div className="twitter"><img src="src/assets/Group.png" alt="" /></div>
-                        <div className="instagram"><img src="src/assets/icon-instagram.png" alt="" /></div>
-                        <div className="linkedin"><img src="src/assets/Icon-Linkedin.png" alt="" /></div>
+                        <div className="instagram"><img src={Instagram} alt="" /></div>
+                        <div className="linkedin"><img src={LinkedIn} alt="" /></div>
                     </div>
                 </div>
             </div>

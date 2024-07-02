@@ -108,7 +108,8 @@ const App = () => {
         <Route path='/404' element={<Page404 />} />
 
         /* Dynamic Routes */
-        <Route path="gallery/:id" element={<Gallery />} />
+        <Route path='/productdetails/:id' element={<ProductDetails />} />
+        <Route path="/gallery/:id" element={<Gallery />} />
 
         /* Artist Routes */
         <Route path='/artistsignup' element={<ArtistSignup />} />
@@ -120,7 +121,7 @@ const App = () => {
         <Route path='/cart' element={getCartComponent()} />
         <Route path='/wishlist' element={<WishList />} />
         <Route path='/checkout' element={getCheckoutComponent()} />
-        <Route path='/productdetails' element={<ProductDetails />} />
+        
       </Routes>
     </BrowserRouter>
   )

@@ -11,7 +11,6 @@ const Frames = () => {
         let req = await fetch(getStories)
         let res = await req.json()
         setStoryDetails(res)
-        console.log(storyDetails)
     }
 
     useEffect(() => {
