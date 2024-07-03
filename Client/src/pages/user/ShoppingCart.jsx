@@ -14,9 +14,8 @@ const auth = getAuth(app)
 const firestore = getFirestore(app)
 
 const ShoppingCart = () => {
-    const [user, setUser] = useState()
+    const [user, setUser] = useState(undefined)
     const [cartItems, setCartItems] = useState([])
-    const [count, setCount] = useState(0)
 
     const getUser = async (user) => {
         if (!user.phoneNumber) {
@@ -67,8 +66,7 @@ const ShoppingCart = () => {
 
     useEffect(() => {
         getCartFn()
-        console.log(count)
-    }, [count])
+    }, [])
 
     return (
         <>
@@ -77,7 +75,7 @@ const ShoppingCart = () => {
                     <Navbar />
                     <div className='w-full flex flex-col justify-center items-center py-20 gap-10'>
                         {cartItems.map((cartItem)=>{
-                            return <Card key={cartItem.itemDetails._id} itemId={cartItem.itemDetails._id} count={count} setCount={setCount} image={cartItem.itemDetails.imageUrl} title={cartItem.itemDetails.title} price={cartItem.itemDetails.mainPrice} quantity={cartItem.count} />
+                            return <Card key={cartItem.itemDetails._id} itemId={cartItem.itemDetails._id} image={cartItem.itemDetails.imageUrl} title={cartItem.itemDetails.title} price={cartItem.itemDetails.mainPrice} quantity={cartItem.count} refreshData={getCartFn}/>
                         })}
                       </div>
                     <div className="cards w-full flex flex-col justify-center items-center font-[Helvetica] gap-10 pb-24 pt-10">

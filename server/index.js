@@ -7,6 +7,7 @@ const productRouter = require("./routes/product.js")
 const cartRouter = require("./routes/cart.js")
 const assetRouter=require("./routes/asset.js")
 const videoRouter=require("./routes/video.js")
+const wishlistRouter=require("./routes/wishlist.js")
 
 /* Dotenv */
 require("dotenv").config()
@@ -29,6 +30,7 @@ app.use("/api/products", productRouter)
 app.use("/api/cart", cartRouter)
 app.use("/api/assets",assetRouter)
 app.use("/api/videos",videoRouter)
+app.use("/api/wishlist",wishlistRouter)
 
 app.listen(PORT, () => {
     console.log(`Server Started on Port: ${PORT}`)

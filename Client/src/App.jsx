@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /* Pages */
 import LandingPage from './pages/LandingPage'
@@ -27,7 +29,7 @@ const auth = getAuth(app)
 const firestore = getFirestore(app)
 
 const App = () => {
-  const [userType, setUserType] = useState(null)
+  const [userType, setUserType] = useState(undefined)
   const { authBool } = useBooleanContext()
 
   const getUserType = async (user) => {
@@ -59,11 +61,18 @@ const App = () => {
             setUserType(details.userType)
           });
         }
+      } else {
+        setUserType(null)
       }
     })
   }, [authBool])
 
   const getProfileComponent = () => {
+    if (userType === undefined) {
+      return <div>
+        ...loading
+      </div>
+    }
     if (userType === null) {
       return <Page404 />
     }
@@ -75,6 +84,11 @@ const App = () => {
   }
 
   const getCartComponent = () => {
+    if (userType === undefined) {
+      return <div className='text-center flex justify-center items-center'>
+        ...loading
+      </div>
+    }
     if (userType === null) {
       return <Page404 />
     }
@@ -86,6 +100,11 @@ const App = () => {
   }
 
   const getCheckoutComponent = () => {
+    if (userType === undefined) {
+      return <div>
+        ...loading
+      </div>
+    }
     if (userType === null) {
       return <Page404 />
     }
@@ -96,8 +115,25 @@ const App = () => {
     }
   }
 
+  const getWishlistComponent = () => {
+    if (userType === undefined) {
+      return <div>
+        ...loading
+      </div>
+    }
+    if (userType === null) {
+      return <Page404 />
+    }
+    if (userType === 'user') {
+      return <WishList />;
+    } else if (userType === 'artist') {
+      return <Page404 />;
+    }
+  }
+
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
 
         /* General Routes-But here normal user can signup */
@@ -119,9 +155,9 @@ const App = () => {
 
         /* UserRoutes */
         <Route path='/cart' element={getCartComponent()} />
-        <Route path='/wishlist' element={<WishList />} />
+        <Route path='/wishlist' element={getWishlistComponent()} />
         <Route path='/checkout' element={getCheckoutComponent()} />
-        
+
       </Routes>
     </BrowserRouter>
   )

@@ -41,3 +41,8 @@ export const updateCart=`${host}/api/cart/update-Cart`
 
 /* Update Cart */
 export const deleteCart=`${host}/api/cart/delete-Cart`
+
+
+/* Wishlist APIs */
+export const getFavorites=`${host}/api/wishlist/get`
+export const addFavorites=`${host}/api/wishlist/post`

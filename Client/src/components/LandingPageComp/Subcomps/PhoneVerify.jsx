@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-phone-number-input/style.css'
@@ -180,7 +180,6 @@ const PhoneVerify = ({ setboolpopphone }) => {
                         </div>
                     </div>
                 </div>
-                <ToastContainer />
             </div>
         </>
     )

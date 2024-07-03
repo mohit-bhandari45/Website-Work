@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { getVideoById } from '../../../apis/apis'
+import { useNavigate } from 'react-router-dom'
 
 const Story = ({ mainVideo }) => {
+    const navigate=useNavigate()
 
     return (
-        <div className="img1 h-[94vh] w-[23vw] relative py-20 top-0 hover:scale-105 transition-all duration-100 ease-in-out cursor-pointer">
+        <div onClick={()=>navigate("/gallery/:id")} className="img1 h-[94vh] w-[23vw] relative py-20 top-0 hover:scale-105 transition-all duration-100 ease-in-out cursor-pointer">
             <video autoPlay muted loop className='absolute top-20 h-[75vh] w-full' width="600" src={`${getVideoById}/${mainVideo}`}></video>
             {/* <input onChange={handleChange} className='absolute z-20' type="file"/> */}
             <div className="flex justify-center items-end h-[75vh] bg-[#00000082] relative z-10">

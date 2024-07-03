@@ -60,7 +60,7 @@ const FlashSales = () => {
             </div>
             <div style={{ right: right + "vw" }} className={`w-[90%] gap-5 h-[90vh] justify-start items-center flex relative font-[Helvetica]`}>
                 {items.map((element) => {
-                    return <Card3 key={element._id} itemId={element._id} img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} />
+                    return <Card3 key={element._id} itemId={element._id} img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} wishlist={element.wishlist} refreshData={getProductBySalesFn}/>
                 })}
             </div>
         </div>

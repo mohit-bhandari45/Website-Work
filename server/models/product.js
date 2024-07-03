@@ -14,6 +14,10 @@ const productSchema = mongoose.Schema({
         required: true,
         unique: true
     },
+    wishlist: {
+        type: Boolean,
+        default: null
+    },
     title: {
         type: String,
         required: true

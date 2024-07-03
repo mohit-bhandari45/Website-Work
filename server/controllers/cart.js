@@ -13,7 +13,7 @@ async function getCart(req, res) {
         }
 
         let items = await Promise.all(cart.items.map(async (item) => {
-            const itemDetails = await Product.findOne({ _id: item.itemId });
+            const itemDetails = await Product.findById({ _id: item.itemId });
             return { count: item.count, itemDetails };
         }));
 

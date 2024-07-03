@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom"
 import Star from './Star'
 
 /* Toast */
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 /* APIs */
-import { getImage, addCart } from '../../../apis/apis'
+import { getImage, addCart, addFavorites } from '../../../apis/apis'
 
 /* Firebase */
 import { app } from "../../../firebase"
@@ -16,7 +16,7 @@ import { getFirestore, collection, where, query, getDocs } from "firebase/firest
 const auth = getAuth(app)
 const firestore = getFirestore(app)
 
-const Card3 = ({ itemId, img, discount, title, mainPrice, prevPrice, rating, reviews }) => {
+const Card3 = ({ itemId, img, discount, title, mainPrice, prevPrice, rating, reviews,wishlist,refreshData}) => {
     const [visible, setvisible] = useState(false)
     const [user, setUser] = useState()
     const navigate = useNavigate()
@@ -86,12 +86,29 @@ const Card3 = ({ itemId, img, discount, title, mainPrice, prevPrice, rating, rev
             if (res.status === 201 || res.status === 200) {
                 const status = await res.json()
                 toast.success(status.msg, toastOptions)
-            }else {
+            } else {
                 console.error('Failed to add item to cart');
             }
         } catch (error) {
-            console.log("Error while adding item to cart:",error)
+            console.log("Error while adding item to cart:", error)
         }
+    }
+
+    async function handleFavourites(e) {
+        e.stopPropagation();
+        const req = await fetch(addFavorites, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: user.email,
+                itemId: itemId
+            })
+        })
+        const res = await req.json()
+        toast.success(res.msg,toastOptions)
+        refreshData()
     }
 
     return (
@@ -101,7 +118,14 @@ const Card3 = ({ itemId, img, discount, title, mainPrice, prevPrice, rating, rev
                 <div className="icons w-full flex justify-between items-start h-full p-3">
                     <div className="off bg-[#ED8A73] px-4 py-1 rounded-md text-white">{discount}%</div>
                     <div className="mainicons flex flex-col gap-2 justify-center items-center">
-                        <div className="love p-2 bg-white rounded-full"><img src="src/assets/heart small.png" alt="" /></div>
+                        <div className="love p-2 bg-white rounded-full">
+                            {!wishlist || wishlist === null ? <svg onClick={handleFavourites} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                                <path d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg> : <svg onClick={handleFavourites} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="black">
+                                <path d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                            }
+                        </div>
                         <div className="love p-2 bg-white rounded-full"><img src="src/assets/Quick View.png" alt="" /></div>
                     </div>
                 </div>
@@ -120,7 +144,6 @@ const Card3 = ({ itemId, img, discount, title, mainPrice, prevPrice, rating, rev
                     <div className="title text-gray-600">({reviews} reviews)</div>
                 </div>
             </div>
-            <ToastContainer />
         </div>
     )
 }

@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Footer from '../../components/UniversalComp/Footer'
 import { useState } from 'react'
 import Card1 from '../../components/UserPageComps/WishListComps/Card1'
 import Navbar from '../../components/UserPageComps/UniversalComps/Navbar'
+
+/* Firebase */
+import { app } from '../../firebase'
+import { onAuthStateChanged, getAuth } from 'firebase/auth'
+import { getFirestore, collection, where, query, getDocs } from "firebase/firestore"
+import { getFavorites } from '../../apis/apis'
+const auth = getAuth(app)
+const firestore = getFirestore(app)
 
 const WishList = () => {
     const [items, setitems] = useState([
@@ -44,21 +52,82 @@ const WishList = () => {
         }
     ])
 
+    const [user, setUser] = useState(undefined)
+    const [favorites, setFavorites] = useState()
+
+    const getUser = async (user) => {
+        if (!user.phoneNumber) {
+            const usersRef1 = collection(firestore, "users");
+            const q1 = query(usersRef1, where("email", "==", user.email));
+            let querySnapshot = await getDocs(q1);
+            if (querySnapshot.empty) {
+                const usersRef2 = collection(firestore, "artists");
+                const q2 = query(usersRef2, where("email", "==", user.email));
+                querySnapshot = await getDocs(q2);
+            }
+            return querySnapshot;
+        } else {
+            const usersRef3 = collection(firestore, "users");
+            const q3 = query(usersRef3, where("number", "==", user.phoneNumber));
+            const querySnapshot = await getDocs(q3);
+            return querySnapshot;
+        }
+    }
+
+    async function getFavoriteFn() {
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const querySnapshot = await getUser(user);
+                if (!querySnapshot.empty) {
+                    querySnapshot.forEach((doc) => {
+                        let details = { ...doc.data() }
+                        setUser(details)
+                    });
+                }
+
+                /* API Fetching */
+                const res = await fetch(getFavorites, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email: user.email })
+                })
+                if (res.status === 200) {
+                    /* Status 200 means request is sucussfull */
+                    const items = await res.json()
+                    setFavorites(items)
+                }
+            }
+        })
+    }
+
+    useEffect(() => {
+        getFavoriteFn()
+        console.log(favorites)
+    }, [])
+
+    if (!favorites) {
+        return <div>
+            ...loading
+        </div>
+    }
+
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <div className="wishlist w-full h-[100vh] flex flex-col justify-center items-center">
                 <div className="head h-[10vh] w-[90%] flex justify-between items-center gap-4">
                     <div className="head1 h-full w-1/2 flex gap-4 justify-start items-center">
-                        <div className="title text-[#000000] font-medium text-xl font-[Helvetica]">WishList (4)</div>
+                        <div className="title text-[#000000] font-medium text-xl font-[Helvetica]">WishList ({favorites.length})</div>
                     </div>
                     <div className="head2 text-md font-semibold font-[Helvetica]">
                         <button className='bg-white px-12 py-2 rounded-md hover:bg-black border-2 border-gray-500 text-black hover:text-white transition-all duration-300 ease-in-out'>Move All To Bag</button>
                     </div>
                 </div>
                 <div className={`w-[90%] gap-5 h-[70vh] justify-between items-center flex relative font-[Helvetica]`}>
-                    {items.map((element) => {
-                        return <Card1 img1={element.img} img2="src/assets/icon-delete.png" discount={element.discount} title={element.title} mainprice={element.mainprice} prevprice={element.prevprice} />
+                    {favorites.map((element) => {
+                        return <Card1 key={element._id} imageId={element._id} imageUrl={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} refreshData={getFavoriteFn} />
                     })}
                 </div>
             </div>
@@ -73,8 +142,8 @@ const WishList = () => {
                     </div>
                 </div>
                 <div className={`w-[90%] gap-5 h-[90vh] justify-between items-center flex relative font-[Helvetica]`}>
-                    {items.map((element) => {
-                        return <Card1 img1={element.img} img2="src/assets/Quick View.png" discount={element.discount} title={element.title} mainprice={element.mainprice} prevprice={element.prevprice} stars={element.stars} amount={element.amount} />
+                    {favorites.map((element) => {
+                        return <Card1 key={element._id} imageId={element._id} imageUrl={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} refreshData={getFavoriteFn} />
                     })}
                 </div>
             </div>

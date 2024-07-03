@@ -15,7 +15,7 @@ import { getFirestore, collection, where, query, getDocs } from "firebase/firest
 const auth = getAuth(app)
 const firestore = getFirestore(app)
 
-const Card = ({ itemId, count, setCount, image, title, quantity, price }) => {
+const Card = ({ itemId, image, title, quantity, price,refreshData }) => {
     const [user, setUser] = useState()
 
     const getUser = async (user) => {
@@ -70,7 +70,7 @@ const Card = ({ itemId, count, setCount, image, title, quantity, price }) => {
         })
         if (res.status === 200) {
             /* Status 200 means request is succuccfull */
-            setCount(prevCount => (prevCount + 1) >= 100 ? 0 : prevCount + 1);
+            refreshData()
         }
     }
 
@@ -89,10 +89,7 @@ const Card = ({ itemId, count, setCount, image, title, quantity, price }) => {
         })
         if (res.status === 200) {
             /* Status 200 means request is succuccfull */
-            setCount(prevCount => {
-                const newCount = prevCount - 1;
-                return newCount < 0 ? 100 : newCount;
-            });
+            refreshData()
         }
     }
 
@@ -110,7 +107,7 @@ const Card = ({ itemId, count, setCount, image, title, quantity, price }) => {
         })
         if (res.status === 200) {
             /* Status 200 means request is succuccfull */
-            setCount(prevCount => (prevCount + 0.5) >= 100 ? 0 : prevCount + 0.5);
+            refreshData()
         }
     }
 
