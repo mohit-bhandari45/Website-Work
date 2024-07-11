@@ -52,13 +52,13 @@ const Frames5 = () => {
             </div>
             <div className={`w-[90%] gap-7 h-[150vh] justify-center items-center flex flex-col relative font-[Helvetica]`}>
                 <div className="one flex gap-7">
-                    {items1.map((element) => {
-                        return <Card4 key={element._id} itemId={element._id} img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} wishlist={element.wishlist} refreshData={getAllProductsFn}/>
+                    {items1.map((item) => {
+                        return <Card4 key={item._id} itemId={item._id} image={item.imageUrl} discount={item.discount} title={item.title} mainPrice={item.mainPrice} prevPrice={item.prevPrice} rating={item.rating} reviews={item.reviews} wishlist={item.wishlist} refreshData={getAllProductsFn}/>
                     })}
                 </div>
                 <div className="two flex gap-7">
-                    {items2.map((element) => {
-                        return <Card4 key={element._id} itemId={element._id} img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} wishlist={element.wishlist} refreshData={getAllProductsFn}/>
+                    {items2.map((item) => {
+                        return <Card4 key={item._id} itemId={item._id} image={item.imageUrl} discount={item.discount} title={item.title} mainPrice={item.mainPrice} prevPrice={item.prevPrice} rating={item.rating} reviews={item.reviews} wishlist={item.wishlist} refreshData={getAllProductsFn}/>
                     })}
                 </div>
                 <div className="button"><button className='bg-[#ED8A73] py-4 px-12 text-white rounded-md text-xl'>View All Products</button></div>

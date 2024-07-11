@@ -10,6 +10,9 @@ export const useBooleanContext = () => {
 
 // Create the provider component
 export const BooleanProvider = ({ children }) => {
+    const [user, setUser] = useState(undefined)
+    const [userType, setUserType] = useState(undefined)
+
     const [boolPopPhone, setBoolPopPhone] = useState(false);
     const [toastBool, setToastBool] = useState(false)
     const [phoneToastBool, setPhoneToastBool] = useState(false)
@@ -23,8 +26,18 @@ export const BooleanProvider = ({ children }) => {
     };
 
     return (
-        <BooleanContext.Provider value={{ boolPopPhone,authBool,setAuthBool, toastBool,boolPop,setBoolPop,profile,setProfile, setToastBool, phoneToastBool, setPhoneToastBool, setBoolPopPhone, toggleBoolPopPhone }}>
-        {/* <BooleanContext.Provider value={{ boolPopPhone, setBoolPopPhone, toggleBoolPopPhone }}> */}
+        <BooleanContext.Provider value={{
+            boolPopPhone,setBoolPopPhone,
+            authBool,setAuthBool,
+            boolPop,setBoolPop,
+            profile,setProfile,
+            toastBool,setToastBool,
+            phoneToastBool,setPhoneToastBool,
+            toggleBoolPopPhone,
+            user,setUser,
+            userType,setUserType
+        }}>
+            {/* <BooleanContext.Provider value={{ boolPopPhone, setBoolPopPhone, toggleBoolPopPhone }}> */}
             {children}
         </BooleanContext.Provider>
     );

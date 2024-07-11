@@ -1,5 +1,8 @@
 const express = require("express")
-const { videoController, videoById } = require("../controllers/video")
+const {
+    videoController,
+    videoById
+} = require("../controllers/video")
 
 const router = express.Router()
 

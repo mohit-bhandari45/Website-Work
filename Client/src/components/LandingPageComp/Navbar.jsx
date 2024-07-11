@@ -1,5 +1,5 @@
 /* React Imports */
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Credentials from './Credentials'
 import { getLogo } from '../../apis/apis'
@@ -7,36 +7,16 @@ import { getLogo } from '../../apis/apis'
 /* Context API */
 import { useBooleanContext } from '../../context/context'
 
-/* Firebase */
-import { onAuthStateChanged, getAuth } from 'firebase/auth'
-import { app } from '../../firebase'
-import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
-const auth = getAuth(app)
-const firestore = getFirestore(app)
-
 const Navbar = ({ bool, setbool }) => {
-  const { profile, setProfile } = useBooleanContext()
-  const [userType, setUserType] = useState()
+  const { profile, setProfile, userType } = useBooleanContext()
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setProfile(true)
-        const usersRef = collection(firestore, "users");
-        const q = query(usersRef, where("email", "==", user.email));
-        let querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
-          querySnapshot.forEach((doc) => {
-            let details = { ...doc.data() }
-            setUserType(details.userType)
-          });
-        }
-      } else {
-        setProfile(false)
-      }
-    })
+    if (userType === "user" || userType === "artist") {
+      setProfile(true)
+    } else {
+      setProfile(false)
+    }
   })
-
 
   return (
     <>

@@ -53,17 +53,20 @@ function LandingPage() {
 
   useEffect(() => {
     if (toastBool) {
-      toast('Signed Up Successfully', toastOptions);
-      setToastBool(false);
+      toast.success('Signed Up Successfully', toastOptions)
+      setTimeout(() => {
+        setBoolPopPhone(true)
+        setToastBool(false);
+      }, 2000)
     }
-  }, [toastBool, setToastBool]);
+  }, [toastBool]);
 
   useEffect(() => {
     if (phoneToastBool && !toastBool) {
-      toast('Phone Number added Successfully', toastOptions);
+      toast.success('Phone Number added Successfully', toastOptions)
       setPhoneToastBool(false);
     }
-  }, [phoneToastBool, toastBool]);
+  }, [phoneToastBool]);
 
   return (
     <div>
@@ -105,7 +108,6 @@ function LandingPage() {
       <FramesLast />
       <SubFooter />
       <Footer />
-      <ToastContainer />
     </div>
   )
 }

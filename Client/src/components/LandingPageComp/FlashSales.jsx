@@ -8,6 +8,7 @@ const FlashSales = () => {
     const [items, setItems] = useState([])
 
     async function getProductBySalesFn() {
+        /* API to fetch sales products */
         const req = await fetch(getSalesProducts)
         const result = await req.json()
         setItems(result)
@@ -59,8 +60,8 @@ const FlashSales = () => {
                 </div>
             </div>
             <div style={{ right: right + "vw" }} className={`w-[90%] gap-5 h-[90vh] justify-start items-center flex relative font-[Helvetica]`}>
-                {items.map((element) => {
-                    return <Card3 key={element._id} itemId={element._id} img={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} wishlist={element.wishlist} refreshData={getProductBySalesFn}/>
+                {items.map((item) => {
+                    return <Card3 key={item._id} itemId={item._id} image={item.imageUrl} discount={item.discount} title={item.title} mainPrice={item.mainPrice} prevPrice={item.prevPrice} rating={item.rating} reviews={item.reviews} wishlist={item.wishlist} refreshData={getProductBySalesFn}/>
                 })}
             </div>
         </div>

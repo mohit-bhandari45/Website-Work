@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Loader } from 'rsuite';
+import 'rsuite/dist/rsuite-no-reset.min.css'
 
 /* Pages */
 import LandingPage from './pages/LandingPage'
@@ -29,8 +31,7 @@ const auth = getAuth(app)
 const firestore = getFirestore(app)
 
 const App = () => {
-  const [userType, setUserType] = useState(undefined)
-  const { authBool } = useBooleanContext()
+  const { authBool, userType, setUserType, setUser } = useBooleanContext()
 
   const getUserType = async (user) => {
     if (!user.phoneNumber) {
@@ -59,6 +60,7 @@ const App = () => {
           querySnapshot.forEach((doc) => {
             let details = { ...doc.data() }
             setUserType(details.userType)
+            setUser(details)
           });
         }
       } else {
@@ -67,67 +69,83 @@ const App = () => {
     })
   }, [authBool])
 
+  const getLandingPage = () => {
+    if (userType === undefined) {
+      return <div>
+         <Loader center size='lg' speed='slow' />
+      </div>
+    }
+    if (userType === null) {
+      return <LandingPage />
+    }
+    if (userType === 'artist') {
+      return <LandingPage />
+    } else if (userType === 'user') {
+      return <LandingPage />
+    }
+  }
+
   const getProfileComponent = () => {
     if (userType === undefined) {
       return <div>
-        ...loading
+        <Loader center size='lg' speed='slow' />
       </div>
     }
     if (userType === null) {
       return <Page404 />
     }
     if (userType === 'artist') {
-      return <ArtistProfile />;
+      return <ArtistProfile />
     } else if (userType === 'user') {
-      return <UserProfile />;
+      return <UserProfile />
     }
   }
 
   const getCartComponent = () => {
     if (userType === undefined) {
       return <div className='text-center flex justify-center items-center'>
-        ...loading
+        <Loader center size='lg' speed='slow' />
       </div>
     }
     if (userType === null) {
       return <Page404 />
     }
     if (userType === 'user') {
-      return <ShoppingCart />;
+      return <ShoppingCart />
     } else if (userType === 'artist') {
-      return <Page404 />;
+      return <Page404 />
     }
   }
 
   const getCheckoutComponent = () => {
     if (userType === undefined) {
       return <div>
-        ...loading
+        <Loader center size='lg' speed='slow' />
       </div>
     }
     if (userType === null) {
       return <Page404 />
     }
     if (userType === 'user') {
-      return <Checkout />;
+      return <Checkout />
     } else if (userType === 'artist') {
-      return <Page404 />;
+      return <Page404 />
     }
   }
 
   const getWishlistComponent = () => {
     if (userType === undefined) {
       return <div>
-        ...loading
+        <Loader center size='lg' speed='slow' />
       </div>
     }
     if (userType === null) {
       return <Page404 />
     }
     if (userType === 'user') {
-      return <WishList />;
+      return <WishList />
     } else if (userType === 'artist') {
-      return <Page404 />;
+      return <Page404 />
     }
   }
 
@@ -137,7 +155,7 @@ const App = () => {
       <Routes>
 
         /* General Routes-But here normal user can signup */
-        <Route path='/' element={<LandingPage />} />
+        <Route path='/' element={getLandingPage()} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contacts />} />
         <Route path='/showmore' element={<ShowMore />} />

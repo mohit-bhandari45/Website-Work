@@ -58,7 +58,7 @@ const PhoneVerify = ({ setboolpopphone }) => {
         autoClose: 5000,
         pauseOnHover: true,
         draggable: true,
-        theme: "light",
+        theme: "dark",
     }
 
     const sendOtp = async () => {
@@ -68,7 +68,7 @@ const PhoneVerify = ({ setboolpopphone }) => {
             if (check) {
                 const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
                 const confirmation = await signInWithPhoneNumber(auth, number, recaptcha);
-                toast("OTP sent successfully", toastOptions);
+                toast.success("OTP sent successfully", toastOptions);
                 setBool1(false)
                 setUser(confirmation)
             } else {

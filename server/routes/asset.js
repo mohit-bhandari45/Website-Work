@@ -1,5 +1,10 @@
 const express = require("express")
-const { assetController,getLogo,heroAssetById, getFavIcon } = require("../controllers/asset")
+const {
+    assetController,
+    getLogo,
+    heroAssetById,
+    getFavIcon
+} = require("../controllers/asset")
 
 const router = express.Router()
 

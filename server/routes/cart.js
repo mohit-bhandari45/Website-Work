@@ -1,5 +1,10 @@
 const express = require("express")
-const { getCart, addCart,updateCart,deleteCart } = require("../controllers/cart")
+const {
+    getCart,
+    addCart,
+    updateCart,
+    deleteCart
+} = require("../controllers/cart")
 
 const router = express.Router()
 

@@ -1,11 +1,9 @@
 /* React App */
 import React, { useEffect, useState } from 'react'
-import { GoogleLogin } from '@react-oauth/google';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 /* Toast */
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 /* Context API */
@@ -20,23 +18,12 @@ const googleProvider = new GoogleAuthProvider()
 const firestore = getFirestore(app)
 
 const Signup = ({ setsignbool, setbool }) => {
-    const navigate = useNavigate()
     const [bool1, setbool1] = useState(false)
     const [bool2, setbool2] = useState(false)
     const [bool3, setbool3] = useState(false)
     const [counter, setcounter] = useState(0)
     const [height, setHeight] = useState(85)
-    const { setBoolPopPhone, setToastBool, boolPop, setBoolPop,authBool,setAuthBool } = useBooleanContext()
-
-    const toastOptions = {
-        position: "bottom-right",
-        autoClose: 5000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-        closeOnClick: true,
-    }
-
+    const { setToastBool, setBoolPop, authBool, setAuthBool } = useBooleanContext()
 
     const googleProviderFn = () => {
         signInWithPopup(auth, googleProvider).then(async (user) => {
@@ -50,15 +37,12 @@ const Signup = ({ setsignbool, setbool }) => {
                     const result = await addDoc(collection(firestore, "users"), {
                         name: user.user.displayName,
                         email: user.user.email,
-                        userType:"user"
+                        userType: "user"
                     })
                     setAuthBool(!authBool)
-                    setToastBool(true)
                     setbool(false)
                     setBoolPop(false)
-                    setTimeout(() => {
-                        setBoolPopPhone(true)
-                    }, 2000);
+                    setToastBool(true)
                 }
             }
         })
@@ -153,15 +137,12 @@ const Signup = ({ setsignbool, setbool }) => {
                 name: inputdetails.name,
                 email: inputdetails.email,
                 password: inputdetails.password,
-                userType:"user"
+                userType: "user"
             })
             setAuthBool(!authBool)
-            setToastBool(true)
             setbool(false)
             setBoolPop(false)
-            setTimeout(() => {
-                setBoolPopPhone(true)
-            }, 2000);
+            setToastBool(true)
         }).catch((err) => {
             toast.error("User already exist", toast)
             console.log(err)
@@ -178,7 +159,9 @@ const Signup = ({ setsignbool, setbool }) => {
                     <div className="head flex justify-between items-center w-[100%]">
                         <div className="login text-3xl font-semibold text-gray-500">Sign Up</div>
                         <div className="cross cursor-pointer">
-                            <svg onClick={() => { setbool(false) }} xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="24" height="24" viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img" class="sc-rbbb40-0 fJjczH"><title>cross</title><path d="M11.42 10.42l3.54-3.54c0.38-0.4 0.38-1.040 0-1.42s-1.020-0.4-1.42 0l-3.54 3.54-3.54-3.54c-0.4-0.4-1.020-0.4-1.42 0s-0.38 1.020 0 1.42l3.54 3.54-3.54 3.54c-0.38 0.38-0.38 1.020 0 1.42 0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28l3.54-3.56 3.54 3.56c0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28c0.38-0.4 0.38-1.040 0-1.42l-3.54-3.54z"></path></svg>
+                            <svg onClick={() => {
+                                setbool(false)
+                            }} xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="24" height="24" viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img" class="sc-rbbb40-0 fJjczH"><title>cross</title><path d="M11.42 10.42l3.54-3.54c0.38-0.4 0.38-1.040 0-1.42s-1.020-0.4-1.42 0l-3.54 3.54-3.54-3.54c-0.4-0.4-1.020-0.4-1.42 0s-0.38 1.020 0 1.42l3.54 3.54-3.54 3.54c-0.38 0.38-0.38 1.020 0 1.42 0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28l3.54-3.56 3.54 3.56c0.2 0.18 0.46 0.28 0.72 0.28s0.5-0.1 0.7-0.28c0.38-0.4 0.38-1.040 0-1.42l-3.54-3.54z"></path></svg>
                         </div>
                     </div>
                     <div className="section flex flex-col gap-4">

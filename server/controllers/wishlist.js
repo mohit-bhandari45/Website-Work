@@ -34,21 +34,18 @@ async function addUpdateFavorites(req, res) {
                 items: [{ itemId }]
             })
             const product = await Product.findByIdAndUpdate(itemId, { wishlist: true })
-            console.log(product)
-            res.status(201).json({ msg: "Item added to favourites", wishlist: product.wishlist });
+            return res.status(201).json({ msg: "Item added to favourites", wishlist: product.wishlist });
         }
 
         const item = wishlist.items.find(item => item.itemId === itemId);
         if (item) {
             wishlist.items = wishlist.items.filter((e) => e.itemId !== itemId)
             const product = await Product.findByIdAndUpdate(itemId, { wishlist: false })
-            console.log(product)
             wishlist.save();
             return res.status(200).json({ msg: "Item deleted from favourites", wishlist: product.wishlist })
         } else {
             wishlist.items = [...wishlist.items, { itemId }]
             const product = await Product.findByIdAndUpdate(itemId, { wishlist: true })
-            console.log(product)
             wishlist.save();
             return res.status(200).json({ msg: "Item added to favourites", wishlist: product.wishlist })
         }
@@ -58,7 +55,23 @@ async function addUpdateFavorites(req, res) {
     }
 }
 
+async function deleteFavourites(req, res) {
+    try {
+        const { email, itemId } = req.body;
+        const wishlist = await Wishlist.findOne({ email });
+        if (wishlist) {
+            wishlist.items = wishlist.items.filter(item => item.itemId !== itemId)
+            await Product.findByIdAndUpdate(itemId, { wishlist: false })
+            wishlist.save();
+            res.status(200).json({ msg: "Item Deleted Successfully" })
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getFavorites,
-    addUpdateFavorites
+    addUpdateFavorites,
+    deleteFavourites
 }
