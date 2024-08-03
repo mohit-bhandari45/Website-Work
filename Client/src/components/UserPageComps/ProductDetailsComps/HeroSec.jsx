@@ -3,6 +3,7 @@ import { getImage, getProductById, addFavorites } from '../../../apis/apis';
 import Star from '../../LandingPageComp/Subcomps/Star';
 import { Loader } from 'rsuite';
 import 'rsuite/dist/rsuite-no-reset.min.css'
+import { useNavigate } from 'react-router-dom';
 
 /* Images */
 import Vector from "../../../assets/Vector (5).png"
@@ -12,17 +13,25 @@ import Delivery from "../../../assets/icon-delivery.png"
 import Heart from "../../../assets/Vector (8).png"
 import Return from "../../../assets/Icon-return.png"
 import { useBooleanContext } from '../../../context/context';
+
+/* Toasts */
+import toastOptions from '../../../utils/toastOptions';
 import { toast } from 'react-toastify';
 
 const HeroSec = ({ id }) => {
     const [bool, setbool] = useState(true)
     const [item, setItem] = useState()
     const [count, setCount] = useState(0)
-    const { user } = useBooleanContext();
+    const { token } = useBooleanContext();
     const [height, setHeight] = useState(75)
+    const navigate = useNavigate()
 
     async function getProductByIdFn() {
         const req = await fetch(`${getProductById}/${id}`);
+        if (req.status == 404) {
+            navigate("/404")
+            return;
+        }
         const result = await req.json();
         setItem(result)
     }
@@ -32,25 +41,16 @@ const HeroSec = ({ id }) => {
         window.scrollTo(0, 0);
     }, [id])
 
-    const toastOptions = {
-        position: "bottom-right",
-        autoClose: 3000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-        closeOnClick: true,
-    }
-
     async function handleFavourites(e) {
         e.stopPropagation();
-        if (user) {
+        if (token) {
             const req = await fetch(addFavorites, {
                 method: "POST",
                 headers: {
+                    "Authorization": "Bearer " + token,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    email: user.email,
                     itemId: id
                 })
             })

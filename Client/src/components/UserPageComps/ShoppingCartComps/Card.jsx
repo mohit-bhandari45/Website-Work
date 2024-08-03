@@ -8,62 +8,21 @@ import Vector2 from "../../../assets/Vector (1).png"
 /* API */
 import { getImage, updateCart, deleteCart } from '../../../apis/apis'
 
-/* Firebase */
-import { app } from "../../../firebase"
-import { onAuthStateChanged, getAuth } from 'firebase/auth'
-import { getFirestore, collection, where, query, getDocs } from "firebase/firestore"
-const auth = getAuth(app)
-const firestore = getFirestore(app)
+/* Context API */
+import { useBooleanContext } from '../../../context/context'
 
-const Card = ({ itemId, image, title, quantity, price,refreshData }) => {
-    const [user, setUser] = useState()
-
-    const getUser = async (user) => {
-        if (!user.phoneNumber) {
-            const usersRef1 = collection(firestore, "users");
-            const q1 = query(usersRef1, where("email", "==", user.email));
-            let querySnapshot = await getDocs(q1);
-            if (querySnapshot.empty) {
-                const usersRef2 = collection(firestore, "artists");
-                const q2 = query(usersRef2, where("email", "==", user.email));
-                querySnapshot = await getDocs(q2);
-            }
-            return querySnapshot;
-        } else {
-            const usersRef3 = collection(firestore, "users");
-            const q3 = query(usersRef3, where("number", "==", user.phoneNumber));
-            const querySnapshot = await getDocs(q3);
-            return querySnapshot;
-        }
-    }
-
-    async function getUserFn() {
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const querySnapshot = await getUser(user);
-                if (!querySnapshot.empty) {
-                    querySnapshot.forEach((doc) => {
-                        let details = { ...doc.data() }
-                        setUser(details)
-                    });
-                }
-            }
-        })
-    }
-
-    useEffect(() => {
-        getUserFn()
-    }, [])
+const Card = ({ itemId, image, title, quantity, price, refreshData }) => {
+    const { token } = useBooleanContext()
 
     async function handleUp() {
         /* API Fetching */
         const res = await fetch(updateCart, {
             method: "POST",
             headers: {
+                "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                email: user.email,
                 itemId: itemId,
                 count: 1
             })
@@ -79,10 +38,10 @@ const Card = ({ itemId, image, title, quantity, price,refreshData }) => {
         const res = await fetch(updateCart, {
             method: "POST",
             headers: {
+                "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                email: user.email,
                 itemId: itemId,
                 count: -1
             })
@@ -98,10 +57,10 @@ const Card = ({ itemId, image, title, quantity, price,refreshData }) => {
         const res = await fetch(deleteCart, {
             method: "POST",
             headers: {
+                "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                email: user.email,
                 itemId: itemId,
             })
         })

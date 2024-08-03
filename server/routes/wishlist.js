@@ -4,10 +4,14 @@ const {
     addUpdateFavorites,
     deleteFavourites
 } = require("../controllers/wishlist")
+const { auth } = require("../middlewares/middleware")
 
 const router = express.Router()
 
-router.post("/get", getFavorites)
+/* Authentication Middleware */
+router.use(auth())
+
+router.get("/get", getFavorites)
 router.post("/post", addUpdateFavorites)
 router.post("/delete", deleteFavourites)
 

@@ -4,8 +4,8 @@ const Product = require("../models/product")
 /* Get All Wishlist Items */
 async function getFavorites(req, res) {
     try {
-        const email = req.body.email;
-        const wishlist = await Wishlist.findOne({ email });
+        const user_Id = req.user.uid
+        const wishlist = await Wishlist.findOne({ user_Id });
         if (!wishlist) {
             // There's no wishlist for this user created yet
             // Create an empty wishlist in that case
@@ -26,28 +26,26 @@ async function getFavorites(req, res) {
 /* Add and updating to favourites */
 async function addUpdateFavorites(req, res) {
     try {
-        const { email, itemId } = req.body;
-        const wishlist = await Wishlist.findOne({ email });
+        const user_Id = req.user.uid
+        const { itemId } = req.body;
+        const wishlist = await Wishlist.findOne({ user_Id });
         if (!wishlist) {
-            const wishlistItem = await Wishlist.create({
-                email: email,
+            const newWishlist = await Wishlist.create({
+                user_Id: user_Id,
                 items: [{ itemId }]
             })
-            const product = await Product.findByIdAndUpdate(itemId, { wishlist: true })
-            return res.status(201).json({ msg: "Item added to favourites", wishlist: product.wishlist });
+            return res.status(201).json({ msg: "Item added to favourites", wishlist: newWishlist });
         }
 
         const item = wishlist.items.find(item => item.itemId === itemId);
         if (item) {
             wishlist.items = wishlist.items.filter((e) => e.itemId !== itemId)
-            const product = await Product.findByIdAndUpdate(itemId, { wishlist: false })
             wishlist.save();
-            return res.status(200).json({ msg: "Item deleted from favourites", wishlist: product.wishlist })
+            return res.status(200).json({ msg: "Item deleted from favourites" })
         } else {
             wishlist.items = [...wishlist.items, { itemId }]
-            const product = await Product.findByIdAndUpdate(itemId, { wishlist: true })
             wishlist.save();
-            return res.status(200).json({ msg: "Item added to favourites", wishlist: product.wishlist })
+            return res.status(200).json({ msg: "Item added to favourites" })
         }
     } catch (error) {
         console.error(error);
@@ -57,11 +55,11 @@ async function addUpdateFavorites(req, res) {
 
 async function deleteFavourites(req, res) {
     try {
-        const { email, itemId } = req.body;
-        const wishlist = await Wishlist.findOne({ email });
+        const user_Id = req.user.uid
+        const { itemId } = req.body;
+        const wishlist = await Wishlist.findOne({ user_Id });
         if (wishlist) {
             wishlist.items = wishlist.items.filter(item => item.itemId !== itemId)
-            await Product.findByIdAndUpdate(itemId, { wishlist: false })
             wishlist.save();
             res.status(200).json({ msg: "Item Deleted Successfully" })
         }

@@ -12,7 +12,6 @@ import SubFooter from '../components/LandingPageComp/SubFooter'
 import Footer from '../components/UniversalComp/Footer'
 import Mid2 from '../components/GalleryComps/Mid2'
 import Card from '../components/GalleryComps/Card'
-import Frames5 from '../components/LandingPageComp/Frames5'
 import { useParams } from 'react-router-dom'
 
 /* Images */
@@ -26,6 +25,7 @@ import State7 from "../assets/Ellipse 54 (10).png"
 import State8 from "../assets/Ellipse 54 (11).png"
 import image from "../assets/Rectangle 4163.png"
 import { getProductById } from '../apis/apis'
+import Explore from '../components/LandingPageComp/Explore'
 
 const Gallery = () => {
   const params = useParams();
@@ -134,7 +134,7 @@ const Gallery = () => {
           </div>
         </div>
       </div>
-      <Frames5 />
+      <Explore/>
       <SubFooter />
       <Footer />
     </>

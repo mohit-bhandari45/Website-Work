@@ -4,18 +4,25 @@ const Product = require("../models/product")
 /* Get All Cart Items */
 async function getCart(req, res) {
     try {
-        const email = req.body.email;
-        const cart = await Cart.findOne({ email });
+        const user_Id = req.user.uid;
+        const cart = await Cart.findOne({ user_Id });
         if (!cart) {
             // There's no cart for this user created yet
             // Create an empty cart in that case
             return res.status(200).json({ msg: 'Created New Cart', items: [] });
         }
 
-        let items = await Promise.all(cart.items.map(async (item) => {
-            const itemDetails = await Product.findById({ _id: item.itemId });
+        // let items = await Promise.all(cart.items.map(async (item) => {
+        //     const itemDetails = await Product.findById({ _id: item.itemId });
+        //     return { count: item.count, itemDetails };
+        // }))
+
+        const itemIds = cart.items.map(item => item.itemId);
+        const products = await Product.find({ _id: { $in: itemIds } });
+        const items = cart.items.map(item => {
+            const itemDetails = products.find(product => product._id.toString() === item.itemId.toString());
             return { count: item.count, itemDetails };
-        }));
+        })
 
         return res.status(200).json(items);
     } catch (error) {
@@ -27,12 +34,13 @@ async function getCart(req, res) {
 /* Add Items to Cart */
 async function addCart(req, res) {
     try {
-        const { email, itemId, count } = req.body
-        const cart = await Cart.findOne({ email })
+        const user_Id = req.user.uid
+        const { itemId, count } = req.body
+        const cart = await Cart.findOne({ user_Id })
         if (!cart) {
             // There's no cart for this user created yet
             const newCart = await Cart.create({
-                email: email,
+                user_Id: user_Id,
                 items: [{ itemId, count }]
             })
             console.log(newCart)
@@ -56,7 +64,7 @@ async function addCart(req, res) {
             cart.items = [...cart.items, { itemId, count }]
         }
         await cart.save()
-        return res.status(200).send({ msg: "Item added to Cart", cart })
+        return res.status(200).json({ msg: "Item added to Cart", cart })
     } catch (error) {
         console.log(error)
     }
@@ -65,8 +73,9 @@ async function addCart(req, res) {
 /* Update Items in Cart */
 async function updateCart(req, res) {
     try {
-        const { email, itemId, count } = req.body
-        const cart = await Cart.findOne({ email })
+        const user_Id = req.user.uid
+        const { itemId, count } = req.body
+        const cart = await Cart.findOne({ user_Id })
 
         /* Find the item in the Cart */
         const item = cart.items.find(item => item.itemId === itemId)
@@ -93,8 +102,9 @@ async function updateCart(req, res) {
 /* Delete Items in Cart */
 async function deleteCart(req, res) {
     try {
-        const { email, itemId } = req.body
-        const cart = await Cart.findOne({ email })
+        const user_Id = req.user.uid
+        const { itemId } = req.body
+        const cart = await Cart.findOne({ user_Id })
 
         /* Find the item in the Cart */
         const item = cart.items.find(item => item.itemId === itemId)

@@ -10,17 +10,17 @@ import { getCart } from "../../apis/apis"
 import { useBooleanContext } from '../../context/context'
 
 const ShoppingCart = () => {
-    const { user } = useBooleanContext()
+    const { token } = useBooleanContext()
     const [cartItems, setCartItems] = useState([])
 
     async function getCartFn() {
         /* API Fetching */
         const res = await fetch(getCart, {
-            method: "POST",
+            method: "GET",
             headers: {
+                "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ email: user.email })
         })
         if (res.status === 200) {
             /* Status 200 means request is sucussfull */

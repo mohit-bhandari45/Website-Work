@@ -18,7 +18,7 @@ const cartItemSchema = mongoose.Schema({
 })
 
 const cartSchema = mongoose.Schema({
-    email: {
+    user_Id: {
         type: String,
         required: true
     },

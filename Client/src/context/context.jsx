@@ -19,6 +19,7 @@ export const BooleanProvider = ({ children }) => {
     const [boolPop, setBoolPop] = useState(false)
     const [profile, setProfile] = useState(false)
     const [authBool, setAuthBool] = useState(false)
+    const [token, setToken] = useState("")
 
     // Toggle function
     const toggleBoolPopPhone = () => {
@@ -35,7 +36,8 @@ export const BooleanProvider = ({ children }) => {
             phoneToastBool,setPhoneToastBool,
             toggleBoolPopPhone,
             user,setUser,
-            userType,setUserType
+            userType,setUserType,
+            token,setToken
         }}>
             {/* <BooleanContext.Provider value={{ boolPopPhone, setBoolPopPhone, toggleBoolPopPhone }}> */}
             {children}

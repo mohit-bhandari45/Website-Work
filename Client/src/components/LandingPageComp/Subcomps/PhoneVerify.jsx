@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import 'react-toastify/dist/ReactToastify.css';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import 'animate.css';
 import { CgSpinner } from "react-icons/cg"
+
+/* Toasts */
+import toastOptions from '../../../utils/toastOptions';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /* Context API */
 import { useBooleanContext } from '../../../context/context';
 
 /* Firebase */
 import { app } from '../../../firebase';
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, reauthenticateWithCredential, reauthenticateWithPopup, RecaptchaVerifier, signInWithPhoneNumber, signInWithPopup, EmailAuthProvider, getIdToken, signOut } from "firebase/auth"
-import { getFirestore, collection, where, query, getDocs, updateDoc, } from "firebase/firestore"
+import { getAuth, onAuthStateChanged, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth"
+import { getFirestore } from "firebase/firestore"
+import { handleNumberCheck, handleVerifyOtp } from '../../../utils/auth';
 const auth = getAuth(app)
 const firestore = getFirestore(app)
 
 const PhoneVerify = ({ setboolpopphone }) => {
 
-    /* userdetails */
+    /* Prev user email */
     const [email, setEmail] = useState("")
-    const [prevUser, setPrevUser] = useState()
 
     /* Rest States */
     const [number, setNumber] = useState()
@@ -29,16 +32,16 @@ const PhoneVerify = ({ setboolpopphone }) => {
     const [height, setHeight] = useState("60")
     const [user, setUser] = useState(null)
     const [otp, setOtp] = useState("")
-    const navigate = useNavigate()
     const { setBoolPopPhone, setPhoneToastBool, authBool, setAuthBool } = useBooleanContext()
-    const [bool1, setBool1] = useState(false)
-    const [bool2, setBool2] = useState(false)
+    const [spinners, setSpinners] = useState({
+        sendOtpSpinner: false,
+        verifyOtpSpinner: false
+    })
 
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
             try {
                 if (user) {
-                    setPrevUser(user)
                     setEmail(user.email)
                 } else {
                     console.log("User is signed out.");
@@ -53,29 +56,34 @@ const PhoneVerify = ({ setboolpopphone }) => {
         setNumber(number)
     }
 
-    const toastOptions = {
-        position: "top-right",
-        autoClose: 5000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-    }
-
     const sendOtp = async () => {
         try {
-            setBool1(true)
-            const check = await numberCheck()
+            setSpinners({ ...spinners, sendOtpSpinner: true })
+            const check = await handleNumberCheck(number)
+            if (check === false) {
+                setNumber("")
+            }
             if (check) {
-                const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
+                console.log("otp sending")
+                const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
+                    'callback': (response) => {
+                        // reCAPTCHA solved, allow signInWithPhoneNumber.
+                        console.log('reCAPTCHA solved');
+                    },
+                    'expired-callback': () => {
+                        // Response expired. Ask user to solve reCAPTCHA again.
+                        console.log('reCAPTCHA expired');
+                    }
+                });
                 const confirmation = await signInWithPhoneNumber(auth, number, recaptcha);
                 toast.success("OTP sent successfully", toastOptions);
-                setBool1(false)
+                setSpinners({ ...spinners, sendOtpSpinner: false })
                 setUser(confirmation)
             } else {
-                setBool1(false)
+                setSpinners({ ...spinners, sendOtpSpinner: false })
             }
         } catch (err) {
-            setBool1(false)
+            setSpinners({ ...spinners, sendOtpSpinner: false })
             console.log("Error sending OTP:", err);
             if (err.code === 'auth/too-many-requests') {
                 console.warn('Too many requests. Retrying after delay...');
@@ -87,48 +95,19 @@ const PhoneVerify = ({ setboolpopphone }) => {
         }
     }
 
-    const numberCheck = async () => {
-        try {
-            const q = query(collection(firestore, "users"));
-            const querySnapshot = await getDocs(q);
-            if (!querySnapshot.empty) {
-                const userData = querySnapshot.docs.find(doc => doc.data().number === number);
-                if (userData) {
-                    toast.error("This number is already registered", toastOptions);
-                    setNumber("")
-                    return false
-                } else {
-                    return true
-                }
-            }
-        } catch (error) {
-            console.error("Error updating document: ", error);
-        }
-    }
-
     const verifyOtp = async () => {
         try {
-            setBool2(true)
+            setSpinners({ ...spinners, verifyOtpSpinner: true })
             user.confirm(otp).then(async (result) => {
-                setBool2(false)
-                const q = query(collection(firestore, "users"), where("email", "==", email));
-                const querySnapshot = await getDocs(q);
-                if (!querySnapshot.empty) {
-                    const userDocRef = querySnapshot.docs[0].ref;
-                    await updateDoc(userDocRef, {
-                        number
-                    }).then(async (res) => {
-                        console.log("User document updated successfully.");
-                        setPhoneToastBool(true)
-                        setBoolPopPhone(false)
-                    })
+                setSpinners({ ...spinners, verifyOtpSpinner: false })
+                if (handleVerifyOtp(email, number)) {
+                    setPhoneToastBool(true)
+                    setBoolPopPhone(false)
                     setAuthBool(!authBool)
-                } else {
-                    console.log("No matching documents found.");
                 }
             })
         } catch (error) {
-            setBool2(false)
+            setSpinners({ ...spinners, verifyOtpSpinner: false })
             toast.error("Invalid OTP", toastOptions);
             console.log(error)
         }
@@ -161,21 +140,21 @@ const PhoneVerify = ({ setboolpopphone }) => {
                             <button
                                 onClick={sendOtp}
                                 className="text text-center w-full bg-[#18122B] flex justify-center items-center gap-3 text-white rounded-md py-3 text-[19px] font-[Helvetica]">
-                                {bool1 && <CgSpinner val={20} className='animate-spin' />}
+                                {spinners.sendOtpSpinner && <CgSpinner val={20} className='animate-spin' />}
                                 Send One Time Password
                             </button>
                         </div>
                         <div id="recaptcha"></div>
                     </div>
                     <div className="verify flex justify-center items-center gap-5 w-full">
-                        <div className={`${bool2 ? "w-[50%]" : "w-[55%]"} enter`}>
+                        <div className={`${spinners.verifyOtpSpinner ? "w-[50%]" : "w-[55%]"} enter`}>
                             <input onChange={(e) => { setOtp(e.target.value) }} value={otp} type="text" className='px-2 py-2 font-[Helvetica] border-2 w-full border-black rounded-md text-xl' placeholder='Enter OTP' /></div>
-                        <div className={`${bool2 ? "w-[50%]" : "w-[45%]"} button`}>
+                        <div className={`${spinners.verifyOtpSpinner ? "w-[50%]" : "w-[45%]"} button`}>
                             <button
                                 onClick={verifyOtp}
                                 className='bg-black text-white w-full px-8 flex justify-center items-center gap-2 py-3 rounded-md font-bold font-[Helvetica]'>
-                                {bool2 && <CgSpinner val={20} className='animate-spin' />}
-                                {bool2 ? "Verifying" : "Verify"} Otp
+                                {spinners.verifyOtpSpinner && <CgSpinner val={20} className='animate-spin' />}
+                                {spinners.verifyOtpSpinner ? "Verifying" : "Verify"} Otp
                             </button>
                         </div>
                     </div>

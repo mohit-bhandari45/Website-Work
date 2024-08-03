@@ -9,118 +9,94 @@ import 'react-toastify/dist/ReactToastify.css';
 /* Context API */
 import { useBooleanContext } from '../../../context/context';
 
-/* Firebase */
-import { app } from '../../../firebase';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import { getFirestore, collection, addDoc, where, query, getDocs } from "firebase/firestore"
-const auth = getAuth(app)
-const googleProvider = new GoogleAuthProvider()
-const firestore = getFirestore(app)
+/* Auth Functions */
+import { handleGoogleAuth, handleSignUp } from '../../../utils/auth';
+import toastOptions from '../../../utils/toastOptions';
 
 const Signup = ({ setsignbool, setbool }) => {
-    const [bool1, setbool1] = useState(false)
-    const [bool2, setbool2] = useState(false)
-    const [bool3, setbool3] = useState(false)
     const [counter, setcounter] = useState(0)
     const [height, setHeight] = useState(85)
     const { setToastBool, setBoolPop, authBool, setAuthBool } = useBooleanContext()
 
-    const googleProviderFn = () => {
-        signInWithPopup(auth, googleProvider).then(async (user) => {
-            if (user) {
-                const usersRef = collection(firestore, "users");
-                const q = query(usersRef, where("email", "==", user.user.email));
-                const querySnapshot = await getDocs(q);
-                if (!querySnapshot.empty) {
-                    toast.error("User already exist", toast)
-                } else {
-                    const result = await addDoc(collection(firestore, "users"), {
-                        name: user.user.displayName,
-                        email: user.user.email,
-                        userType: "user"
-                    })
-                    setAuthBool(!authBool)
-                    setbool(false)
-                    setBoolPop(false)
-                    setToastBool(true)
-                }
-            }
-        })
-    }
-
     /* User Signup using input fields */
-    const [inputdetails, setinputdetails] = useState({
+    const [inputDetails, setInputDetails] = useState({
         name: "",
         email: "",
         password: ""
     })
+    const [errors, setErrors] = useState({
+        name: false,
+        email: false,
+        password: false
+    })
 
-    const [checked, setchecked] = useState(true)
-    const [checkbox, setcheckbox] = useState(false)
+    const [checked, setChecked] = useState(true)
+    const [checkbox, setCheckbox] = useState(false)
     useEffect(() => {
-        if (inputdetails.name.length > 1 && inputdetails.password.length >= 8 && inputdetails.email.includes("@") && inputdetails.email.endsWith(".com") && checkbox) {
-            setchecked(false)
+        if (inputDetails.name.length > 1 && inputDetails.password.length >= 8 && inputDetails.email.includes("@") && inputDetails.email.endsWith(".com") && checkbox) {
+            setChecked(false)
         } else {
-            setchecked(true)
+            setChecked(true)
         }
-    }, [inputdetails, checkbox])
+    }, [inputDetails, checkbox])
 
 
     /* HandleChange for input fields */
-    const handleChange = (e) => {
-        setinputdetails({ ...inputdetails, [e.target.name]: e.target.value })
+    const handleInputChange = (e) => {
+        setInputDetails({ ...inputDetails, [e.target.name]: e.target.value })
         setcounter(counter + 1)
         if (counter >= 1) {
             if (e.target.name === "name") {
-                if (inputdetails.email.length === 0) {
-                    if (inputdetails.name.length > 0) {
-                        setbool1(false)
+                if (inputDetails.email.length === 0) {
+                    if (inputDetails.name.length > 0) {
+                        setErrors({ ...errors, name: false })
                     } else {
-                        setbool1(true)
+                        setErrors({ ...errors, name: true })
                     }
                 } else {
-                    if (inputdetails.name.length >= 0) {
-                        setbool1(false)
+                    if (inputDetails.name.length >= 0) {
+                        setErrors({ ...errors, name: false })
                     } else {
-                        setbool1(true)
+                        setErrors({ ...errors, name: true })
                     }
                 }
             } else if (e.target.name === "password") {
-                setbool3(false)
+                setErrors({ ...errors, password: false })
             }
             else {
-                setbool2(false)
+                setErrors({ ...errors, email: false })
             }
         }
     }
 
     /* HandleChange for checkbox fields */
-    const handleChange2 = () => {
-        setcheckbox(!checkbox)
+    const handleCheckboxChange = () => {
+        setCheckbox(!checkbox)
     }
 
     /* onremovedfocus/onblur, these function will get executed. */
     const handleblur1 = (e) => {
-        if (inputdetails.name.length < 2) {
-            setbool1(true)
+        if (inputDetails.name.length < 2) {
+            setErrors({ ...errors, name: true })
         } else {
-            setbool1(false)
+            setErrors({ ...errors, name: false })
         }
     }
     const handleblur2 = (e) => {
-        if (!inputdetails.email.includes("@") || !inputdetails.email.endsWith(".com")) {
-            setbool2(true)
+        if (!inputDetails.email.includes("@") || !inputDetails.email.endsWith(".com")) {
+            setErrors({ ...errors, email: true })
         } else {
-            setbool2(false)
+            setErrors({ ...errors, email: false })
         }
     }
     const handleblur3 = (e) => {
-        if (inputdetails.password.length < 8) {
-            setbool3(true)
+        if (inputDetails.password.length < 8) {
+            setErrors({ ...errors, password: true })
         } else {
-            setbool3(false)
+            setErrors({ ...errors, password: false })
         }
     }
+
 
     /* Height change on getting or removing errors */
     const handleheightChange = () => {
@@ -130,23 +106,31 @@ const Signup = ({ setsignbool, setbool }) => {
     }
 
 
-    /* Form submit by normal email and password */
+    /* Email and Password Auth */
     const handleSubmit = async (e) => {
-        createUserWithEmailAndPassword(auth, inputdetails.email, inputdetails.password).then(async (credentials) => {
-            const result = await addDoc(collection(firestore, "users"), {
-                name: inputdetails.name,
-                email: inputdetails.email,
-                password: inputdetails.password,
-                userType: "user"
-            })
+        const result =await handleSignUp(inputDetails)
+        console.log(result)
+        if (result) {
             setAuthBool(!authBool)
             setbool(false)
             setBoolPop(false)
             setToastBool(true)
-        }).catch((err) => {
-            toast.error("User already exist", toast)
-            console.log(err)
-        })
+        }else{
+            toast.error("User already exist", toastOptions)
+        }
+    }
+
+    /* Google Auth */
+    const googleProviderFn = async () => {
+        const status = await handleGoogleAuth()
+        if (status) {
+            setAuthBool(!authBool)
+            setbool(false)
+            setBoolPop(false)
+            setToastBool(true)
+        }else{
+            toast.error("Error Login",toastOptions)
+        }
     }
 
 
@@ -155,7 +139,7 @@ const Signup = ({ setsignbool, setbool }) => {
             <div className="fixed w-[100vw] h-[100vh] top-0 flex justify-center items-center opacity-85 bg-black z-30">
             </div>
             <div className="fixed w-[100vw] h-[100vh] top-0 flex justify-center items-center z-30 font-[Helvetica]">
-                <div className={`${bool1 || bool2 || bool3 ? handleheightChange : height + "%"} cont relative w-[30%] bg-white z-50 rounded-md px-6 py-4 flex flex-col gap-11`}>
+                <div className={`${errors.name || errors.email || errors.password ? handleheightChange : height + "%"} cont relative w-[30%] bg-white z-50 rounded-md px-6 py-4 flex flex-col gap-11`}>
                     <div className="head flex justify-between items-center w-[100%]">
                         <div className="login text-3xl font-semibold text-gray-500">Sign Up</div>
                         <div className="cross cursor-pointer">
@@ -166,19 +150,19 @@ const Signup = ({ setsignbool, setbool }) => {
                     </div>
                     <div className="section flex flex-col gap-4">
                         <div className="input1 w-[100%]">
-                            <input onBlur={handleblur1} onChange={handleChange} className='rounded-md border-[1px] h-12 w-[100%] pl-3 placeholder:text-[18px]' type="text" name="name" id="" placeholder='Full Name' value={inputdetails.name} />
-                            {bool1 && <div className="error text-red-500 text-sm">Please enter a valid name</div>}
+                            <input onBlur={handleblur1} onChange={handleInputChange} className='rounded-md border-[1px] h-12 w-[100%] pl-3 placeholder:text-[18px]' type="text" name="name" id="" placeholder='Full Name' value={inputDetails.name} />
+                            {errors.name && <div className="error text-red-500 text-sm">Please enter a valid name</div>}
                         </div>
                         <div className="input1 w-[100%]">
-                            <input onBlur={handleblur2} onChange={handleChange} className='rounded-md border-[1px] h-12 w-[100%] pl-3 placeholder:text-[18px]' type="text" name="email" id="" placeholder='Email' value={inputdetails.email} />
-                            {bool2 && <div className="error text-red-500 text-sm">Invalid Email Id</div>}
+                            <input onBlur={handleblur2} onChange={handleInputChange} className='rounded-md border-[1px] h-12 w-[100%] pl-3 placeholder:text-[18px]' type="text" name="email" id="" placeholder='Email' value={inputDetails.email} />
+                            {errors.email && <div className="error text-red-500 text-sm">Invalid Email Id</div>}
                         </div>
                         <div className="input1 w-[100%]">
-                            <input onBlur={handleblur3} onChange={handleChange} className='rounded-md border-[1px] h-12 w-[100%] pl-3 placeholder:text-[18px]' type="password" name="password" id="" placeholder='Password' value={inputdetails.password} />
-                            {bool3 && <div className="error text-red-500 text-sm">Password must be upto 8-16 characters</div>}
+                            <input onBlur={handleblur3} onChange={handleInputChange} className='rounded-md border-[1px] h-12 w-[100%] pl-3 placeholder:text-[18px]' type="password" name="password" id="" placeholder='Password' value={inputDetails.password} />
+                            {errors.password && <div className="error text-red-500 text-sm">Password must be upto 8-16 characters</div>}
                         </div>
                         <div className="check flex w-[100%] gap-2 pl-3">
-                            <input onChange={handleChange2} checked={checkbox} type="checkbox" name="" id="" className='w-5 h-5 cursor-pointer' />
+                            <input onChange={handleCheckboxChange} checked={checkbox} type="checkbox" name="" id="" className='w-5 h-5 cursor-pointer' />
                             <div className="text text-sm">
                                 I agree to ours Terms of Service, Privacy Policy and Content Policies
                             </div>

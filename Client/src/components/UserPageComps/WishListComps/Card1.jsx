@@ -1,38 +1,37 @@
 import React, { useState } from 'react'
-import { deleteFavourites, getImage } from '../../../apis/apis'
 import Star from '../../LandingPageComp/Subcomps/Star'
 import Delete from "../../../assets/icon-delete.png"
 import { useNavigate } from 'react-router-dom'
+import { useBooleanContext } from '../../../context/context'
+
+/* APIS */
+import { deleteFavourites, getImage } from '../../../apis/apis'
+
+/* Toasts */
+import toastOptions from '../../../utils/toastOptions'
 import { toast } from 'react-toastify'
 
-const Card1 = ({ itemId, imageUrl,email, discount, title, mainPrice, prevPrice, rating, reviews, refreshData }) => {
+const Card1 = ({ itemId, imageUrl, discount, title, mainPrice, prevPrice, rating, reviews, refreshData }) => {
     const [visible, setvisible] = useState(false)
+    const { token } = useBooleanContext()
     const navigate = useNavigate()
-
-    const toastOptions = {
-        position: "bottom-right",
-        autoClose: 5000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-        closeOnClick: true,
-    }
 
     async function handleDelete(e) {
         e.stopPropagation()
+        console.log(token)
         const req = await fetch(deleteFavourites, {
             method: "POST",
             headers: {
+                "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                email: email,
                 itemId: itemId,
             })
         })
-        if(req.status===200){
-            const res=await req.json();
-            toast.success(res.msg,toastOptions)
+        if (req.status === 200) {
+            const res = await req.json();
+            toast.success(res.msg, toastOptions)
             refreshData()
         }
     }

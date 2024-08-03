@@ -7,7 +7,8 @@ import heartImage from "../../../assets/heart small.png"
 import QuickView from "../../../assets/Quick View.png"
 
 /* Toast */
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
+import toastOptions from '../../../utils/toastOptions'
 import 'react-toastify/dist/ReactToastify.css';
 
 /* APIs */
@@ -19,31 +20,21 @@ import { useBooleanContext } from '../../../context/context'
 const Card4 = ({ itemId, image, discount, title, mainPrice, prevPrice, rating, reviews, wishlist, refreshData }) => {
     const navigate = useNavigate()
     const [visible, setvisible] = useState(false)
-    const { user } = useBooleanContext()
-
-    const toastOptions = {
-        position: "bottom-right",
-        autoClose: 3000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-        closeOnClick: true,
-    }
+    const { token } = useBooleanContext()
 
     async function addToCart(e) {
         try {
             e.stopPropagation();
 
-            if (user) {
-
+            if (token) {
                 /* API Fetching */
                 const res = await fetch(addCart, {
                     method: "POST",
                     headers: {
+                        "Authorization": "Bearer " + token,
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        email: user.email,
                         itemId: itemId,
                         count: 1
                     })
@@ -52,7 +43,7 @@ const Card4 = ({ itemId, image, discount, title, mainPrice, prevPrice, rating, r
                     const status = await res.json()
                     toast.success(status.msg, toastOptions)
                 } else {
-                    console.error('Failed to add item to cart');
+                    console.error(await res.json().message);
                 }
             } else {
                 toast.error("You need to Sign In first", toastOptions)
@@ -64,14 +55,14 @@ const Card4 = ({ itemId, image, discount, title, mainPrice, prevPrice, rating, r
 
     async function handleFavourites(e) {
         e.stopPropagation()
-        if (user) {
+        if (token) {
             const req = await fetch(addFavorites, {
                 method: "POST",
                 headers: {
+                    "Authorization": "Bearer " + token,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    email: user.email,
                     itemId: itemId
                 })
             })

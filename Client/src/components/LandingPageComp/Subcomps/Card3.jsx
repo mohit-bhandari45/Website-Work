@@ -4,6 +4,7 @@ import Star from './Star'
 
 /* Toast */
 import { toast } from 'react-toastify';
+import toastOptions from '../../../utils/toastOptions';
 import 'react-toastify/dist/ReactToastify.css';
 
 /* APIs */
@@ -14,42 +15,34 @@ import { useBooleanContext } from '../../../context/context';
 
 const Card3 = ({ itemId, image, discount, title, mainPrice, prevPrice, rating, reviews, wishlist, refreshData }) => {
     const [visible, setvisible] = useState(false)
-    const { user } = useBooleanContext()
+    const { token } = useBooleanContext()
     const navigate = useNavigate()
-
-    const toastOptions = {
-        position: "bottom-right",
-        autoClose: 3000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-        closeOnClick: true,
-    }
 
     async function addToCart(e) {
         try {
             e.stopPropagation();
-            if (user) {
+            if (token) {
                 /* API Fetching */
                 const res = await fetch(addCart, {
                     method: "POST",
                     headers: {
+                        "Authorization": "Bearer " + token,
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        email: user.email,
                         itemId: itemId,
                         count: 1
                     })
                 })
+                console.log(res.status)
                 if (res.status === 201 || res.status === 200) {
                     const status = await res.json()
                     toast.success(status.msg, toastOptions)
                 } else {
-                    console.error('Failed to add item to cart');
+                    console.error(await res.json().message);
                 }
             } else {
-                toast.success("You need to Sign In first", toastOptions)
+                toast.error("You need to Sign In first", toastOptions)
             }
         } catch (error) {
             console.log("Error while adding item to cart:", error)
@@ -58,14 +51,14 @@ const Card3 = ({ itemId, image, discount, title, mainPrice, prevPrice, rating, r
 
     async function handleFavourites(e) {
         e.stopPropagation();
-        if (user) {
+        if (token) {
             const req = await fetch(addFavorites, {
                 method: "POST",
                 headers: {
+                    "Authorization": "Bearer " + token,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    email: user.email,
                     itemId: itemId
                 })
             })

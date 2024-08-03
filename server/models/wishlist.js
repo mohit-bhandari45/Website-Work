@@ -14,7 +14,7 @@ const wishlistItemSchema = mongoose.Schema({
 })
 
 const wishlistSchema = mongoose.Schema({
-    email: {
+    user_Id: {
         type: String,
         required: true
     },

@@ -3,6 +3,7 @@ import Footer from '../../components/UniversalComp/Footer'
 import { useState } from 'react'
 import Card1 from '../../components/UserPageComps/WishListComps/Card1'
 import Navbar from '../../components/UserPageComps/UniversalComps/Navbar'
+import { Loader } from 'rsuite'
 
 /* API */
 import { getFavorites } from '../../apis/apis'
@@ -11,6 +12,7 @@ import { getFavorites } from '../../apis/apis'
 import { useBooleanContext } from '../../context/context'
 
 const WishList = () => {
+    const { token } = useBooleanContext()
     const [items, setitems] = useState([
         {
             img: "src/assets/g92-2-500x500 1.png",
@@ -49,18 +51,16 @@ const WishList = () => {
             amount: "(99)"
         }
     ])
-
-    const { user } = useBooleanContext()
     const [favorites, setFavorites] = useState()
 
     async function getFavoriteFn() {
         /* API Fetching */
         const res = await fetch(getFavorites, {
-            method: "POST",
+            method: "GET",
             headers: {
+                "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ email: user.email })
         })
         if (res.status === 200) {
             /* Status 200 means request is sucussfull */
@@ -75,7 +75,7 @@ const WishList = () => {
 
     if (!favorites) {
         return <div>
-            ...loading
+            <Loader center size='lg' speed='slow' />
         </div>
     }
 
@@ -93,7 +93,7 @@ const WishList = () => {
                 </div>
                 <div className={`w-[90%] gap-5 h-[70vh] items-center flex relative font-[Helvetica]`}>
                     {favorites.map((element) => {
-                        return <Card1 key={element._id} itemId={element._id} email={user.email} imageUrl={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} refreshData={getFavoriteFn} />
+                        return <Card1 key={element._id} itemId={element._id} imageUrl={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} refreshData={getFavoriteFn} />
                     })}
                 </div>
             </div>

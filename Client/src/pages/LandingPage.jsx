@@ -1,45 +1,38 @@
-import Navbar from '../components/LandingPageComp/Navbar'
+import 'animate.css'
 import { useEffect, useState } from 'react'
-import Search from '../components/UniversalComp/Search'
-import HeroSec from '../components/LandingPageComp/HeroSec'
-import Herosec2 from '../components/LandingPageComp/Herosec2'
-import PotSec from '../components/LandingPageComp/PotSec'
-import Frames from '../components/LandingPageComp/Frames'
-import Mid from '../components/LandingPageComp/Mid'
+import BrowseCategory from '../components/LandingPageComp/BrowseCategory'
+import FlashSales from '../components/LandingPageComp/FlashSales'
 import Frames2 from '../components/LandingPageComp/Frames2'
 import Frames3 from '../components/LandingPageComp/Frames3'
 import Frames4 from '../components/LandingPageComp/Frames4'
-import Footer from '../components/UniversalComp/Footer'
 import FramesLast from '../components/LandingPageComp/FramesLast'
-import FlashSales from '../components/LandingPageComp/FlashSales'
-import BrowseCategory from '../components/LandingPageComp/BrowseCategory'
-import Frames5 from '../components/LandingPageComp/Frames5'
+import HeroSec from '../components/LandingPageComp/HeroSec'
+import Mid from '../components/LandingPageComp/Mid'
+import Navbar from '../components/LandingPageComp/Navbar'
+import PotSec from '../components/LandingPageComp/PotSec'
 import SubFooter from '../components/LandingPageComp/SubFooter'
-import 'animate.css';
+import Footer from '../components/UniversalComp/Footer'
+import Search from '../components/UniversalComp/Search'
 
-import { ToastContainer, toast } from 'react-toastify'
+/* Toasts */
+import { toast } from 'react-toastify'
+import toastOptions from '../utils/toastOptions'
 
 /* Context API */
 import { useBooleanContext } from '../context/context'
 
 /* Firebase */
-import { app } from '../firebase'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import AcrilicTransition from '../components/LandingPageComp/AcrilicTransitions'
+import Explore from '../components/LandingPageComp/Explore'
+import Stories from '../components/LandingPageComp/Stories'
 import PhoneVerify from '../components/LandingPageComp/Subcomps/PhoneVerify'
+import { app } from '../firebase'
 const auth = getAuth(app)
 
 function LandingPage() {
   const { boolPopPhone, toastBool, phoneToastBool, setToastBool, setBoolPopPhone, setPhoneToastBool, boolPop, setBoolPop } = useBooleanContext()
   const [bool, setbool] = useState(false)
-
-  const toastOptions = {
-    position: "top-right",
-    autoClose: 5000,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-    closeOnClick: true,
-  }
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -48,7 +41,7 @@ function LandingPage() {
           setBoolPop(true)
         }, 5000);
       }
-    });
+    })
   }, [])
 
   useEffect(() => {
@@ -93,9 +86,9 @@ function LandingPage() {
       <Navbar bool={bool} setbool={setbool} />
       <Search />
       <HeroSec />
-      <Herosec2 />
+      <AcrilicTransition />
       <PotSec />
-      <Frames />
+      <Stories />
       <BrowseCategory />
       <FlashSales />
       <Mid title="COMING SOON !" h="10vh" />
@@ -104,7 +97,7 @@ function LandingPage() {
       <Frames3 />
       <Mid title="BESTSELLER" h="25vh" />
       <Frames4 />
-      <Frames5 />
+      <Explore/>
       <FramesLast />
       <SubFooter />
       <Footer />

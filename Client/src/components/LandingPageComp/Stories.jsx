@@ -5,7 +5,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { getStories } from '../../apis/apis';
 
-const Frames = () => {
+const Stories = () => {
     const [storyDetails, setStoryDetails] = useState([])
     async function getVideos() {
         let req = await fetch(getStories)
@@ -46,4 +46,4 @@ const Frames = () => {
     )
 }
 
-export default Frames
+export default Stories

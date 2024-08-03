@@ -26,7 +26,7 @@ const Navbar = ({ bool, setbool }) => {
             <a href="/"><img className='w-44 h-20' src={getLogo} alt="" /></a>
           </div>
 
-          <div className="elements flex gap-32 text-xl font-semibold">
+          <div className="elements lg:flex gap-3 lg:gap-32 text-xl font-semibold lg:flex-row flex-col hidden">
             <div className="gallery cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
               <Link to="/catalog">Catalog</Link>
             </div>

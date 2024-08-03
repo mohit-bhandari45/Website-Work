@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from 'rsuite';
 import 'rsuite/dist/rsuite-no-reset.min.css'
 
+
 /* Pages */
 import LandingPage from './pages/LandingPage'
 import About from './pages/About'
@@ -22,46 +23,29 @@ import ProductDetails from './pages/user/ProductDetails'
 
 /* Context API */
 import { useBooleanContext } from './context/context'
+import { getUserType } from './utils/auth';
 
-/* Firebase */
-import { app } from './firebase'
-import { onAuthStateChanged, getAuth } from 'firebase/auth'
-import { getFirestore, collection, where, query, getDocs } from "firebase/firestore"
+
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { app } from './firebase';
 const auth = getAuth(app)
-const firestore = getFirestore(app)
 
 const App = () => {
-  const { authBool, userType, setUserType, setUser } = useBooleanContext()
-
-  const getUserType = async (user) => {
-    if (!user.phoneNumber) {
-      const usersRef1 = collection(firestore, "users");
-      const q1 = query(usersRef1, where("email", "==", user.email));
-      let querySnapshot = await getDocs(q1);
-      if (querySnapshot.empty) {
-        const usersRef2 = collection(firestore, "artists");
-        const q2 = query(usersRef2, where("email", "==", user.email));
-        querySnapshot = await getDocs(q2);
-      }
-      return querySnapshot;
-    } else {
-      const usersRef3 = collection(firestore, "users");
-      const q3 = query(usersRef3, where("number", "==", user.phoneNumber));
-      const querySnapshot = await getDocs(q3);
-      return querySnapshot;
-    }
-  }
+  const { authBool, userType, setUserType, setUser,token,setToken } = useBooleanContext()
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
+        user.getIdToken().then((token) => {
+          setToken(token)
+        })
         const querySnapshot = await getUserType(user);
         if (!querySnapshot.empty) {
           querySnapshot.forEach((doc) => {
             let details = { ...doc.data() }
             setUserType(details.userType)
             setUser(details)
-          });
+          })
         }
       } else {
         setUserType(null)
@@ -72,7 +56,7 @@ const App = () => {
   const getLandingPage = () => {
     if (userType === undefined) {
       return <div>
-         <Loader center size='lg' speed='slow' />
+        <Loader center size='lg' speed='slow' />
       </div>
     }
     if (userType === null) {

@@ -18,31 +18,18 @@ const Login = (props) => {
     const [value, setValue] = useState()
     const navigate = useNavigate()
 
-    const googleProviderFn = () => {
-        signInWithPopup(auth, googleProvider).then(async (user) => {
-            if (user) {
-                const usersRef = collection(firestore, "users");
-                const q = query(usersRef, where("email", "==", user.user.email));
-                const querySnapshot = await getDocs(q);
-                if (!querySnapshot.empty) {
-                    navigate("/userprofile")
-                } else {
-                    toast.error("No User found", toast)
-                }
-            }
-        })
+    /* Google Auth */
+    const googleProviderFn = async () => {
+        const status = await handleGoogleAuth()
+        if (status) {
+            navigate("/userprofile")
+        }else{
+            toast.error("Error Login",toastOptions)
+        }
     }
 
     const handleChangenum = (value) => {
         setValue(value)
-    }
-
-    const toastOptions = {
-        position: "bottom-right",
-        autoClose: 5000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "light",
     }
 
     return (
