@@ -1,31 +1,30 @@
-import React, { useEffect } from 'react'
-import Navbar from '../components/GalleryComps/Navbar'
-import Search from '../components/UniversalComp/Search'
-import Card2 from "../components/LandingPageComp/Subcomps/Card2"
-import { useState } from 'react'
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import Mid from '../components/GalleryComps/Mid'
+import React, { useEffect, useState } from 'react'
+import Carousel from 'react-multi-carousel'
+import 'react-multi-carousel/lib/styles.css'
+import { useParams } from 'react-router-dom'
+import Card from '../components/GalleryComps/Card'
 import HeroSec from '../components/GalleryComps/HeroSec'
+import Mid from '../components/GalleryComps/Mid'
+import Mid2 from '../components/GalleryComps/Mid2'
 import MinorSec from '../components/GalleryComps/MinorSec'
+import Navbar from '../components/GalleryComps/Navbar'
 import SubFooter from '../components/LandingPageComp/SubFooter'
 import Footer from '../components/UniversalComp/Footer'
-import Mid2 from '../components/GalleryComps/Mid2'
-import Card from '../components/GalleryComps/Card'
-import { useParams } from 'react-router-dom'
+import Search from '../components/UniversalComp/Search'
 
 /* Images */
+import { getProductById } from '../apis/apis'
+import State7 from "../assets/Ellipse 54 (10).png"
+import State8 from "../assets/Ellipse 54 (11).png"
 import State1 from "../assets/Ellipse 54 (4).png"
 import State2 from "../assets/Ellipse 54 (5).png"
 import State3 from "../assets/Ellipse 54 (6).png"
 import State4 from "../assets/Ellipse 54 (7).png"
 import State5 from "../assets/Ellipse 54 (8).png"
 import State6 from "../assets/Ellipse 54 (9).png"
-import State7 from "../assets/Ellipse 54 (10).png"
-import State8 from "../assets/Ellipse 54 (11).png"
 import image from "../assets/Rectangle 4163.png"
-import { getProductById } from '../apis/apis'
 import Explore from '../components/LandingPageComp/Explore'
+import SubState from '../components/LandingPageComp/Subcomps/SubState'
 
 const Gallery = () => {
   const params = useParams();
@@ -107,7 +106,7 @@ const Gallery = () => {
       <Search />
       <Carousel autoPlay={true} arrows={false} infinite showDots={false} keyBoardControl={true} shouldResetAutoplay={true} focusOnSelect={true} autoPlaySpeed={1500} className='' responsive={responsive}>
         {details.map((detail) => {
-          return <Card2 state={detail.state} image={detail.image} />
+          return <SubState state={detail.state} image={detail.image} />
         })}
       </Carousel>
       <Mid />

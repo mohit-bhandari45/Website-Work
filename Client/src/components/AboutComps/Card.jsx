@@ -1,23 +1,31 @@
-import React, { useState } from 'react'
+import React from 'react';
 
-const Card = ({icon,views,title}) => {
-    const [bool, setbool] = useState(false)
-
+const Card = ({ index, icon, views, title, handleClick, coloured }) => {
     return (
-        <div onClick={()=>{setbool(!bool)}} className={`${bool?"bg-[#ED8A73] text-white":"text-black bg-white"} cursor-pointer transition-all duration-300 ease-in-out w-[15%] flex-col border-2 border-gray-300 rounded-sm gap-3 h-[55%] flex justify-center items-center`}>
-            <div className="logo p-2 bg-gray-300 rounded-full">
-                <div className="circle p-2 bg-black rounded-full">
-                    <img className='w-8 h-8' src={icon} alt="" />
+        <div
+            onClick={(e) => handleClick(e, index)}
+            className={`${
+                coloured ? "bg-[#ED8A73] text-white" : "bg-white text-black"
+            } cursor-pointer transition-all duration-300 ease-in-out
+            flex flex-col justify-center items-center
+            border-2 border-gray-300 rounded-lg
+            p-4
+            w-full sm:w-60 md:w-72 lg:w-72
+            h-60`}
+        >
+            <div className="logo p-2 bg-gray-300 rounded-full mb-3 flex justify-center items-center">
+                <div className="circle p-2 bg-black rounded-full flex justify-center items-center">
+                    <img className='w-12 h-12' src={icon} alt="" />
                 </div>
             </div>
-            <div className="amount text-2xl font-bold font-[Helvetica]">
+            <div className="amount text-lg md:text-xl font-bold">
                 {views}
             </div>
-            <div className="para font-[Helvetica] font-semibold">
+            <div className="para font-semibold text-sm md:text-base text-center">
                 {title}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Card
+export default Card;

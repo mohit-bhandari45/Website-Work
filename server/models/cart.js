@@ -6,7 +6,8 @@ const cartItemSchema = mongoose.Schema({
         default: 1
     },
     itemId: {
-        type: String,
+        type: mongoose.Types.ObjectId,
+        ref: 'Product',
         required: true
     },
     addedAt: {

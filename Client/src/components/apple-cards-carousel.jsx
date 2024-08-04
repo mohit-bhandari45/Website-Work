@@ -17,7 +17,7 @@ import { useOutsideClick } from "../hook/use-outside-hook"
 import { getImage } from "../apis/apis";
 import Star from "./LandingPageComp/Subcomps/Star";
 import { useBooleanContext } from "../context/context";
-import { addToCart } from "../utils/products";
+import { addToCart, handleFavourites } from "../utils/products";
 
 export const CarouselContext = createContext({
   onCardClose: () => { },
@@ -99,6 +99,7 @@ export const Carousel = forwardRef(({ items, initialScroll = 0 }, ref) => {
 export const Card = ({
   card,
   layout = false,
+  updateWishList
 }) => {
   const [isLoading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
@@ -106,7 +107,6 @@ export const Card = ({
   // const { onCardClose, currentIndex } = useContext(CarouselContext);
   const [visible, setvisible] = useState(false)
   const { token } = useBooleanContext()
-
 
   useEffect(() => {
     function onKeyDown(event) {
@@ -135,6 +135,12 @@ export const Card = ({
   //   setOpen(false);
   //   onCardClose(index);
   // };
+
+  const wishListUpdate = async (e) => {
+    await handleFavourites(e, card._id, token)
+    updateWishList()
+  }
+
 
   return (
     <>
@@ -189,13 +195,13 @@ export const Card = ({
             <div className="off bg-[#ED8A73] px-4 py-1 rounded-md text-white">56%</div>
             <div className="mainicons flex flex-col gap-2 justify-center items-center">
               <div className="love p-2 bg-white rounded-full">
-                {/* {!wishlist || wishlist === null ? <svg onClick={handleFavourites} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
-                                <path d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                            </svg> :  */}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="black">
+                {!card.favourite || card.favourite === null ? <svg onClick={wishListUpdate} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
                   <path d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                </svg>
-                {/* } */}
+                </svg> :
+                  <svg onClick={wishListUpdate} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="black">
+                    <path d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                  </svg>
+                }
               </div>
               <div className="love p-2 bg-white rounded-full"><img src="src/assets/Quick View.png" alt="" /></div>
             </div>
@@ -215,7 +221,7 @@ export const Card = ({
             blurDataURL={typeof src === "string" ? src : undefined}
           />
         </div>
-        <button onClick={(e) => { addToCart(e, card._id,token) }} className={visible ? "transition-all z-20 duration-700 ease-in-out opacity-100 add absolute bottom-0 bg-black text-white w-full justify-center flex py-4 rounded-b-md text-xl" : "transition-all z-20 duration-700 ease-in-out  add absolute bottom-[-60px] bg-black text-white w-full justify-center flex py-4 rounded-b-md text-xl opacity-0"}>Add to Cart</button>
+        <button onClick={(e) => { addToCart(e, card._id, token) }} className={visible ? "transition-all z-20 duration-700 ease-in-out opacity-100 add absolute bottom-0 bg-black text-white w-full justify-center flex py-4 rounded-b-md text-xl" : "transition-all z-20 duration-700 ease-in-out  add absolute bottom-[-60px] bg-black text-white w-full justify-center flex py-4 rounded-b-md text-xl opacity-0"}>Add to Cart</button>
       </motion.button>
       <div className="tags w-full flex flex-col justify-center items-start gap-1 py-2 relative z-30 bg-white">
         <div onClick={() => navigate(`/productdetails/${itemId}`)} className="title text-lg font-semibold transition-all duration-500 hover:scale-105 ease-in-out cursor-pointer">{card.title}</div>

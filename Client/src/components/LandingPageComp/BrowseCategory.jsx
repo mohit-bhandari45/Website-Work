@@ -1,39 +1,50 @@
-import React, { useState } from 'react'
-import Browses from './Subcomps/Browses'
+import React, { useRef, useState } from 'react'
+import { Card, Carousel } from '../BrowsesCarousel';
 
 const BrowseCategory = () => {
-    const [items, setitems] = useState([
+    const carouselRef = useRef(null);
+    const [items, setItems] = useState([
         "Wall Paintings",
         "Wooden Crafts",
         "Jewellery",
         "Dokra art",
-        "khadi",
-        "Scultures"
-    ])
+        "Khadi",
+        "Sculptures",
+        "Sculptures",
+        "Sculptures",
+        "Sculptures"
+    ]);
+
+    const cards = items.map((item, index) => (
+        <Card key={index} card={item} index={index} />
+    ));
+
     return (
-        <div className='h-[70vh] py-16 w-full font-[Helvetica] flex flex-col justify-center items-center'>
-            <div className="head h-[30vh] w-[90%]">
-                <div className="head2 h-[10vh] flex justify-start items-center gap-4 w-full">
-                    <div className="bar w-[1.5%] h-[70%] rounded-sm bg-[#DB4444]"></div>
-                    <div className="title text-[#DB4444] font-medium">Categories</div>
+        <div className='py-5 sm:py-10 md:py-14 w-full font-[Helvetica] flex flex-col justify-center items-center px-4 sm:px-6 md:px-8'>
+            <div className="head w-[93.5%]">
+                <div className="head2 flex items-center gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8">
+                    <div className="bar w-1 sm:w-1.5 md:w-2 h-6 sm:h-8 md:h-10 rounded-sm bg-[#DB4444]"></div>
+                    <div className="title text-[#DB4444] font-medium text-base sm:text-lg md:text-xl lg:text-2xl">Categories</div>
                 </div>
-                <div className="cont w-full flex justify-between items-center h-[15vh]">
-                    <div className="first flex justify-center items-center gap-16 h-full">
-                        <div className="title text-4xl font-semibold">Browse by Category</div>
+                <div className="cont flex flex-row justify-between items-start sm:items-center mb-6 sm:mb-8">
+                    <div className="first mb-4 sm:mb-0">
+                        <div className="title text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">Browse by Category</div>
                     </div>
-                    <div className="second flex justify-center items-center gap-2">
-                        <div className="arrow1 bg-[#F5F5F5] rounded-full p-4"><img src="src/assets/icons_arrow-left.png" alt="" /></div>
-                        <div onClick={() => { setright(prevright => prevright + 20) }} className="arrow2 bg-[#F5F5F5] rounded-full p-4"><img src="src/assets/icons arrow-right.png" alt="" /></div>
+                    <div className="second flex gap-2 sm:gap-3">
+                        <div onClick={() => carouselRef.current.scrollLeft()} className="arrow bg-[#F5F5F5] rounded-full p-2 sm:p-3 md:p-4 cursor-pointer">
+                            <img src="src/assets/icons_arrow-left.png" alt="Left Arrow" className='w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8' />
+                        </div>
+                        <div onClick={() => carouselRef.current.scrollRight()} className="arrow bg-[#F5F5F5] rounded-full p-2 sm:p-3 md:p-4 cursor-pointer">
+                            <img src="src/assets/icons arrow-right.png" alt="Right Arrow" className='w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8' />
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className='w-[90%] h-[40vh] flex justify-start items-center gap-8'>
-                {items.map((item,index)=>{
-                    return <Browses key={index} item={item}/>
-                })}
+            <div className='w-[93.5%] h-[25vh] sm:h-[30vh] md:h-[35vh] flex justify-start items-center overflow-x-hidden'>
+                <Carousel ref={carouselRef} items={cards} />
             </div>
         </div>
     )
 }
 
-export default BrowseCategory
+export default BrowseCategory;

@@ -32,17 +32,13 @@ const productSchema = mongoose.Schema({
     },
     listedAt: {
         type: Date,
-        default: () => {
-            return new Date()
-        }
+        default: () => new Date()
     },
     releaseDate: {
         type: Date,
-        default: () => {
-            return new Date()
-        }
+        default: () => new Date()
     }
 })
 
-const Product = mongoose.model("product", productSchema)
+const Product = mongoose.model("Product", productSchema)
 module.exports = Product

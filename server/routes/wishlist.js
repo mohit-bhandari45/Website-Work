@@ -13,6 +13,5 @@ router.use(auth())
 
 router.get("/get", getFavorites)
 router.post("/post", addUpdateFavorites)
-router.post("/delete", deleteFavourites)
 
 module.exports = router

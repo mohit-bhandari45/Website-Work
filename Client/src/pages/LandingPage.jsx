@@ -2,15 +2,11 @@ import 'animate.css'
 import { useEffect, useState } from 'react'
 import BrowseCategory from '../components/LandingPageComp/BrowseCategory'
 import FlashSales from '../components/LandingPageComp/FlashSales'
-import Frames2 from '../components/LandingPageComp/Frames2'
-import Frames3 from '../components/LandingPageComp/Frames3'
-import Frames4 from '../components/LandingPageComp/Frames4'
-import FramesLast from '../components/LandingPageComp/FramesLast'
 import HeroSec from '../components/LandingPageComp/HeroSec'
-import Mid from '../components/LandingPageComp/Mid'
 import Navbar from '../components/LandingPageComp/Navbar'
 import PotSec from '../components/LandingPageComp/PotSec'
 import SubFooter from '../components/LandingPageComp/SubFooter'
+import Titles from '../components/LandingPageComp/Titles'
 import Footer from '../components/UniversalComp/Footer'
 import Search from '../components/UniversalComp/Search'
 
@@ -24,9 +20,13 @@ import { useBooleanContext } from '../context/context'
 /* Firebase */
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import AcrilicTransition from '../components/LandingPageComp/AcrilicTransitions'
+import ComingSoon from '../components/LandingPageComp/ComingSoon'
 import Explore from '../components/LandingPageComp/Explore'
+import NewArrival from '../components/LandingPageComp/NewArrival'
+import StateArts from '../components/LandingPageComp/StateArts'
 import Stories from '../components/LandingPageComp/Stories'
 import PhoneVerify from '../components/LandingPageComp/Subcomps/PhoneVerify'
+import Testimonials from '../components/LandingPageComp/Testimonials'
 import { app } from '../firebase'
 const auth = getAuth(app)
 
@@ -91,14 +91,14 @@ function LandingPage() {
       <Stories />
       <BrowseCategory />
       <FlashSales />
-      <Mid title="COMING SOON !" h="10vh" />
-      <Frames2 />
-      <Mid title="State Arts" h="20vh" />
-      <Frames3 />
-      <Mid title="BESTSELLER" h="25vh" />
-      <Frames4 />
+      <Titles title="COMING SOON !" h="10vh" />
+      <ComingSoon />
+      <Titles title="State Arts" h="20vh" />
+      <StateArts />
+      <Titles title="BESTSELLER" h="25vh" />
+      <NewArrival />
       <Explore/>
-      <FramesLast />
+      <Testimonials />
       <SubFooter />
       <Footer />
     </div>

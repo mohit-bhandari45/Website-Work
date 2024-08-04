@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from 'rsuite';
 import 'rsuite/dist/rsuite-no-reset.min.css'
 
-
 /* Pages */
 import LandingPage from './pages/LandingPage'
 import About from './pages/About'
@@ -38,6 +37,7 @@ const App = () => {
       if (user) {
         user.getIdToken().then((token) => {
           setToken(token)
+          console.log(token)
         })
         const querySnapshot = await getUserType(user);
         if (!querySnapshot.empty) {

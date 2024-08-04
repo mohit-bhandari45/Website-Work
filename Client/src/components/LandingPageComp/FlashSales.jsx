@@ -1,62 +1,58 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Card, Carousel } from "../../components/apple-cards-carousel"
-
-/* API */
-import { toast } from 'react-toastify'
-import { addCart, addFavorites, getSalesProducts } from '../../apis/apis'
-import { useBooleanContext } from '../../context/context'
-import toastOptions from '../../utils/toastOptions'
+import React, { useEffect, useRef, useState } from 'react';
+import { Card, Carousel } from "../../components/apple-cards-carousel";
+import { toast } from 'react-toastify';
+import { addCart, addFavorites, getSalesProducts, updateCart } from '../../apis/apis';
+import { useBooleanContext } from '../../context/context';
+import toastOptions from '../../utils/toastOptions';
+import { getFavoriteItems } from '../../utils/products';
 
 const FlashSales = () => {
-    const { token } = useBooleanContext()
-    const [items, setItems] = useState([])
+    const { token, wishList, setWishList } = useBooleanContext();
+    const [items, setItems] = useState([]);
     const carouselRef = useRef(null);
 
-    items.map((item) => {
-        items.push(item)
-    })
-    items.map((item) => {
-        items.push(item)
-    })
-
     async function getProductBySalesFn() {
-        /* API to fetch sales products */
-        const req = await fetch(getSalesProducts)
-        const result = await req.json()
-        setItems(result)
-    }
-
-    async function handleFavourites(e) {
-        e.stopPropagation();
-        if (token) {
-            const req = await fetch(addFavorites, {
-                method: "POST",
-                headers: {
-                    "Authorization": "Bearer " + token,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    itemId: itemId
-                })
-            })
-            const res = await req.json()
-            toast.success(res.msg, toastOptions)
-            refreshData()
-        } else {
-            toast.error("You need to Sign In first", toastOptions)
+        try {
+            const req = await fetch(getSalesProducts);
+            const result = await req.json();
+            setItems(result);
+        } catch (error) {
+            console.error("Error fetching sales products:", error);
         }
     }
 
-    const cards = items.map((item, index) => (
-        <Card key={item.imageUrl} handleFavourites={handleFavourites} card={item} index={index} />
-    ))
-
     useEffect(() => {
         getProductBySalesFn()
+        getFavoriteItems(token).then((items) => {
+            setWishList(items)
+        })
     }, [])
-    
+
+    const updateWishList = () => {
+        getFavoriteItems(token).then((items) => {
+            setWishList(items)
+        })
+        const updatedItems = items.map((item) => {
+            let mappedItem = wishList.items.find((wishItem) => wishItem.itemId._id === item._id);
+            return mappedItem ? { ...item, "favourite": true } : { ...item, "favourite": false };
+        })
+        setItems(updatedItems)
+    }
+
+    useEffect(() => {
+        if (items) {
+            if (wishList) {
+                updateWishList()
+            }
+        }
+    }, [wishList])
+
+    const cards = items.map((item, index) => (
+        <Card key={item.imageUrl} card={item} index={index} updateWishList={updateWishList}/>
+    ))
+
     return (
-        <div className='h-[110vh] sm:h-[120vh] md:h-[130vh] py-0 sm:py-0 md:py-16 w-full font-[Helvetica] flex flex-col justify-center items-center'>
+        <div className="h-[110vh] sm:h-[120vh] md:h-[130vh] py-0 sm:py-0 md:py-16 w-full font-[Helvetica] flex flex-col justify-center items-center">
             <div className="head h-[30vh] w-[90%]">
                 <div className="head2 h-[10vh] sm:h-[15vh] md:h-[10vh] flex justify-start items-center gap-4 w-full">
                     <div className="bar w-[1.5%] h-[70%] sm:h-[50%] md:h-[70%] rounded-sm bg-[#ED8A73]"></div>
@@ -66,25 +62,15 @@ const FlashSales = () => {
                     <div className="first flex flex-col md:flex-row justify-center items-start gap-2 md:items-center sm:gap-4 md:gap-6 lg:gap-16 h-full">
                         <div className="title text-2xl sm:text-4xl font-semibold">Flash Sales</div>
                         <div className="time flex justify-center items-center gap-1 sm:gap-2 md:gap-3">
-                            <div className="days">
-                                <div className="d1 font-semibold lg:text-base text-[9px] sm:text-[12px] md:text-[14px]">Days</div>
-                                <div className="time lg:text-5xl md:text-4xl text-xl sm:text-3xl font-bold">03</div>
-                            </div>
-                            <div className="colon text-2xl sm:text-4xl rounded-full text-[#E07575]">:</div>
-                            <div className="hours">
-                                <div className="d1 font-semibold lg:text-base text-[9px] sm:text-[12px] md:text-[14px]">Hours</div>
-                                <div className="time lg:text-5xl md:text-4xl text-xl sm:text-3xl font-bold">23</div>
-                            </div>
-                            <div className="colon text-2xl sm:text-4xl rounded-full text-[#E07575]">:</div>
-                            <div className="minutes">
-                                <div className="d1 font-semibold lg:text-base text-[9px] sm:text-[12px] md:text-[14px]">Minutes</div>
-                                <div className="time lg:text-5xl md:text-4xl text-xl sm:text-3xl font-bold">19</div>
-                            </div>
-                            <div className="colon text-2xl sm:text-4xl rounded-full text-[#E07575]">:</div>
-                            <div className="minutes">
-                                <div className="d1 font-semibold lg:text-base text-[9px] sm:text-[12px] md:text-[14px]">Seconds</div>
-                                <div className="time lg:text-5xl md:text-4xl text-xl sm:text-3xl font-bold">56</div>
-                            </div>
+                            {['Days', 'Hours', 'Minutes', 'Seconds'].map((unit, idx) => (
+                                <React.Fragment key={unit}>
+                                    <div className="flex flex-col items-center">
+                                        <div className="d1 font-semibold lg:text-base text-[9px] sm:text-[12px] md:text-[14px]">{unit}</div>
+                                        <div className="time lg:text-5xl md:text-4xl text-xl sm:text-3xl font-bold">03</div>
+                                    </div>
+                                    {idx < 3 && <div className="colon text-2xl sm:text-4xl rounded-full text-[#E07575]">:</div>}
+                                </React.Fragment>
+                            ))}
                         </div>
                     </div>
                     <div className="second flex justify-center items-center gap-2">
@@ -102,8 +88,6 @@ const FlashSales = () => {
             </div>
         </div>
     );
-}
+};
 
-export default FlashSales
-
-
+export default FlashSales;

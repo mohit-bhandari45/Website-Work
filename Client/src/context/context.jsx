@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
+import { getFavorites } from '../apis/apis';
 
 // Create the context
 const BooleanContext = createContext();
@@ -20,24 +21,26 @@ export const BooleanProvider = ({ children }) => {
     const [profile, setProfile] = useState(false)
     const [authBool, setAuthBool] = useState(false)
     const [token, setToken] = useState("")
+    const [wishList, setWishList] = useState(null)
 
     // Toggle function
     const toggleBoolPopPhone = () => {
         setBoolPopPhone(prevState => !prevState);
-    };
+    }
 
     return (
         <BooleanContext.Provider value={{
-            boolPopPhone,setBoolPopPhone,
-            authBool,setAuthBool,
-            boolPop,setBoolPop,
-            profile,setProfile,
-            toastBool,setToastBool,
-            phoneToastBool,setPhoneToastBool,
+            boolPopPhone, setBoolPopPhone,
+            authBool, setAuthBool,
+            boolPop, setBoolPop,
+            profile, setProfile,
+            toastBool, setToastBool,
+            phoneToastBool, setPhoneToastBool,
             toggleBoolPopPhone,
-            user,setUser,
-            userType,setUserType,
-            token,setToken
+            user, setUser,
+            userType, setUserType,
+            token, setToken,
+            wishList,setWishList
         }}>
             {/* <BooleanContext.Provider value={{ boolPopPhone, setBoolPopPhone, toggleBoolPopPhone }}> */}
             {children}

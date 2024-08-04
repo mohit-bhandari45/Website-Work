@@ -2,14 +2,13 @@ const mongoose = require("mongoose")
 
 const wishlistItemSchema = mongoose.Schema({
     itemId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product', // Reference to the Product model
         required: true
     },
     addedAt: {
         type: Date,
-        default: () => {
-            return new Date()
-        }
+        default: () => new Date()
     }
 })
 

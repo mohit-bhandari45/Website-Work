@@ -1,14 +1,6 @@
 const fs = require("fs")
 const admin = require("../config/firebase-config")
 
-function ReqRes(filename) {
-    return (req, res, next) => {
-        fs.appendFile(filename, `Request Recieved at ${Date.now()}\n`, (err, data) => {
-            next()
-        })
-    }
-}
-
 function auth() {
     return async (req, res, next) => {
         try {
@@ -30,6 +22,5 @@ function auth() {
 }
 
 module.exports = {
-    ReqRes,
     auth
 }

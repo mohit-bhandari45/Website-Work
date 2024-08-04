@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { addCart, addFavorites } from "../apis/apis";
+import { addCart, addFavorites, getFavorites } from "../apis/apis";
 import toastOptions from "./toastOptions";
 
 export const addToCart = async (e, itemId, token) => {
@@ -31,7 +31,7 @@ export const addToCart = async (e, itemId, token) => {
     }
 }
 
-async function handleFavourites(e, itemId,token) {
+export async function handleFavourites(e, itemId, token) {
     e.stopPropagation();
     if (token) {
         const req = await fetch(addFavorites, {
@@ -48,5 +48,22 @@ async function handleFavourites(e, itemId,token) {
         toast.success(res.msg, toastOptions)
     } else {
         toast.error("You need to Sign In first", toastOptions)
+    }
+}
+
+
+export async function getFavoriteItems(token) {
+    /* API Fetching */
+    const res = await fetch(getFavorites, {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json"
+        },
+    })
+    if (res.status === 200) {
+        /* Status 200 means request is sucussfull */
+        const items = await res.json()
+        return items
     }
 }
