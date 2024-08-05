@@ -133,16 +133,48 @@ const App = () => {
     }
   }
 
+  const getContactComponent = () => {
+    if (userType === undefined) {
+      return <div>
+        <Loader center size='lg' speed='slow' />
+      </div>
+    }
+    if (userType === null) {
+      return <Page404 />
+    }
+    if (userType === 'user') {
+      return <Contacts />
+    } else if (userType === 'artist') {
+      return <Page404 />
+    }
+  }
+
+  const getShowMore = () => {
+    if (userType === undefined) {
+      return <div>
+        <Loader center size='lg' speed='slow' />
+      </div>
+    }
+    if (userType === null) {
+      return <Page404 />
+    }
+    if (userType === 'user') {
+      return <ShowMore />
+    } else if (userType === 'artist') {
+      return <Page404 />
+    }
+  }
+
   return (
     <BrowserRouter>
       <ToastContainer />
       <Routes>
 
         /* General Routes-But here normal user can signup */
-        <Route path='/' element={getLandingPage()} />
-        <Route path='/about' element={<About />} />
-        <Route path='/contact' element={<Contacts />} />
-        <Route path='/showmore' element={<ShowMore />} />
+        <Route path='/' element={getLandingPage()} />  //done
+        <Route path='/about' element={<About />} />  /done
+        <Route path='/contact' element={getContactComponent()} />  //done
+        <Route path='/showmore' element={getShowMore()} />  //done
         <Route path='/404' element={<Page404 />} />
 
         /* Dynamic Routes */
@@ -156,7 +188,7 @@ const App = () => {
         <Route path='/profile' element={getProfileComponent()} />
 
         /* UserRoutes */
-        <Route path='/cart' element={getCartComponent()} />
+        <Route path='/cart' element={getCartComponent()} /> //done
         <Route path='/wishlist' element={getWishlistComponent()} />
         <Route path='/checkout' element={getCheckoutComponent()} />
 

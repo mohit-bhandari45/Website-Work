@@ -1,6 +1,9 @@
 import React from 'react';
 import { getLogo } from '../../../apis/apis';
 import profile from "../../../assets/User_alt_fill.png";
+import WishList from "../../../assets/Wishlist.png"
+import Cart from "../../../assets/Cart1 with buy.png"
+import Search from "../../../assets/Component 2.png"
 
 const Navbar = () => {
     return (
@@ -19,16 +22,16 @@ const Navbar = () => {
                         className='w-full pl-2 bg-transparent h-full focus:border-none focus:outline-none'
                         placeholder='What are you looking for?' 
                     />
-                    <img className='h-6 ml-2' src="src/assets/Component 2.png" alt="Search Icon" />
+                    <img className='h-6 ml-2' src={Search} alt="Search Icon" />
                 </div>
                 
                 {/* Icons */}
                 <div className="icons flex items-center gap-4">
                     <div className="wish">
-                        <img className='h-6 md:h-8 w-14' src="src/assets/Wishlist.png" alt="Wishlist" />
+                        <img className='h-6 md:h-8 w-14' src={WishList} alt="Wishlist" />
                     </div>
                     <div className="cart">
-                        <img className='h-6 md:h-8 w-14' src="src/assets/Cart1 with buy.png" alt="Cart" />
+                        <img className='h-6 md:h-8 w-14' src={Cart} alt="Cart" />
                     </div>
                     <div className="account bg-black p-1 rounded-full">
                         <img className='invert h-6 md:h-8 w-14' src={profile} alt="Profile" />

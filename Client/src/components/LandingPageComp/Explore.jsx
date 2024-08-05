@@ -36,41 +36,42 @@ const Explore = () => {
     }
 
     useEffect(() => {
-        getAllProductsFn()
-        getFavoriteItems(token).then((items) => {
-            setWishList(items)
-        })
-    }, [])
-
-    const updateWishList = () => {
-        getFavoriteItems(token).then((items) => {
-            setWishList(items)
-        })
-        const updatedItems1 = items1.map((item) => {
-            let mappedItem = wishList.items.find((wishItem) => wishItem.itemId._id === item._id);
-            return mappedItem ? { ...item, "favourite": true } : { ...item, "favourite": false };
-        })
-        setItems1(updatedItems1)
-        const updatedItems2 = items2.map((item) => {
-            let mappedItem = wishList.items.find((wishItem) => wishItem.itemId._id === item._id);
-            return mappedItem ? { ...item, "favourite": true } : { ...item, "favourite": false };
-        })
-        setItems2(updatedItems2)
-    }
+        getAllProductsFn();
+        if (token) {
+            getFavoriteItems(token).then((items) => {
+                setWishList(items);
+            });
+        }
+    }, [token, setWishList]);
 
     useEffect(() => {
-        if (items1 || items2) {
-            if (wishList) {
-                updateWishList()
-            }
+        if (wishList && items1.length > 0 && items2.length > 0) {
+            const updatedItems1 = items1.map((item) => {
+                let mappedItem = wishList.items.find((wishItem) => wishItem.itemId._id === item._id);
+                return mappedItem ? { ...item, "favourite": true } : { ...item, "favourite": false };
+            })
+            setItems1(updatedItems1)
+            const updatedItems2 = items2.map((item) => {
+                let mappedItem = wishList.items.find((wishItem) => wishItem.itemId._id === item._id);
+                return mappedItem ? { ...item, "favourite": true } : { ...item, "favourite": false };
+            })
+            setItems2(updatedItems2)
         }
-    }, [wishList])
+    }, [wishList]);
+
+    const updateWishList = () => {
+        if (token) {
+            getFavoriteItems(token).then((items) => {
+                setWishList(items);
+            });
+        }
+    }
 
     const cards1 = items1.map((item, index) => (
-        <Card key={item.imageUrl} card={item} index={index} updateWishList={updateWishList}/>
+        <Card key={item.imageUrl} card={item} index={index} updateWishList={updateWishList} />
     ))
     const cards2 = items2.map((item, index) => (
-        <Card key={item.imageUrl} card={item} index={index} updateWishList={updateWishList}/>
+        <Card key={item.imageUrl} card={item} index={index} updateWishList={updateWishList} />
     ))
 
     return (

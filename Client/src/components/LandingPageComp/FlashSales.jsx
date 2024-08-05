@@ -22,33 +22,34 @@ const FlashSales = () => {
     }
 
     useEffect(() => {
-        getProductBySalesFn()
-        getFavoriteItems(token).then((items) => {
-            setWishList(items)
-        })
-    }, [])
-
-    const updateWishList = () => {
-        getFavoriteItems(token).then((items) => {
-            setWishList(items)
-        })
-        const updatedItems = items.map((item) => {
-            let mappedItem = wishList.items.find((wishItem) => wishItem.itemId._id === item._id);
-            return mappedItem ? { ...item, "favourite": true } : { ...item, "favourite": false };
-        })
-        setItems(updatedItems)
-    }
+        getProductBySalesFn();
+        if (token) {
+            getFavoriteItems(token).then((items) => {
+                setWishList(items);
+            });
+        }
+    }, [token, setWishList]);
 
     useEffect(() => {
-        if (items) {
-            if (wishList) {
-                updateWishList()
-            }
+        if (wishList && items.length > 0) {
+            const updatedItems = items.map((item) => {
+                let mappedItem = wishList.items.find((wishItem) => wishItem.itemId._id === item._id);
+                return mappedItem ? { ...item, "favourite": true } : { ...item, "favourite": false };
+            });
+            setItems(updatedItems);
         }
-    }, [wishList])
+    }, [wishList]);
+
+    const updateWishList = () => {
+        if (token) {
+            getFavoriteItems(token).then((items) => {
+                setWishList(items);
+            });
+        }
+    }
 
     const cards = items.map((item, index) => (
-        <Card key={item.imageUrl} card={item} index={index} updateWishList={updateWishList}/>
+        <Card key={item.imageUrl} card={item} index={index} updateWishList={updateWishList} />
     ))
 
     return (

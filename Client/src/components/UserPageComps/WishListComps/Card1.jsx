@@ -1,40 +1,14 @@
 import React, { useState } from 'react'
-import Star from '../../LandingPageComp/Subcomps/Star'
-import Delete from "../../../assets/icon-delete.png"
 import { useNavigate } from 'react-router-dom'
+import Delete from "../../../assets/icon-delete.png"
 import { useBooleanContext } from '../../../context/context'
-
-/* APIS */
-import { deleteFavourites, getImage } from '../../../apis/apis'
-
-/* Toasts */
-import toastOptions from '../../../utils/toastOptions'
-import { toast } from 'react-toastify'
+import Star from '../../LandingPageComp/Subcomps/Star'
+import { getImage } from '../../../apis/apis'
 
 const Card1 = ({ itemId, imageUrl, discount, title, mainPrice, prevPrice, rating, reviews, refreshData }) => {
     const [visible, setvisible] = useState(false)
     const { token } = useBooleanContext()
     const navigate = useNavigate()
-
-    async function handleDelete(e) {
-        e.stopPropagation()
-        console.log(token)
-        const req = await fetch(deleteFavourites, {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                itemId: itemId,
-            })
-        })
-        if (req.status === 200) {
-            const res = await req.json();
-            toast.success(res.msg, toastOptions)
-            refreshData()
-        }
-    }
 
     return (
         <div className='h-full w-[21vw] rounded-lg relative flex flex-col justify-center items-center font-[Helvetica]'>
@@ -43,7 +17,7 @@ const Card1 = ({ itemId, imageUrl, discount, title, mainPrice, prevPrice, rating
                 <div className="icons w-full flex justify-between items-start h-full p-3">
                     <div className="off bg-[#ED8A73] px-4 py-1 rounded-md text-white">{discount}%</div>
                     <div className="mainicons flex flex-col gap-2 justify-center items-center">
-                        <div onClick={handleDelete} className="love p-2 bg-white rounded-full">
+                        <div onClick={(e)=>handleFavourites(e,token,itemId)} className="love p-2 bg-white rounded-full">
                             <img src={Delete} alt="" />
                         </div>
                     </div>

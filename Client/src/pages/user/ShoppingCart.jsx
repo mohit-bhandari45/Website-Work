@@ -23,36 +23,39 @@ const ShoppingCart = () => {
             },
         })
         if (res.status === 200) {
-            /* Status 200 means request is sucussfull */
+            /* Status 200 means request is successful */
             const carts = await res.json()
             setCartItems(carts)
         }
-
     }
 
     useEffect(() => {
         getCartFn()
     }, [])
 
+    if (cartItems.length === 0) {
+        return <div className="flex justify-center items-center h-screen">Loading...</div>
+    }
+
     return (
         <>
-            <div className="bg-[#393E46]">
+            <div className="bg-[#393E46] min-h-screen">
                 <div className="main py-8 rounded-b-3xl bg-white">
                     <Navbar />
-                    <div className='w-full flex flex-col justify-center items-center py-20 gap-10'>
-                        {cartItems.map((cartItem) => {
-                            return <Card key={cartItem.itemDetails._id} itemId={cartItem.itemDetails._id} image={cartItem.itemDetails.imageUrl} title={cartItem.itemDetails.title} price={cartItem.itemDetails.mainPrice} quantity={cartItem.count} refreshData={getCartFn} />
+                    <div className='w-full flex flex-col justify-center items-center py-10 sm:py-20 px-4 sm:px-8 gap-6 sm:gap-10'>
+                        {cartItems.items.map((cartItem) => {
+                            return <Card key={cartItem.itemId._id} itemId={cartItem.itemId._id} image={cartItem.itemId.imageUrl} title={cartItem.itemId.title} price={cartItem.itemId.mainPrice} quantity={cartItem.count} refreshData={getCartFn} />
                         })}
                     </div>
-                    <div className="cards w-full flex flex-col justify-center items-center font-[Helvetica] gap-10 pb-24 pt-10">
-                        <div className="card1 w-[85%] py-5 flex justify-center items-center bg-[#2F4D7C] rounded-xl">
-                            <div className='text-4xl text-white'>Add Delivery Address In Next Step</div>
+                    <div className="cards w-full flex flex-col justify-center items-center font-[Helvetica] gap-6 sm:gap-10 pb-12 sm:pb-24 pt-5 sm:pt-10 px-4 sm:px-8">
+                        <div className="card1 w-full max-w-[90%] sm:max-w-[85%] py-4 sm:py-5 flex justify-center items-center bg-[#2F4D7C] rounded-xl">
+                            <div className='text-lg sm:text-2xl md:text-3xl lg:text-4xl text-white text-center px-2'>Add Delivery Address In Next Step</div>
                         </div>
-                        <div className="card2 w-[85%] h-[15vh] text-white py-10 flex justify-between px-20 items-center bg-[#393E46] rounded-xl">
-                            <div className="price text-3xl">Rs 4317</div>
-                            <div className="elements flex justify-center items-center gap-6">
-                                <div className="text text-3xl font-bold">Checkout</div>
-                                <div className="right"><img src="src/assets/go back (1).png" alt="" /></div>
+                        <div className="card2 w-full max-w-[90%] sm:max-w-[85%] text-white py-6 sm:py-8 flex flex-row justify-between px-6 sm:px-10 md:px-10 items-center bg-[#393E46] rounded-xl">
+                            <div className="price text-lg sm:text-2xl md:text-3xl mb-4 sm:mb-0">Rs 4317</div>
+                            <div className="elements flex justify-center items-center gap-4 sm:gap-6">
+                                <div className="text text-lg sm:text-2xl md:text-3xl font-bold">Checkout</div>
+                                <div className="right"><img className="w-8 h-2 sm:w-9 sm:h-2 md:w-12 md:h-2" src="src/assets/go back (1).png" alt="" /></div>
                             </div>
                         </div>
                     </div>

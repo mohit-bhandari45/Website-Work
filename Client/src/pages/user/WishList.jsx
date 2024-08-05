@@ -10,6 +10,7 @@ import { getFavorites } from '../../apis/apis'
 
 /* Context API */
 import { useBooleanContext } from '../../context/context'
+import { getFavoriteItems } from '../../utils/products'
 
 const WishList = () => {
     const { token } = useBooleanContext()
@@ -53,20 +54,13 @@ const WishList = () => {
     ])
     const [favorites, setFavorites] = useState()
 
-    async function getFavoriteFn() {
-        /* API Fetching */
-        const res = await fetch(getFavorites, {
-            method: "GET",
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            },
-        })
-        if (res.status === 200) {
-            /* Status 200 means request is sucussfull */
-            const items = await res.json()
-            setFavorites(items)
+    const getFavoriteFn = () => {
+        if (token) {
+            getFavoriteItems(token).then((items) => {
+                setFavorites(items);
+            });
         }
+
     }
 
     useEffect(() => {
@@ -85,15 +79,16 @@ const WishList = () => {
             <div className="wishlist w-full h-[100vh] flex flex-col justify-center items-center">
                 <div className="head h-[10vh] w-[90%] flex justify-between items-center gap-4">
                     <div className="head1 h-full w-1/2 flex gap-4 justify-start items-center">
-                        <div className="title text-[#000000] font-medium text-xl font-[Helvetica]">WishList ({favorites.length})</div>
+                        <div className="title text-[#000000] font-medium text-xl font-[Helvetica]">WishList ({favorites.items.length})</div>
                     </div>
                     <div className="head2 text-md font-semibold font-[Helvetica]">
                         <button className='bg-white px-12 py-2 rounded-md hover:bg-black border-2 border-gray-500 text-black hover:text-white transition-all duration-300 ease-in-out'>Move All To Bag</button>
                     </div>
                 </div>
                 <div className={`w-[90%] gap-5 h-[70vh] items-center flex relative font-[Helvetica]`}>
-                    {favorites.map((element) => {
-                        return <Card1 key={element._id} itemId={element._id} imageUrl={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} refreshData={getFavoriteFn} />
+                    {favorites.items.map((element) => {
+                        console.log(element)
+                        return <Card1 key={element.itemId._id} itemId={element.itemId._id} imageUrl={element.itemId.imageUrl} discount={element.itemId.discount} title={element.itemId.title} mainPrice={element.itemId.mainPrice} prevPrice={element.itemId.prevPrice} rating={element.itemId.rating} reviews={element.itemId.reviews} refreshData={getFavoriteFn} />
                     })}
                 </div>
             </div>
@@ -108,8 +103,8 @@ const WishList = () => {
                     </div>
                 </div>
                 <div className={`w-[90%] gap-5 h-[90vh] justify-between items-center flex relative font-[Helvetica]`}>
-                    {favorites.map((element) => {
-                        return <Card1 key={element._id} itemId={element._id} imageUrl={element.imageUrl} discount={element.discount} title={element.title} mainPrice={element.mainPrice} prevPrice={element.prevPrice} rating={element.rating} reviews={element.reviews} refreshData={getFavoriteFn} />
+                    {favorites.items.map((element) => {
+                        return <Card1 key={element.itemId._id} itemId={element.itemId._id} imageUrl={element.itemId.imageUrl} discount={element.itemId.discount} title={element.itemId.title} mainPrice={element.itemId.mainPrice} prevPrice={element.itemId.prevPrice} rating={element.itemId.rating} reviews={element.itemId.reviews} refreshData={getFavoriteFn} />
                     })}
                 </div>
             </div>

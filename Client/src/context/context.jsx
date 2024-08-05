@@ -13,14 +13,13 @@ export const useBooleanContext = () => {
 export const BooleanProvider = ({ children }) => {
     const [user, setUser] = useState(undefined)
     const [userType, setUserType] = useState(undefined)
+    const [token, setToken] = useState("")
 
     const [boolPopPhone, setBoolPopPhone] = useState(false);
     const [toastBool, setToastBool] = useState(false)
     const [phoneToastBool, setPhoneToastBool] = useState(false)
     const [boolPop, setBoolPop] = useState(false)
-    const [profile, setProfile] = useState(false)
     const [authBool, setAuthBool] = useState(false)
-    const [token, setToken] = useState("")
     const [wishList, setWishList] = useState(null)
 
     // Toggle function
@@ -33,7 +32,6 @@ export const BooleanProvider = ({ children }) => {
             boolPopPhone, setBoolPopPhone,
             authBool, setAuthBool,
             boolPop, setBoolPop,
-            profile, setProfile,
             toastBool, setToastBool,
             phoneToastBool, setPhoneToastBool,
             toggleBoolPopPhone,

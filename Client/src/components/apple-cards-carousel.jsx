@@ -18,6 +18,7 @@ import { getImage } from "../apis/apis";
 import Star from "./LandingPageComp/Subcomps/Star";
 import { useBooleanContext } from "../context/context";
 import { addToCart, handleFavourites } from "../utils/products";
+import { useNavigate } from "react-router-dom";
 
 export const CarouselContext = createContext({
   onCardClose: () => { },
@@ -107,6 +108,7 @@ export const Card = ({
   // const { onCardClose, currentIndex } = useContext(CarouselContext);
   const [visible, setvisible] = useState(false)
   const { token } = useBooleanContext()
+  const navigate=useNavigate()
 
   useEffect(() => {
     function onKeyDown(event) {
@@ -187,6 +189,7 @@ export const Card = ({
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         // onClick={handleOpen}
+        onClick={()=>navigate(`/productdetails/${card._id}`)}
         onMouseOver={() => { setvisible(true) }} onMouseLeave={() => { setvisible(false) }}
         className="bg-gray-100 cursor-pointer hover:scale-95 transition-all ease-in-out duration-500 dark:bg-neutral-900 h-80 w-56 md:h-[25rem] md:w-80 overflow-hidden flex flex-col items-start justify-start relative z-10"
       >
