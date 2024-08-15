@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getImage, getProductById, addFavorites } from '../../../apis/apis';
-import Star from '../../LandingPageComp/Subcomps/Star';
+// import Star from '../../LandingPageComp/Subcomps/Star';
 import { Loader } from 'rsuite';
 import 'rsuite/dist/rsuite-no-reset.min.css'
 import { useNavigate } from 'react-router-dom';
@@ -15,8 +15,9 @@ import Return from "../../../assets/Icon-return.png"
 import { useBooleanContext } from '../../../context/context';
 
 /* Toasts */
-import toastOptions from '../../../utils/toastOptions';
+import toastOptions from '../../../helper/toastOptions';
 import { toast } from 'react-toastify';
+import { Star } from 'lucide-react';
 
 const HeroSec = ({ id }) => {
     const [bool, setbool] = useState(true)

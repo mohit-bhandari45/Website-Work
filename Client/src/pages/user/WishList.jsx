@@ -10,7 +10,7 @@ import { getFavorites } from '../../apis/apis'
 
 /* Context API */
 import { useBooleanContext } from '../../context/context'
-import { getFavoriteItems } from '../../utils/products'
+import { getFavoriteItems } from "../../helper/products"
 
 const WishList = () => {
     const { token } = useBooleanContext()
@@ -52,46 +52,37 @@ const WishList = () => {
             amount: "(99)"
         }
     ])
-    const [favorites, setFavorites] = useState()
+    const [favorites, setFavorites] = useState(null)
 
-    const getFavoriteFn = () => {
+    const getFavoriteFn = async () => {
         if (token) {
-            getFavoriteItems(token).then((items) => {
-                setFavorites(items);
-            });
+            const favouriteItems = await getFavoriteItems(token)
+            setFavorites(favouriteItems);
         }
-
     }
 
     useEffect(() => {
         getFavoriteFn()
     }, [])
 
-    if (!favorites) {
-        return <div>
-            <Loader center size='lg' speed='slow' />
-        </div>
-    }
-
     return (
         <>
             <Navbar />
-            <div className="wishlist w-full h-[100vh] flex flex-col justify-center items-center">
+            {favorites && favorites.length>0 && <div className="wishlist w-full h-[100vh] flex flex-col justify-center items-center">
                 <div className="head h-[10vh] w-[90%] flex justify-between items-center gap-4">
                     <div className="head1 h-full w-1/2 flex gap-4 justify-start items-center">
-                        <div className="title text-[#000000] font-medium text-xl font-[Helvetica]">WishList ({favorites.items.length})</div>
+                        <div className="title text-[#000000] font-medium text-xl font-[Helvetica]">WishList ({favorites.length})</div>
                     </div>
                     <div className="head2 text-md font-semibold font-[Helvetica]">
                         <button className='bg-white px-12 py-2 rounded-md hover:bg-black border-2 border-gray-500 text-black hover:text-white transition-all duration-300 ease-in-out'>Move All To Bag</button>
                     </div>
                 </div>
                 <div className={`w-[90%] gap-5 h-[70vh] items-center flex relative font-[Helvetica]`}>
-                    {favorites.items.map((element) => {
-                        console.log(element)
+                    {favorites.map((element) => {
                         return <Card1 key={element.itemId._id} itemId={element.itemId._id} imageUrl={element.itemId.imageUrl} discount={element.itemId.discount} title={element.itemId.title} mainPrice={element.itemId.mainPrice} prevPrice={element.itemId.prevPrice} rating={element.itemId.rating} reviews={element.itemId.reviews} refreshData={getFavoriteFn} />
                     })}
                 </div>
-            </div>
+            </div>}
             <div className="slider w-full h-[100vh] flex flex-col justify-center items-center">
                 <div className="head h-[10vh] w-[90%] flex justify-between items-center gap-4">
                     <div className="head1 h-full w-1/2 flex gap-4 justify-start items-center">
@@ -103,7 +94,7 @@ const WishList = () => {
                     </div>
                 </div>
                 <div className={`w-[90%] gap-5 h-[90vh] justify-between items-center flex relative font-[Helvetica]`}>
-                    {favorites.items.map((element) => {
+                    {favorites && favorites.map((element) => {
                         return <Card1 key={element.itemId._id} itemId={element.itemId._id} imageUrl={element.itemId.imageUrl} discount={element.itemId.discount} title={element.itemId.title} mainPrice={element.itemId.mainPrice} prevPrice={element.itemId.prevPrice} rating={element.itemId.rating} reviews={element.itemId.reviews} refreshData={getFavoriteFn} />
                     })}
                 </div>

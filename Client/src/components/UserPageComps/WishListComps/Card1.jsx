@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Delete from "../../../assets/icon-delete.png"
 import { useBooleanContext } from '../../../context/context'
-import Star from '../../LandingPageComp/Subcomps/Star'
+// import Star from '../../LandingPageComp/Subcomps/Star'
 import { getImage } from '../../../apis/apis'
+import { handleFavourites } from '../../../helper/products'
+import { Star } from 'lucide-react'
 
 const Card1 = ({ itemId, imageUrl, discount, title, mainPrice, prevPrice, rating, reviews, refreshData }) => {
     const [visible, setvisible] = useState(false)
@@ -17,7 +19,10 @@ const Card1 = ({ itemId, imageUrl, discount, title, mainPrice, prevPrice, rating
                 <div className="icons w-full flex justify-between items-start h-full p-3">
                     <div className="off bg-[#ED8A73] px-4 py-1 rounded-md text-white">{discount}%</div>
                     <div className="mainicons flex flex-col gap-2 justify-center items-center">
-                        <div onClick={(e)=>handleFavourites(e,token,itemId)} className="love p-2 bg-white rounded-full">
+                        <div onClick={async (e) => {
+                            await handleFavourites(e, itemId, token)
+                            refreshData()
+                        }} className="love p-2 bg-white rounded-full">
                             <img src={Delete} alt="" />
                         </div>
                     </div>

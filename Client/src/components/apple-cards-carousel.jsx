@@ -8,16 +8,13 @@ import React, {
   useImperativeHandle,
   forwardRef,
 } from "react";
-import {
-  IconX,
-} from "@tabler/icons-react";
 import { cn } from "../lib/utils"
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "../hook/use-outside-hook"
 import { getImage } from "../apis/apis";
-import Star from "./LandingPageComp/Subcomps/Star";
+import Star from "./UserPageComps/HomePageComps/Subcomps/Star";
 import { useBooleanContext } from "../context/context";
-import { addToCart, handleFavourites } from "../utils/products";
+import { addToCart, handleFavourites } from "../helper/products";
 import { useNavigate } from "react-router-dom";
 
 export const CarouselContext = createContext({

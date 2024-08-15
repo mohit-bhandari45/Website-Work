@@ -8,9 +8,9 @@ import Mid from '../components/GalleryComps/Mid'
 import Mid2 from '../components/GalleryComps/Mid2'
 import MinorSec from '../components/GalleryComps/MinorSec'
 import Navbar from '../components/GalleryComps/Navbar'
-import SubFooter from '../components/LandingPageComp/SubFooter'
 import Footer from '../components/UniversalComp/Footer'
 import Search from '../components/UniversalComp/Search'
+import SubFooter from '../components/UserPageComps/HomePageComps/SubFooter'
 
 /* Images */
 import { getProductById } from '../apis/apis'
@@ -23,23 +23,23 @@ import State4 from "../assets/Ellipse 54 (7).png"
 import State5 from "../assets/Ellipse 54 (8).png"
 import State6 from "../assets/Ellipse 54 (9).png"
 import image from "../assets/Rectangle 4163.png"
-import Explore from '../components/LandingPageComp/Explore'
-import SubState from '../components/LandingPageComp/Subcomps/SubState'
+import Explore from '../components/UserPageComps/HomePageComps/Explore'
+import SubState from '../components/UserPageComps/HomePageComps/Subcomps/SubState'
 
-const Gallery = () => {
-  const params = useParams();
+function Gallery() {
+  const params = useParams()
   const { id } = params
   const [item, setItem] = useState()
 
   async function getProductByIdFn() {
-    const req = await fetch(`${getProductById}/${id}`);
-    const result = await req.json();
+    const req = await fetch(`${getProductById}/${id}`)
+    const result = await req.json()
     setItem(result)
   }
 
   useEffect(() => {
     getProductByIdFn()
-      window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
   }, [id])
 
   const [details, setdetails] = useState([
@@ -111,7 +111,7 @@ const Gallery = () => {
       </Carousel>
       <Mid />
       <HeroSec item={item} />
-      <MinorSec item={item}/>
+      <MinorSec item={item} />
       <div className="hero3 h-[120vh] w-full flex flex-col py-16">
         <Mid2 />
         <div className="cards w-full h-[100vh] flex justify-center items-center">
@@ -133,7 +133,7 @@ const Gallery = () => {
           </div>
         </div>
       </div>
-      <Explore/>
+      <Explore />
       <SubFooter />
       <Footer />
     </>

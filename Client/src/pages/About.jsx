@@ -3,7 +3,7 @@ import Navbar from '../components/UserPageComps/UniversalComps/Navbar';
 import Footer from '../components/UniversalComp/Footer';
 import HeroSec from '../components/AboutComps/HeroSec';
 import Card from '../components/AboutComps/Card';
-import SubFooter from '../components/LandingPageComp/SubFooter';
+import SubFooter from '../components/UserPageComps/HomePageComps/SubFooter';
 
 const About = () => {
   const [stats, setstats] = useState([

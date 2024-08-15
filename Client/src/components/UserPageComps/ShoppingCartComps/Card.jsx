@@ -10,7 +10,7 @@ import { getImage } from '../../../apis/apis'
 
 /* Context API */
 import { useBooleanContext } from '../../../context/context'
-import { handleDeleteCart, handleDownCart, handleUpCart } from '../../../utils/products'
+import { handleDeleteCart, handleDownCart, handleUpCart } from '../../../helper/products'
 
 const Card = ({ itemId, image, title, quantity, price, refreshData }) => {
     const { token } = useBooleanContext()

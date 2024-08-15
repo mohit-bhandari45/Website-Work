@@ -4,15 +4,13 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyDB_otqF09FWj0b87tyG1hPXWFLlwN93_E",
-    authDomain: "acrilic-befa9.firebaseapp.com",
-    projectId: "acrilic-befa9",
-    storageBucket: "acrilic-befa9.appspot.com",
-    messagingSenderId: "706351131740",
-    appId: "1:706351131740:web:6cca30c99d3bab89364a99",
-    measurementId: "G-LQDTE12TPR",
+  apiKey: "AIzaSyB8bl1xvMZsbsU2ji4CoLV51EOFN2wmu9M",
+  authDomain: "acrilic-8fcce.firebaseapp.com",
+  projectId: "acrilic-8fcce",
+  storageBucket: "acrilic-8fcce.appspot.com",
+  messagingSenderId: "224467168964",
+  appId: "1:224467168964:web:9df7e4c6d5bfa5ad4d2391"
 };
 
 // Initialize Firebase

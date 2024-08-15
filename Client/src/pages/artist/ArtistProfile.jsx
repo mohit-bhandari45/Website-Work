@@ -8,7 +8,7 @@ import Search from '../../components/UniversalComp/Search'
 /* Firebase */
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore"
-import Titles from '../../components/LandingPageComp/Titles'
+import Titles from '../../components/UserPageComps/HomePageComps/Titles'
 import { app } from '../../firebase'
 const auth = getAuth(app)
 const firestore = getFirestore(app)

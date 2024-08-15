@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Star from '../LandingPageComp/Subcomps/Star';
+import Star from '../UserPageComps/HomePageComps/Subcomps/Star';
 
 /* APIs */
 import { getProductById, getImage } from '../../apis/apis';

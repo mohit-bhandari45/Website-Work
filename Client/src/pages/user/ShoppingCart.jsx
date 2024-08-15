@@ -8,34 +8,24 @@ import { getCart } from "../../apis/apis"
 
 /* Context API */
 import { useBooleanContext } from '../../context/context'
+import { Loader } from 'rsuite'
+import { getCartItems } from '../../helper/products'
 
 const ShoppingCart = () => {
     const { token } = useBooleanContext()
-    const [cartItems, setCartItems] = useState([])
+    const [cartItems, setCartItems] = useState(null)
 
-    async function getCartFn() {
-        /* API Fetching */
-        const res = await fetch(getCart, {
-            method: "GET",
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            },
-        })
-        if (res.status === 200) {
-            /* Status 200 means request is successful */
-            const carts = await res.json()
-            setCartItems(carts)
+    const getCartFn = async () => {
+        if (token) {
+            let items = await getCartItems(token)
+            setCartItems(items)
         }
+
     }
 
     useEffect(() => {
         getCartFn()
     }, [])
-
-    if (cartItems.length === 0) {
-        return <div className="flex justify-center items-center h-screen">Loading...</div>
-    }
 
     return (
         <>
@@ -43,7 +33,7 @@ const ShoppingCart = () => {
                 <div className="main py-8 rounded-b-3xl bg-white">
                     <Navbar />
                     <div className='w-full flex flex-col justify-center items-center py-10 sm:py-20 px-4 sm:px-8 gap-6 sm:gap-10'>
-                        {cartItems.items.map((cartItem) => {
+                        {cartItems && cartItems.length>0 && cartItems.map((cartItem) => {
                             return <Card key={cartItem.itemId._id} itemId={cartItem.itemId._id} image={cartItem.itemId.imageUrl} title={cartItem.itemId.title} price={cartItem.itemId.mainPrice} quantity={cartItem.count} refreshData={getCartFn} />
                         })}
                     </div>

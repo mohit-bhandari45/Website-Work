@@ -9,7 +9,7 @@ async function getCart(req, res) {
         const cart = await Cart.findOne({ user_Id });
         if (!cart) {
             // There's no cart for this user created yet
-            return res.status(200).json({ msg: 'No Cart Exists' });
+            return res.status(404).json({ msg: 'No Cart Exists' })
         }
 
         const items = await Cart.findOne({ user_Id }).populate("items.itemId")

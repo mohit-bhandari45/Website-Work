@@ -1,32 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from 'rsuite';
-import 'rsuite/dist/rsuite-no-reset.min.css'
+import 'rsuite/dist/rsuite-no-reset.min.css';
 
 /* Pages */
-import LandingPage from './pages/LandingPage'
-import About from './pages/About'
-import Contacts from './pages/Contacts'
-import Gallery from './pages/Gallery'
-import ShowMore from './pages/ShowMore'
-import Page404 from './pages/Page404'
-import ArtistSignup from './pages/artist/ArtistSignup'
-import ArtistProfile from './pages/artist/ArtistProfile'
-import ShoppingCart from './pages/user/ShoppingCart'
-import UserProfile from './pages/user/UserProfile'
-import WishList from './pages/user/WishList'
-import Checkout from './pages/user/Checkout'
-import ProductDetails from './pages/user/ProductDetails'
+import About from './pages/About';
+import Contacts from './pages/Contacts';
+import Gallery from './pages/Gallery';
+import LandingPage from './pages/LandingPage';
+import Page404 from './pages/Page404';
+import ShowMore from './pages/ShowMore';
+import ArtistProfile from './pages/artist/ArtistProfile';
+import ArtistSignup from './pages/artist/ArtistSignup';
+import Checkout from './pages/user/Checkout';
+import ProductDetails from './pages/user/ProductDetails';
+import ShoppingCart from './pages/user/ShoppingCart';
+import UserProfile from './pages/user/UserProfile';
+import WishList from './pages/user/WishList';
 
 /* Context API */
-import { useBooleanContext } from './context/context'
-import { getUserType } from './utils/auth';
+import { useBooleanContext } from './context/context';
+import { getUserType } from "./helper/auth";
 
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { app } from './firebase';
+import BlogsAndPost from './pages/artist/BlogsAndPost';
+import DashBoard from './pages/artist/DashBoard';
+import HomePage from './pages/artist/HomePage';
+import PickUpPage from './pages/artist/PickUpPage';
+import ProductList from './pages/artist/ProductList';
+import Home from './pages/user/Home';
+import UploadedProducts from './pages/artist/UploadedProducts';
+import SalesAnalysis from './pages/artist/SalesAnalysis';
 const auth = getAuth(app)
 
 const App = () => {
@@ -53,19 +61,19 @@ const App = () => {
     })
   }, [authBool])
 
-  const getLandingPage = () => {
+  const getHome = () => {
     if (userType === undefined) {
       return <div>
         <Loader center size='lg' speed='slow' />
       </div>
     }
     if (userType === null) {
-      return <LandingPage />
+      return <Home />
     }
     if (userType === 'artist') {
-      return <LandingPage />
+      return <Home />
     } else if (userType === 'user') {
-      return <LandingPage />
+      return <HomePage />
     }
   }
 
@@ -166,15 +174,20 @@ const App = () => {
   }
 
   return (
+    /* Done means responsiveness is done */
     <BrowserRouter>
       <ToastContainer />
       <Routes>
+        <Route path='/' element={<LandingPage/>} />  //done
 
         /* General Routes-But here normal user can signup */
-        <Route path='/' element={getLandingPage()} />  //done
-        <Route path='/about' element={<About />} />  /done
-        <Route path='/contact' element={getContactComponent()} />  //done
-        <Route path='/showmore' element={getShowMore()} />  //done
+        {/* <Route path='/home' element={getHome()} />  //done  //main */}
+        <Route path='/home' element={<Home/>} />  //done  //main
+        {/* <Route path='/home' element={<HomePage/>}/>  //done */}
+
+        <Route path='/about' element={<About />} /> 
+        <Route path='/contact' element={getContactComponent()} /> 
+        <Route path='/showmore' element={getShowMore()} />
         <Route path='/404' element={<Page404 />} />
 
         /* Dynamic Routes */
@@ -183,12 +196,19 @@ const App = () => {
 
         /* Artist Routes */
         <Route path='/artistsignup' element={<ArtistSignup />} />
+        <Route path='/dashboard' element={<DashBoard />} />  
+        {/* //done(hamburger-remain) */}
+        <Route path='/product-list' element={<ProductList />} />   //done
+        <Route path='/uploaded-products' element={<UploadedProducts />} />   //done
+        <Route path='/pick-up' element={<PickUpPage />} />   //done
+        <Route path='/sales-analysis' element={<SalesAnalysis />} />   //done
+        <Route path='/blogs-posts' element={<BlogsAndPost />} />
 
         /* Profiles depending upon userType */
         <Route path='/profile' element={getProfileComponent()} />
 
         /* UserRoutes */
-        <Route path='/cart' element={getCartComponent()} /> //done
+        <Route path='/cart' element={getCartComponent()} />
         <Route path='/wishlist' element={getWishlistComponent()} />
         <Route path='/checkout' element={getCheckoutComponent()} />
 
