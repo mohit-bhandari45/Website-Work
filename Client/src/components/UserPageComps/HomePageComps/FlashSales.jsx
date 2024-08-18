@@ -30,8 +30,9 @@ const FlashSales = () => {
 
     useEffect(() => {
         if (wishList && items.length > 0) {
+            console.log(wishList)
             const updatedItems = items.map((item) => {
-                let mappedItem = wishList.items.find((wishItem) => wishItem.itemId._id === item._id);
+                let mappedItem = wishList.find((wishItem) => wishItem.itemId._id === item._id);
                 return mappedItem ? { ...item, "favourite": true } : { ...item, "favourite": false };
             });
             setItems(updatedItems);

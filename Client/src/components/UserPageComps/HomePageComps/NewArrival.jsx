@@ -24,10 +24,10 @@ const NewArrival = () => {
 
     return (
         <div className='min-h-[125vh] w-full font-[Helvetica] flex flex-col justify-center items-center px-4 md:px-8 py-8'>
-            <div className="head w-full max-w-7xl">
+            <div className="head w-full max-w-[90vw]">
                 <div className="head2 h-[10vh] flex justify-start items-center gap-4 w-full">
-                    <div className="bar w-[1.5%] h-[70%] rounded-sm bg-[#DB4444]"></div>
-                    <div className="title text-[#DB4444] font-medium">Featured</div>
+                    <div className="bar w-[1.5%] h-[70%] rounded-sm bg-[#ED8A73]"></div>
+                    <div className="title text-[#ED8A73] font-medium">Featured</div>
                 </div>
                 <div className="cont w-full flex justify-between items-center h-[10vh] md:h-[15vh]">
                     <div className="first flex justify-center items-center gap-16 h-full">
@@ -35,7 +35,7 @@ const NewArrival = () => {
                     </div>
                 </div>
             </div>
-            <div className='w-full max-w-7xl h-auto md:h-[90vh] flex flex-col md:flex-row justify-start items-center gap-8'>
+            <div className='w-full max-w-[90vw] h-auto md:h-[90vh] flex flex-col md:flex-row justify-start items-center gap-8'>
                 <div onClick={() => navigate(`/productdetails/${recentProducts[0]._id}`)} className="left cursor-pointer h-[400px] md:h-full w-full md:w-[45%] bg-black box-border px-5 py-5 rounded-lg text-white gap-2 flex flex-col relative justify-end items-start overflow-hidden">
                     <img onClick={() => navigate(`/productdetails/${recentProducts[0]._id}`)} src={`${getImage}/${recentProducts[0].imageUrl}`} className='w-[80%] h-[80%] object-contain absolute bottom-0 right-5' alt="" />
                     <h1 onClick={() => navigate(`/productdetails/${recentProducts[0]._id}`)} className='font-bold text-xl relative z-10 transition-all duration-500 hover:scale-105 ease-in-out cursor-pointer'>{recentProducts[0].title}</h1>

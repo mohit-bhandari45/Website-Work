@@ -2,7 +2,7 @@ import React from 'react';
 
 const PotSec = () => {
   return (
-    <div className='2xl:h-[110vh] xl:h-[100vh] lg:h-[85vh] md:h-[70vh] sm:h-[140vh] h-[100vh] relative font-[Helvetica] w-full bg-black text-white'>
+    <div className='2xl:h-[110vh] xl:h-[100vh] lg:h-[85vh] md:h-[70vh] sm:h-[100vh] h-[90vh] relative font-[Helvetica] w-full bg-black text-white'>
       <div className="head xl:h-[8vh] 2xl:h-[20vh] h-0"></div>
       <div className="absolute w-1/2 bg-white rounded-full right-44 top-0 h-full blur-[600px] opacity-40"></div>
       <div className="main lg:h-[90vh] h-full flex md:flex-row flex-col-reverse md:justify-between justify-end items-center 2xl:px-32 xl:px-28 lg:p-24 md:p-12 relative w-full">

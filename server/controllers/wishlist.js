@@ -7,7 +7,6 @@ async function getFavorites(req, res) {
     try {
         const user_Id = req.user.uid
         const wishlist = await Wishlist.findOne({ user_Id });
-        console.log(wishlist)
         if (!wishlist) {
             // There's no wishlist for this user created yet
             return res.status(404).json({ msg: 'No Items is favorites yet' });

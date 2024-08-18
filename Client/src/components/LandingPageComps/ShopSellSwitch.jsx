@@ -22,7 +22,7 @@ const ShopSellSwitch = () => {
         console.log("sell")
         setRemove(true)
         setTimeout(() => {
-          navigate("/home")
+          // navigate("/home")
         }, 200);
       }
     }, 5000);

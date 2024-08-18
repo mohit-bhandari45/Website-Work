@@ -45,12 +45,12 @@ const Explore = () => {
     useEffect(() => {
         if (wishList && items1.length > 0 && items2.length > 0) {
             const updatedItems1 = items1.map((item) => {
-                let mappedItem = wishList.items.find((wishItem) => wishItem.itemId._id === item._id);
+                let mappedItem = wishList.find((wishItem) => wishItem.itemId._id === item._id);
                 return mappedItem ? { ...item, "favourite": true } : { ...item, "favourite": false };
             })
             setItems1(updatedItems1)
             const updatedItems2 = items2.map((item) => {
-                let mappedItem = wishList.items.find((wishItem) => wishItem.itemId._id === item._id);
+                let mappedItem = wishList.find((wishItem) => wishItem.itemId._id === item._id);
                 return mappedItem ? { ...item, "favourite": true } : { ...item, "favourite": false };
             })
             setItems2(updatedItems2)
