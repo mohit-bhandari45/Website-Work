@@ -13,16 +13,6 @@ const auth = getAuth(app)
 const Navbar = ({ bool, setbool }) => {
   const { token, userType } = useBooleanContext()
 
-  const deleteAccount  = async () => {
-    try {
-      const user = auth.currentUser;
-      await deleteUser(user);
-      console.log("User deleted successfully");
-    } catch (error) {
-      console.error("Error signing out: ", error);
-    }
-  };
-
   return (
     <>
       <div className="main flex justify-center gap-8 h-[18vh] w-full font-[Helvetica]">
@@ -42,8 +32,11 @@ const Navbar = ({ bool, setbool }) => {
               <Link to="/contact">Contacts</Link>
             </div>
             <div className="contacts cursor-pointer hover:scale-110 transition-all duration-100 ease-in-out">
-              <button onClick={deleteAccount }>Delete</button>
+              {/* <Link to="/"> */}
+              Artists
+              {/* </Link> */}
             </div>
+
           </div>
 
           <div className="info flex justify-center items-center gap-5">

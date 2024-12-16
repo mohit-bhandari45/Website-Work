@@ -21,6 +21,7 @@ export const BooleanProvider = ({ children }) => {
     const [boolPop, setBoolPop] = useState(false)
     const [authBool, setAuthBool] = useState(false)
     const [wishList, setWishList] = useState(null)
+    const [type, setType] = useState(null)
 
     /* Landing page removal */
     const [remove,setRemove]=useState(false)
@@ -42,7 +43,8 @@ export const BooleanProvider = ({ children }) => {
             userType, setUserType,
             token, setToken,
             wishList,setWishList,
-            remove,setRemove
+            remove,setRemove,
+            type,setType
         }}>
             {/* <BooleanContext.Provider value={{ boolPopPhone, setBoolPopPhone, toggleBoolPopPhone }}> */}
             {children}

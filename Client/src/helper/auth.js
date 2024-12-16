@@ -1,7 +1,7 @@
 /* Firebase */
 import { app } from '../firebase'
-import { onAuthStateChanged, getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import { getFirestore, collection, where, query, getDocs, addDoc } from "firebase/firestore"
+import {  getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { getFirestore, collection, where, query, getDocs, addDoc, updateDoc } from "firebase/firestore"
 import { toast } from 'react-toastify'
 import toastOptions from './toastOptions'
 const auth = getAuth(app)
@@ -45,7 +45,7 @@ export const handleSignUp = async ({ name, email, password }) => {
       }
     }
   } catch (error) {
-    console.log(err)
+    console.log(error)
     return false
   }
 }
@@ -63,7 +63,7 @@ export const handleGoogleAuth = async () => {
         console.log("User already exist")
         return true;
       } else {
-        const result = await addDoc(collection(firestore, "users"), {
+        await addDoc(collection(firestore, "users"), {
           name: user.displayName,
           email: user.email,
           userType: "user"
@@ -103,6 +103,7 @@ export const handleVerifyOtp = async (email, number) => {
     await updateDoc(userDocRef, {
       number
     }).then(async (res) => {
+      console.log(res)
       console.log("User document updated successfully.");
       return true;
     })

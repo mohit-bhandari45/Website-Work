@@ -5,8 +5,8 @@ import { useBooleanContext } from '../../context/context'
 const ShopSellSwitch = () => {
   const ref = useRef()
   const [pageToggle, setPageToggle] = useState()
-  const navigate=useNavigate()
-  const { setRemove } = useBooleanContext()
+  const navigate = useNavigate()
+  const { setRemove, setUserType,userType,type,setType } = useBooleanContext()
 
   const handleSwitch = () => {
     setPageToggle(!pageToggle)
@@ -16,16 +16,20 @@ const ShopSellSwitch = () => {
   useEffect(() => {
     const toggle = setTimeout(() => {
       if (ref.current.id === "shop") {
-        console.log("shop");
-        // navigate("/home")
+        localStorage.setItem("userType", "user")
+        setType(ref.current.id)
+        localStorage.setItem("type",ref.current.id)
+        navigate("/home")
       } else {
-        console.log("sell")
         setRemove(true)
         setTimeout(() => {
-          // navigate("/home")
+          localStorage.setItem("userType", "artist")
+          setType(ref.current.id)
+          localStorage.setItem("type",ref.current.id)
+          navigate("/home")
         }, 200);
       }
-    }, 5000);
+    }, ref.current.id === "shop" ? 5000 : 1000);
     return () => clearTimeout(toggle);
   }, [pageToggle])
 

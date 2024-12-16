@@ -29,7 +29,7 @@ const FeatureCard = ({ id, title, image, isLocked, path }) => {
     const handleChange = (e) => {
         const newValue = e.target.value;
         setName(newValue);
-        if (newValue === "Sambhit") {
+        if (newValue === "ghsambit") {
             navigate("/dashboard")
         }
     }

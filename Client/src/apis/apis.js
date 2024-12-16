@@ -9,6 +9,9 @@ export const getFavicon=`${host}/api/assets/favicon`
 export const getStories=`${host}/api/videos/get-All`
 export const getVideoById=`${host}/api/videos/get-Video`
 
+/* Email API */
+export const sendEmail=`${host}/api/email`
+
 /* Product APIs */
 
 /* All Products APIs */

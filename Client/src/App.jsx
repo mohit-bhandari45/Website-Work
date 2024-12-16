@@ -38,7 +38,13 @@ import SalesAnalysis from './pages/artist/SalesAnalysis';
 const auth = getAuth(app)
 
 const App = () => {
-  const { authBool, userType, setUserType, setUser,token,setToken } = useBooleanContext()
+  const { authBool, userType, setUserType, setUser, token, setToken,type,user,setType } = useBooleanContext()
+  
+  if(localStorage.getItem("type")){
+    setType(localStorage.getItem("type"))
+    setUserType(localStorage.getItem("userType"))
+  }
+  console.log(type)
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -60,19 +66,25 @@ const App = () => {
       }
     })
   }, [authBool])
+  console.log(userType)
 
   const getHome = () => {
+    if (type && !user) {
+      if (type === "shop") {
+        return <Home />
+      } else if (type === 'sell') {
+        return <HomePage />
+      }
+      return;
+    }
     if (userType === undefined) {
       return <div>
         <Loader center size='lg' speed='slow' />
       </div>
     }
-    if (userType === null) {
+    if (userType === 'user') {
       return <Home />
-    }
-    if (userType === 'artist') {
-      return <Home />
-    } else if (userType === 'user') {
+    } else if (userType === 'artist') {
       return <HomePage />
     }
   }
@@ -178,15 +190,13 @@ const App = () => {
     <BrowserRouter>
       <ToastContainer />
       <Routes>
-        <Route path='/' element={<LandingPage/>} />  //done
+        <Route path='/' element={<LandingPage />} />  //done
 
         /* General Routes-But here normal user can signup */
-        {/* <Route path='/home' element={getHome()} />  //done  //main */}
-        <Route path='/home' element={<Home/>} />  //done  //main
-        {/* <Route path='/home' element={<HomePage/>}/>  //done */}
+        <Route path='/home' element={getHome()} />  //done  //main
 
-        <Route path='/about' element={<About />} /> 
-        <Route path='/contact' element={getContactComponent()} /> 
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={getContactComponent()} />
         <Route path='/showmore' element={getShowMore()} />
         <Route path='/404' element={<Page404 />} />
 
@@ -196,7 +206,7 @@ const App = () => {
 
         /* Artist Routes */
         <Route path='/artistsignup' element={<ArtistSignup />} />
-        <Route path='/dashboard' element={<DashBoard />} />  
+        <Route path='/dashboard' element={<DashBoard />} />
         {/* //done(hamburger-remain) */}
         <Route path='/product-list' element={<ProductList />} />   //done
         <Route path='/uploaded-products' element={<UploadedProducts />} />   //done

@@ -31,7 +31,7 @@ import FlashSales from '../../components/UserPageComps/HomePageComps/FlashSales'
 const auth = getAuth(app)
 
 function Home() {
-  const { boolPopPhone, toastBool, phoneToastBool, setToastBool, setBoolPopPhone, setPhoneToastBool, boolPop, setBoolPop } = useBooleanContext()
+  const { boolPopPhone, toastBool, phoneToastBool, setToastBool, setBoolPopPhone, setPhoneToastBool, boolPop, setBoolPop,setUserType,userType } = useBooleanContext()
   const [bool, setbool] = useState(false)
 
   useEffect(() => {
@@ -42,6 +42,7 @@ function Home() {
         }, 5000);
       }
     })
+    setUserType(localStorage.getItem("userType"))
   }, [])
 
   useEffect(() => {

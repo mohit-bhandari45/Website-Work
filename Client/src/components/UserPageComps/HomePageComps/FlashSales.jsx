@@ -66,7 +66,7 @@ const FlashSales = () => {
                                 <React.Fragment key={unit}>
                                     <div className="flex flex-col items-center">
                                         <div className="d1 font-semibold lg:text-base text-[9px] sm:text-[12px] md:text-[14px]">{unit}</div>
-                                        <div className="time lg:text-5xl md:text-4xl text-xl sm:text-3xl font-bold">03</div>
+                                        <div className="time lg:text-5xl md:text-4xl text-xl sm:text-3xl font-bold">00</div>
                                     </div>
                                     {idx < 3 && <div className="colon text-2xl sm:text-4xl rounded-full text-[#E07575]">:</div>}
                                 </React.Fragment>

@@ -13,7 +13,7 @@ const Navbar = ({ sign }) => {
   return (
     <nav className='w-full h-[10vh] relative z-20 bg-[#BEC6A0] flex justify-between items-center px-4 md:px-10 font-[Helvetica]'>
       <div className="logo">
-        <img className='w-[70%]' src={Logo} alt="Logo" />
+        <Link to="/home"><img className='w-[70%]' src={Logo} alt="Logo" /></Link>
       </div>
       <div className="flex items-center ">
         <div className="hidden lg:flex items-center gap-8 mr-8 font-semibold">

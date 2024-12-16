@@ -1,7 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Search = () => {
-
     return (
         <>
             <div className="main w-full h-[20vh] flex justify-center items-center font-[Helvetica]">
@@ -19,7 +19,7 @@ const Search = () => {
                             </svg>
                         </div>
                         <div className="btn">
-                            <button className='font-bold text-white bg-[#2E93A9] px-4 py-2 rounded-xl cursor-pointer'>SEARCH</button>
+                            <Link to="/404"><button className='font-bold text-white bg-[#2E93A9] px-4 py-2 rounded-xl cursor-pointer'>SEARCH</button></Link>
                         </div>
                     </div>
                 </div>

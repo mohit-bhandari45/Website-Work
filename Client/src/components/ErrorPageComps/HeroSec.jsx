@@ -17,7 +17,7 @@ const HeroSec = () => {
                     <div className='font-semibold'>Your visited page not found. You may go home page.</div>
                     <div>
                         <button className='bg-[#ED8A73] text-white font-bold px-10 py-3 rounded-sm'>
-                            <Link to="/">Back To Home Page</Link>
+                            <Link to="/home">Back To Home Page</Link>
                         </button>
                     </div>
                 </div>
